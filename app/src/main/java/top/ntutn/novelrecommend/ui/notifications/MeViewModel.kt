@@ -1,13 +1,13 @@
-package top.ntutn.novelrecommend.ui.dashboard
+package top.ntutn.novelrecommend.ui.notifications
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class MeViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+        value = "我的"
     }
     val text: LiveData<String> = _text
 }
