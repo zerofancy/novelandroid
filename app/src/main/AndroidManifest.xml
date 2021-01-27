@@ -10,8 +10,12 @@
         android:roundIcon="@mipmap/ic_launcher_treasure_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Novelrecommend">
-        <activity android:name=".ui.DebugHelperActivity"></activity>
-        <activity android:name=".ui.MainActivity">
+        <activity
+            android:name=".ui.DebugHelperActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
