@@ -2,7 +2,6 @@ package top.ntutn.novelrecommend.ui
 
 import android.os.Bundle
 import androidx.annotation.IdRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -11,7 +10,7 @@ import top.ntutn.novelrecommend.BuildConfig
 import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
 
     @IdRes

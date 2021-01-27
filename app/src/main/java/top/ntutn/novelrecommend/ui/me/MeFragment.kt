@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import top.ntutn.novelrecommend.R
+import top.ntutn.novelrecommend.ui.BaseFragment
 
-class MeFragment : Fragment() {
+class MeFragment : BaseFragment() {
 
     private lateinit var meViewModel: MeViewModel
 

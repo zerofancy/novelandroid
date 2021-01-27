@@ -2,6 +2,8 @@ package top.ntutn.novelrecommend
 
 import android.app.Application
 import android.content.Context
+import timber.log.Timber
+import top.ntutn.novelrecommend.utils.CrashReportingTree
 import top.ntutn.novelrecommend.utils.ZeroConfigHelper
 
 class MyApplication : Application() {
@@ -13,6 +15,11 @@ class MyApplication : Application() {
         super.onCreate()
         context = applicationContext
 
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        } else {
+            Timber.plant(CrashReportingTree())
+        }
         ZeroConfigHelper.initZeroConfig(context)
     }
 }

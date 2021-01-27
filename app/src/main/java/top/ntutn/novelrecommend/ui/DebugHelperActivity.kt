@@ -3,12 +3,11 @@ package top.ntutn.novelrecommend.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import top.ntutn.novelrecommend.adapter.DebugConfigAdapter
 import top.ntutn.novelrecommend.databinding.ActivityDebugHelperBinding
 
-class DebugHelperActivity : AppCompatActivity() {
+class DebugHelperActivity : BaseActivity() {
     private lateinit var binding: ActivityDebugHelperBinding
     private val debugConfigAdapter = DebugConfigAdapter()
 
