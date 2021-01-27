@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_discover"
-        android:name="top.ntutn.novelrecommend.ui.home.DiscoverFragment"
+        android:name="top.ntutn.novelrecommend.ui.discover.DiscoverFragment"
         android:label="@string/title_discover"
         tools:layout="@layout/fragment_discover" />
 
     <fragment
         android:id="@+id/navigation_bookshelf"
-        android:name="top.ntutn.novelrecommend.ui.dashboard.BookShelfFragment"
+        android:name="top.ntutn.novelrecommend.ui.bookshelf.BookShelfFragment"
         android:label="@string/title_bookshelf"
         tools:layout="@layout/fragment_bookshelf" />
 
     <fragment
         android:id="@+id/navigation_me"
-        android:name="top.ntutn.novelrecommend.ui.notifications.MeFragment"
+        android:name="top.ntutn.novelrecommend.ui.me.MeFragment"
         android:label="@string/title_me"
         tools:layout="@layout/fragment_me" />
 </navigation>

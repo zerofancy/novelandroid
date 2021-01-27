@@ -1,13 +1,13 @@
-package top.ntutn.novelrecommend.ui.home
+package top.ntutn.novelrecommend.ui.bookshelf
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DiscoverViewModel : ViewModel() {
+class BookShelfViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "发现"
+        value = "书架"
     }
     val text: LiveData<String> = _text
 }

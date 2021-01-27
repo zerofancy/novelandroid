@@ -1,4 +1,4 @@
-package top.ntutn.novelrecommend.ui.notifications
+package top.ntutn.novelrecommend.ui.discover
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import top.ntutn.novelrecommend.R
 
-class MeFragment : Fragment() {
+class DiscoverFragment : Fragment() {
 
-    private lateinit var meViewModel: MeViewModel
+    private lateinit var discoverViewModel: DiscoverViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        meViewModel =
-            ViewModelProvider(this).get(MeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_me, container, false)
-        val textView: TextView = root.findViewById(R.id.text_me)
-        meViewModel.text.observe(viewLifecycleOwner, Observer {
+        discoverViewModel =
+            ViewModelProvider(this).get(DiscoverViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_discover, container, false)
+        val textView: TextView = root.findViewById(R.id.text_discover)
+        discoverViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

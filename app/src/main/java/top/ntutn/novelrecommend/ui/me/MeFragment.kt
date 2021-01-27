@@ -1,4 +1,4 @@
-package top.ntutn.novelrecommend.ui.dashboard
+package top.ntutn.novelrecommend.ui.me
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import top.ntutn.novelrecommend.R
 
-class BookShelfFragment : Fragment() {
+class MeFragment : Fragment() {
 
-    private lateinit var bookShelfViewModel: BookShelfViewModel
+    private lateinit var meViewModel: MeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        bookShelfViewModel =
-            ViewModelProvider(this).get(BookShelfViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_bookshelf, container, false)
-        val textView: TextView = root.findViewById(R.id.text_bookshelf)
-        bookShelfViewModel.text.observe(viewLifecycleOwner, Observer {
+        meViewModel =
+            ViewModelProvider(this).get(MeViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_me, container, false)
+        val textView: TextView = root.findViewById(R.id.text_me)
+        meViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
