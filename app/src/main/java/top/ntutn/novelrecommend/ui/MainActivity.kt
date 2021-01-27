@@ -9,6 +9,8 @@ import androidx.navigation.ui.setupWithNavController
 import top.ntutn.novelrecommend.BuildConfig
 import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.databinding.ActivityMainBinding
+import top.ntutn.novelrecommend.utils.AppUtil
+import top.ntutn.novelrecommend.utils.showToast
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -16,6 +18,7 @@ class MainActivity : BaseActivity() {
     @IdRes
     private var lastSelectedId: Int? = null
     private var clickCount = 0
+    private var exitTime = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,5 +59,20 @@ class MainActivity : BaseActivity() {
             }
             true
         }
+    }
+
+    override fun onBackPressed() {
+        if (System.currentTimeMillis() - exitTime <= EXIT_TIME) {
+            AppUtil.finishAllActivities()
+            super.onBackPressed()
+        } else {
+            exitTime = System.currentTimeMillis()
+            R.string.press_again_to_exit.showToast()
+        }
+    }
+
+    companion object {
+        // 两次返回退出的时间间隔
+        private const val EXIT_TIME = 2000L
     }
 }

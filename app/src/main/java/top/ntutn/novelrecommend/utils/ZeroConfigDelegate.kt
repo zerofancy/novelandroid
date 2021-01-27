@@ -24,7 +24,7 @@ object ZeroConfigHelper {
         return configAnnotation!!.value
     }
 
-    fun initZeroConfig(context: Context) {
+    fun init(context: Context) {
         gson = Gson()
         sp = context.getSharedPreferences(CONFIG_FILE_NAME, Context.MODE_PRIVATE)
         bufferMap = mutableMapOf()
