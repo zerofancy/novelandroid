@@ -1,4 +1,4 @@
-package top.ntutn.novelrecommend.ui.bookshelf
+package top.ntutn.novelrecommend.ui.fragment
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

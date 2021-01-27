@@ -1,4 +1,4 @@
-package top.ntutn.novelrecommend.ui
+package top.ntutn.novelrecommend.ui.base
 
 import androidx.fragment.app.Fragment
 

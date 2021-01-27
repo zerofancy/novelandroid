@@ -2,7 +2,6 @@ package top.ntutn.novelrecommend.utils
 
 import android.view.View
 import android.widget.Toast
-import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
 

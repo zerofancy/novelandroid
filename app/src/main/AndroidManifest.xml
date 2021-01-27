@@ -11,11 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Novelrecommend">
         <activity
-            android:name=".ui.DebugHelperActivity"
+            android:name=".ui.activity.DebugHelperActivity"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".ui.MainActivity"
-            android:screenOrientation="portrait">
+            android:name=".ui.activity.MainActivity"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

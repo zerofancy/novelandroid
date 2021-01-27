@@ -1,13 +1,13 @@
-package top.ntutn.novelrecommend.ui.discover
+package top.ntutn.novelrecommend.ui.fragment
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DiscoverViewModel : ViewModel() {
+class MeViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "发现"
+        value = "我的"
     }
     val text: LiveData<String> = _text
 }

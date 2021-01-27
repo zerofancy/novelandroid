@@ -1,4 +1,4 @@
-package top.ntutn.novelrecommend.ui
+package top.ntutn.novelrecommend.ui.base
 
 import android.app.Activity
 import android.content.BroadcastReceiver
