@@ -3,6 +3,7 @@ package top.ntutn.novelrecommend.ui.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import top.ntutn.novelrecommend.adapter.DebugConfigAdapter
 import top.ntutn.novelrecommend.databinding.ActivityDebugHelperBinding
@@ -10,6 +11,7 @@ import top.ntutn.novelrecommend.ui.base.BaseActivity
 
 class DebugHelperActivity : BaseActivity() {
     private lateinit var binding: ActivityDebugHelperBinding
+    private val debugConfigViewModel by viewModels<DebugConfigViewModel>()
     private val debugConfigAdapter = DebugConfigAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,10 +28,13 @@ class DebugHelperActivity : BaseActivity() {
 
         binding.configList.layoutManager = LinearLayoutManager(this)
         binding.configList.adapter = debugConfigAdapter
+        debugConfigViewModel.configList.observe(this) {
+            debugConfigAdapter.configList = it
+        }
     }
 
     private fun initData() {
-        debugConfigAdapter.configList = listOf("1", "2")
+        debugConfigViewModel.initList()
     }
 
     companion object {

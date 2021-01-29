@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import timber.log.Timber
 import top.ntutn.novelrecommend.utils.AppUtil
@@ -15,8 +14,8 @@ open class BaseActivity : AppCompatActivity() {
     /**
      * Activity创建时调用
      */
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         Timber.d("${javaClass.simpleName} onCreate()")
         val filter = IntentFilter()
         filter.addAction(AppUtil.BROADCAST_FINISH_ALL_ACTIVITIES)

@@ -4,15 +4,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import com.google.gson.Gson
+import top.ntutn.libzeroconfig.ZeroConfig
 import kotlin.reflect.KProperty
-
-/**
- * 标注于配置实体类之上
- * @param value 配置字段名
- */
-@Target(AnnotationTarget.CLASS)
-@Retention(AnnotationRetention.RUNTIME)
-annotation class ZeroConfig(val value: String)
 
 object ZeroConfigHelper {
     private lateinit var gson: Gson
@@ -35,8 +28,9 @@ object ZeroConfigHelper {
      * 相当耗时
      */
     fun getAllDefinedConfigs(): List<Class<*>> {
-        return ClassUtil.getAllClassByPackageName(Package.getPackage("top.ntutn"))
-            .run { AnnotationUtil.validAnnotation(this, ZeroConfig::class.java) }
+        val classList = ClassUtil.getAllClassByPackageName(Package.getPackage("top.ntutn"))
+        return AnnotationUtil.validAnnotation(classList, ZeroConfig::class.java)
+        TODO("kapt")
     }
 
     fun fetchConfigFromNetwork() {

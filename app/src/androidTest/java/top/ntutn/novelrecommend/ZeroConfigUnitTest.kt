@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import top.ntutn.novelrecommend.utils.ZeroConfig
+import top.ntutn.libzeroconfig.ZeroConfig
 import top.ntutn.novelrecommend.utils.zeroConfig
 
 /**

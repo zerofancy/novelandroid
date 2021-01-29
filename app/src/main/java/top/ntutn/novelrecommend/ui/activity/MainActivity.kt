@@ -1,7 +1,7 @@
 package top.ntutn.novelrecommend.ui.activity
 
 import android.os.Bundle
-import androidx.annotation.IdRes
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -14,10 +14,8 @@ import top.ntutn.novelrecommend.utils.showToast
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
 
-    @IdRes
-    private var lastSelectedId: Int? = null
-    private var clickCount = 0
     private var exitTime = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +27,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initView() {
-        val navController = findNavController(R.id.nav_host_fragment)
+        navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
@@ -44,7 +42,7 @@ class MainActivity : BaseActivity() {
     override fun onBackPressed() {
         if (System.currentTimeMillis() - exitTime <= EXIT_TIME) {
             AppUtil.finishAllActivities()
-            super.onBackPressed()
+//            finish()
         } else {
             exitTime = System.currentTimeMillis()
             R.string.press_again_to_exit.showToast()
