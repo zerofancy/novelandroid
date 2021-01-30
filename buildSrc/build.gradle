@@ -25,7 +25,6 @@ dependencies {
 
     // Add any other dependencies you might need for your Kotlin gradle tasks here.
     implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'com.squareup:kotlinpoet:1.7.2'
 }
 
 compileKotlin { kotlinOptions { jvmTarget = "1.8" } }

@@ -6,7 +6,6 @@ import java.nio.file.Files
 import java.nio.file.Paths
 
 object GenerateZeroConfigHolderTask {
-    fun showHelloWorld() = "Hello World!"
 
     fun generateCode() {
         val gson = Gson()
@@ -22,8 +21,8 @@ object GenerateZeroConfigHolderTask {
             "${it.key}" to ZeroConfigInformation(
                 key = "${it.key}",
                 title = "${it.value.title}",
-                clazz = ${it.value.clazz}::class,
-                scope = ${it.value.scope}::class,
+                clazz = "${it.value.clazz}",
+                scope = "${it.value.scope}",
                 owner = "${it.value.owner}"
               )
             """.trim()
@@ -42,6 +41,7 @@ object GenerateZeroConfigHolderTask {
         Files.createDirectories(path)
         val outputFilePath = path.resolve("ZeroHolder.kt")
         Files.write(outputFilePath, result.toByteArray())
+        Files.delete(Paths.get(JSON_PATH))
     }
 
     private const val JSON_PATH = "build/zeroconfig.json"

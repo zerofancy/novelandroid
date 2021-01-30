@@ -8,7 +8,7 @@ import kotlin.reflect.KClass
 data class ZeroConfigInformation(
     val key: String,
     val title: String,
-    val clazz: KClass<*>,
-    val scope: KClass<out ZeroScope>,
+    val clazz: String,
+    val scope: String,
     val owner: String
 )

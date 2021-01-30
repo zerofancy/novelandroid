@@ -3,18 +3,10 @@ package top.ntutn.libzeroconfigcompiler
 import com.google.auto.service.AutoService
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.squareup.kotlinpoet.FileSpec
-import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
-import com.squareup.kotlinpoet.PropertySpec
-import com.squareup.kotlinpoet.TypeSpec
 import top.ntutn.libzeroconfig.DefaultScope
 import top.ntutn.libzeroconfig.ZeroConfig
-import top.ntutn.libzeroconfig.ZeroConfigInformation
-import java.io.File
 import java.nio.file.Files
-import java.nio.file.Path
 import java.nio.file.Paths
-import java.util.*
 import javax.annotation.processing.*
 import javax.lang.model.SourceVersion
 import javax.lang.model.element.TypeElement
@@ -22,7 +14,6 @@ import javax.lang.model.type.MirroredTypeException
 import javax.lang.model.util.Elements
 import javax.lang.model.util.Types
 import javax.tools.Diagnostic
-import javax.tools.StandardLocation
 
 
 @AutoService(Processor::class)
@@ -92,44 +83,6 @@ class ZeroConfigProcessor : AbstractProcessor() {
 
     private fun saveJsonResult() {
         Files.write(Paths.get(JSON_PATH), gson.toJson(classInfoMap).toByteArray())
-    }
-
-    private fun generateCode(classInfoMap: Map<String, ZeroConfigCompilerInformation>) {
-        note("发现${classInfoMap.size}个${ZeroConfig::class.qualifiedName}注解")
-        val file = FileSpec.builder(HOLDER_PACKAGE_NAME, OUTPUT_CLASSNAME)
-            .addType(
-                TypeSpec.objectBuilder(OUTPUT_CLASSNAME)
-                    .addProperty(
-                        PropertySpec.builder(
-                            "value",
-                            Map::class.parameterizedBy(String::class)
-                                .plusParameter(ZeroConfigInformation::class)
-                        )
-                            .initializer(
-                                "mapOf(${
-                                    classInfoMap.map {
-                                        "\"${it.key}\" to ZeroConfigInformation(key=\"${it.value.key}\",title=\"${it.value.title}\",clazz=${it.value.clazz}::class,scope=${it.value.scope}::class,owner=\"${it.value.owner}\")"
-                                    }.joinToString(",")
-                                })"
-                            ).build()
-                    ).build()
-            ).build()
-        file.writeTo(trickyCreateResource(HOLDER_PACKAGE_NAME, "${OUTPUT_CLASSNAME}.kt"))
-        note(file.toString())
-    }
-
-    @Deprecated("tricky")
-    private fun trickyCreateResource(packageName: String, fileName: String): File {
-        val filerFile = filer.createResource(
-            StandardLocation.SOURCE_OUTPUT,
-            packageName,
-            "${UUID.randomUUID()}.tmp"
-        )
-        val generatedResourcePath: Path = Paths.get(filerFile.toUri()).parent
-        val targetPath = generatedResourcePath.resolve(fileName)
-        note("输出到$targetPath")
-        note(File(".").canonicalPath)
-        return targetPath.toFile()
     }
 
     private fun checkAnnotationValid(annotation: ZeroConfig): Boolean {
