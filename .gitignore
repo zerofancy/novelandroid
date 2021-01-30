@@ -8,3 +8,17 @@
 .externalNativeBuild
 .cxx
 local.properties
+app/.classpath
+app/.project
+libzeroconfig/.classpath
+libzeroconfig/.project
+libzeroconfig/.settings
+libzeroconfigcompiler/.classpath
+libzeroconfigcompiler/.project
+zeroconfigutil/.classpath
+zeroconfigutil/.project
+zeroconfigutil/.settings
+libzeroconfigcompiler/.settings
+app/.settings
+.project
+.settings

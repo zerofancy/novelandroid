@@ -14,7 +14,7 @@ object ZeroConfigHelper {
 
     private fun getKeyOfClass(clazz: Class<*>): String {
         val configAnnotation = clazz.getAnnotation(ZeroConfig::class.java)
-        return configAnnotation!!.value
+        return configAnnotation!!.key
     }
 
     fun init(context: Context) {
@@ -28,8 +28,6 @@ object ZeroConfigHelper {
      * 相当耗时
      */
     fun getAllDefinedConfigs(): List<Class<*>> {
-        val classList = ClassUtil.getAllClassByPackageName(Package.getPackage("top.ntutn"))
-        return AnnotationUtil.validAnnotation(classList, ZeroConfig::class.java)
         TODO("kapt")
     }
 

@@ -5,7 +5,6 @@ import android.content.Context
 import timber.log.Timber
 import top.ntutn.novelrecommend.utils.AppUtil
 import top.ntutn.novelrecommend.utils.CrashReportingTree
-import top.ntutn.novelrecommend.utils.ZeroConfigHelper
 
 class MyApplication : Application() {
     companion object {
@@ -21,7 +20,6 @@ class MyApplication : Application() {
         } else {
             Timber.plant(CrashReportingTree())
         }
-        ZeroConfigHelper.init(context)
         AppUtil.init()
     }
 }

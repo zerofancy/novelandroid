@@ -1,3 +1,5 @@
+import top.ntutn.GenerateZeroConfigHolderTask
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext.kotlin_version = "1.4.21"
@@ -24,4 +26,10 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+task generateZeroHolder() {
+    doLast {
+        GenerateZeroConfigHolderTask.INSTANCE.generateCode()
+    }
 }
