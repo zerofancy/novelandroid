@@ -51,7 +51,10 @@ class DebugConfigAdapter(private val activity: FragmentActivity) :
                     titleTextView.text = data.configInformation?.title
                     keyTextView.text = data.configInformation?.key
                     root.setOnClickListener {
-                        ConfigEditDialogFragment().show(activity.supportFragmentManager, "Edit")
+                        ConfigEditDialogFragment.newInstance(
+                            data.configInformation?.key ?: "",
+                            "value"
+                        ).show(activity.supportFragmentManager, "Edit")
                     }
                 }
             }

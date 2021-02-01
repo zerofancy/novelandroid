@@ -11,10 +11,15 @@
         android:layout_height="wrap_content"
         tools:text="demo_config"/>
 
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1px"
+        android:background="#666"/>
+
     <EditText
         android:id="@+id/valueEditText"
         android:layout_width="300dp"
-        android:layout_height="400dp"
+        android:layout_height="500dp"
         android:layout_weight="1"/>
 
     <Button
