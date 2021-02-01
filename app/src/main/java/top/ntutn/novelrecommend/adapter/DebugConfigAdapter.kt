@@ -53,7 +53,7 @@ class DebugConfigAdapter(private val activity: FragmentActivity) :
                     root.setOnClickListener {
                         ConfigEditDialogFragment.newInstance(
                             data.configInformation?.key ?: "",
-                            "value"
+                            "value" //TODO 获取value，并完成保存的操作
                         ).show(activity.supportFragmentManager, "Edit")
                     }
                 }

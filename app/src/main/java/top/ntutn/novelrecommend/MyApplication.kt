@@ -5,6 +5,7 @@ import android.content.Context
 import timber.log.Timber
 import top.ntutn.novelrecommend.utils.AppUtil
 import top.ntutn.novelrecommend.utils.CrashReportingTree
+import top.ntutn.novelrecommend.utils.showToast
 import top.ntutn.zeroconfigutil.ZeroConfigHelper
 
 class MyApplication : Application() {

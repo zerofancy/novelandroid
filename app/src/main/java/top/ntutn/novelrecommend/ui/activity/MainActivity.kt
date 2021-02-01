@@ -37,6 +37,8 @@ class MainActivity : BaseActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
+
+        getString(R.string.debug_notice).showToast()
     }
 
     override fun onBackPressed() {

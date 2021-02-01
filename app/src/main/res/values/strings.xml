@@ -6,4 +6,5 @@
     <string name="title_me">我的</string>
     <string name="press_again_to_exit">再按一次退出</string>
     <string name="save">保存</string>
+    <string name="debug_notice">当前处于Debug模式，可以通过DEBUG TEST按钮进行调试</string>
 </resources>
