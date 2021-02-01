@@ -12,7 +12,7 @@ import top.ntutn.novelrecommend.ui.base.BaseActivity
 class DebugHelperActivity : BaseActivity() {
     private lateinit var binding: ActivityDebugHelperBinding
     private val debugConfigViewModel by viewModels<DebugConfigViewModel>()
-    private val debugConfigAdapter = DebugConfigAdapter()
+    private val debugConfigAdapter = DebugConfigAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

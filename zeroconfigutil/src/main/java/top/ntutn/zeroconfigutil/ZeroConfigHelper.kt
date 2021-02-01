@@ -6,20 +6,20 @@ import androidx.core.content.edit
 import com.google.gson.Gson
 import top.ntutn.libzeroconfig.IZeroConfigHolder
 import top.ntutn.libzeroconfig.ZeroConfig
-import top.ntutn.libzeroconfig.ZeroConfigCompilerInformation
+import top.ntutn.libzeroconfig.ZeroConfigInformation
 
 object ZeroConfigHelper {
     private lateinit var gson: Gson
     private lateinit var sp: SharedPreferences
     private lateinit var bufferMap: MutableMap<Class<*>, Any?>
-    private var configs: MutableMap<String, ZeroConfigCompilerInformation> = mutableMapOf()
+    private var configs: MutableMap<String, ZeroConfigInformation> = mutableMapOf()
 
     private fun getKeyOfClass(clazz: Class<*>): String {
         val configAnnotation = clazz.getAnnotation(ZeroConfig::class.java)
         return configAnnotation!!.key
     }
 
-    fun addConfigHolder(configHolder: IZeroConfigHolder):ZeroConfigHelper {
+    fun addConfigHolder(configHolder: IZeroConfigHolder): ZeroConfigHelper {
         configs.putAll(configHolder.getValue())
         return this
     }
@@ -33,13 +33,7 @@ object ZeroConfigHelper {
     /**
      * 获取所有已经定义的配置
      */
-    fun getAllDefinedConfigs(): List<Class<*>> {
-        TODO("kapt")
-    }
-
-    fun fetchConfigFromNetwork() {
-        //TODO 从互联网更新配置
-    }
+    fun getAllDefinedConfigs(): Collection<ZeroConfigInformation> = configs.values
 
     fun <T> saveConfig(clazz: Class<*>, value: T) {
         bufferMap[clazz] = value

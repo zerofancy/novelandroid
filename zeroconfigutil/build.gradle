@@ -33,14 +33,6 @@ android {
     }
 }
 
-sourceSets {
-    main {
-        java {
-            srcDirs "build/generated/source/zeroHolder"
-        }
-    }
-}
-
 kapt {
     arguments {
         arg("zeroConfigHolder","top.ntutn.zeroconfigutil.ZeroConfigHolder")

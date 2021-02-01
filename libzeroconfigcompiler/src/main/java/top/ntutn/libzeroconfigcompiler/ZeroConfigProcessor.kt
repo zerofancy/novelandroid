@@ -6,7 +6,7 @@ import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import top.ntutn.libzeroconfig.DefaultScope
 import top.ntutn.libzeroconfig.IZeroConfigHolder
 import top.ntutn.libzeroconfig.ZeroConfig
-import top.ntutn.libzeroconfig.ZeroConfigCompilerInformation
+import top.ntutn.libzeroconfig.ZeroConfigInformation
 import javax.annotation.processing.*
 import javax.lang.model.SourceVersion
 import javax.lang.model.element.TypeElement
@@ -31,7 +31,7 @@ class ZeroConfigProcessor : AbstractProcessor() {
     //类型相关工具类
     private lateinit var typeUtils: Types
 
-    private lateinit var classInfoMap: MutableMap<String, ZeroConfigCompilerInformation>
+    private lateinit var classInfoMap: MutableMap<String, ZeroConfigInformation>
 
     private lateinit var zeroConfigHolderPackage: String
 
@@ -89,7 +89,7 @@ class ZeroConfigProcessor : AbstractProcessor() {
             }
             val annotation = element.getAnnotation(ZeroConfig::class.java)
             if (!checkAnnotationValid(annotation)) return false
-            classInfoMap[annotation.key] = ZeroConfigCompilerInformation(
+            classInfoMap[annotation.key] = ZeroConfigInformation(
                 key = annotation.key,
                 clazz = element.qualifiedName.toString(),
                 title = annotation.title,
@@ -108,8 +108,9 @@ class ZeroConfigProcessor : AbstractProcessor() {
     private fun generateCode() {
         val codeBlocks = classInfoMap.map {
             CodeBlock.builder().add(
-                "%S to ZeroConfigCompilerInformation(key=%S,title=%S,clazz=%S,scope=%S,owner=%S)",
+                "%S to %T(key=%S,title=%S,clazz=%S,scope=%S,owner=%S)",
                 it.key,
+                ZeroConfigInformation::class,
                 it.value.key,
                 it.value.title,
                 it.value.clazz,
@@ -126,7 +127,7 @@ class ZeroConfigProcessor : AbstractProcessor() {
                             .addModifiers(KModifier.OVERRIDE)
                             .returns(
                                 Map::class.parameterizedBy(String::class)
-                                    .plusParameter(ZeroConfigCompilerInformation::class)
+                                    .plusParameter(ZeroConfigInformation::class)
                             )
                             .addStatement(
                                 "return mapOf(${codeBlocks.joinToString(",")})"
@@ -196,25 +197,4 @@ class ZeroConfigProcessor : AbstractProcessor() {
     companion object {
         private const val OPTION_CONFIG_HOLDER = "zeroConfigHolder"
     }
-}
-
-fun main() {
-    val file = FileSpec.builder("com.template", "StatesAndContracts")
-        .addType(
-            TypeSpec.classBuilder("TemplateState")
-                .addSuperinterface(ClassName("", "ContractState"))
-                .primaryConstructor(
-                    FunSpec.constructorBuilder()
-                        .addParameter("data", String::class)
-                        .build()
-                )
-                .addProperty(
-                    PropertySpec.builder("data", String::class)
-                        .initializer("data")
-                        .build()
-                )
-                .build()
-        )
-        .build()
-    println(file.toString())
 }
