@@ -1,4 +1,4 @@
-package top.ntutn.libzeroconfigcompiler
+package top.ntutn.libzeroconfig
 
 data class ZeroConfigCompilerInformation(
     val key: String,

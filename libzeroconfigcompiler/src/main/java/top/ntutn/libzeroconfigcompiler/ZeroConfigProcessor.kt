@@ -1,12 +1,12 @@
 package top.ntutn.libzeroconfigcompiler
 
 import com.google.auto.service.AutoService
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import com.squareup.kotlinpoet.*
+import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import top.ntutn.libzeroconfig.DefaultScope
+import top.ntutn.libzeroconfig.IZeroConfigHolder
 import top.ntutn.libzeroconfig.ZeroConfig
-import java.nio.file.Files
-import java.nio.file.Paths
+import top.ntutn.libzeroconfig.ZeroConfigCompilerInformation
 import javax.annotation.processing.*
 import javax.lang.model.SourceVersion
 import javax.lang.model.element.TypeElement
@@ -25,18 +25,21 @@ class ZeroConfigProcessor : AbstractProcessor() {
     //文件相关的工具类
     private lateinit var filer: Filer
 
-    /**
-     * 日志相关的工具类
-     */
+    //日志相关的工具类
     private lateinit var messager: Messager
 
-    /**
-     * 类型相关工具类
-     */
+    //类型相关工具类
     private lateinit var typeUtils: Types
 
     private lateinit var classInfoMap: MutableMap<String, ZeroConfigCompilerInformation>
-    private val gson = Gson()
+
+    private lateinit var zeroConfigHolderPackage: String
+
+    private lateinit var zeroConfigHolderClassName: String
+
+    private var counter = 0
+
+    private var wasWrittenToFile: Boolean = false
 
     override fun init(p0: ProcessingEnvironment?) {
         super.init(p0)
@@ -44,22 +47,40 @@ class ZeroConfigProcessor : AbstractProcessor() {
         filer = processingEnv.filer
         messager = processingEnv.messager
         typeUtils = processingEnv.typeUtils
-        note("${javaClass.simpleName} init")
-        classInfoMap = try {
-            val json = Files.readAllLines(Paths.get(JSON_PATH)).joinToString("\n")
-            note(json)
-            val type = object : TypeToken<Map<String, ZeroConfigCompilerInformation>>() {}.type
-            gson.fromJson(json, type)
-        } catch (e: Throwable) {
-            mutableMapOf()
+        classInfoMap = mutableMapOf()
+
+        val fullPackagePath = processingEnv.options[OPTION_CONFIG_HOLDER] ?: let {
+            error("必须设置${OPTION_CONFIG_HOLDER}")
+            return
         }
-        note(classInfoMap.toString())
+        zeroConfigHolderClassName = fullPackagePath.split('.').last()
+        zeroConfigHolderPackage =
+            fullPackagePath.removeSuffix(zeroConfigHolderClassName)
+                .removeSuffix(".")
+        note("${javaClass.simpleName} init className = ${zeroConfigHolderClassName}, package = ${zeroConfigHolderPackage}. ")
     }
 
     override fun process(
-        p0: MutableSet<out TypeElement>,
+        annotations: MutableSet<out TypeElement>,
         roundEnvironment: RoundEnvironment
     ): Boolean {
+        counter++
+        note("Processing round $counter, new annotations: ${annotations.isNotEmpty()}, processingOver: ${roundEnvironment.processingOver()}")
+
+        if (roundEnvironment.processingOver() && annotations.isNotEmpty()) {
+            error("Unexpected processing state: annotations still available after processing over")
+            return false
+        }
+        if (annotations.isEmpty()) {
+            return false
+        }
+
+        if (wasWrittenToFile) {
+            error("Unexpected processing state: annotations still available after writing.")
+            return false
+        }
+
+        // 收集数据
         roundEnvironment.getElementsAnnotatedWith(ZeroConfig::class.java).forEach { element ->
             //使用了注解的某个类
             if (element !is TypeElement) {
@@ -76,13 +97,47 @@ class ZeroConfigProcessor : AbstractProcessor() {
                 owner = annotation.owner
             )
         }
-//        generateCode(classInfoMap)
-        saveJsonResult()
-        return false
+
+        generateCode()
+
+        wasWrittenToFile = true
+
+        return true
     }
 
-    private fun saveJsonResult() {
-        Files.write(Paths.get(JSON_PATH), gson.toJson(classInfoMap).toByteArray())
+    private fun generateCode() {
+        val codeBlocks = classInfoMap.map {
+            CodeBlock.builder().add(
+                "%S to ZeroConfigCompilerInformation(key=%S,title=%S,clazz=%S,scope=%S,owner=%S)",
+                it.key,
+                it.value.key,
+                it.value.title,
+                it.value.clazz,
+                it.value.scope,
+                it.value.owner
+            ).build().toString()
+        }
+        val file = FileSpec.builder(zeroConfigHolderPackage, zeroConfigHolderClassName)
+            .addType(
+                TypeSpec.classBuilder(zeroConfigHolderClassName)
+                    .addSuperinterface(IZeroConfigHolder::class)
+                    .addFunction(
+                        FunSpec.builder("getValue")
+                            .addModifiers(KModifier.OVERRIDE)
+                            .returns(
+                                Map::class.parameterizedBy(String::class)
+                                    .plusParameter(ZeroConfigCompilerInformation::class)
+                            )
+                            .addStatement(
+                                "return mapOf(${codeBlocks.joinToString(",")})"
+                            )
+                            .build()
+                    )
+                    .build()
+            )
+            .build()
+        note(file.toString())
+        file.writeTo(filer)
     }
 
     private fun checkAnnotationValid(annotation: ZeroConfig): Boolean {
@@ -115,10 +170,15 @@ class ZeroConfigProcessor : AbstractProcessor() {
         }
     }
 
+    /**
+     * 没有用注解，避免了硬编码
+     */
     override fun getSupportedAnnotationTypes(): MutableSet<String> =
         mutableSetOf(ZeroConfig::class.java.canonicalName)
 
     override fun getSupportedSourceVersion(): SourceVersion = SourceVersion.latestSupported()
+
+    override fun getSupportedOptions(): MutableSet<String> = mutableSetOf(OPTION_CONFIG_HOLDER)
 
     fun note(message: String) {
         processingEnv.messager.printMessage(Diagnostic.Kind.NOTE, "$message\r\n")
@@ -134,9 +194,27 @@ class ZeroConfigProcessor : AbstractProcessor() {
     }
 
     companion object {
-        // 生成的代码所在的包名
-        private const val HOLDER_PACKAGE_NAME = "top.ntutn.zeroconfig.holder"
-        private const val OUTPUT_CLASSNAME = "ZeroHolder"
-        private const val JSON_PATH = "build/zeroconfig.json"
+        private const val OPTION_CONFIG_HOLDER = "zeroConfigHolder"
     }
+}
+
+fun main() {
+    val file = FileSpec.builder("com.template", "StatesAndContracts")
+        .addType(
+            TypeSpec.classBuilder("TemplateState")
+                .addSuperinterface(ClassName("", "ContractState"))
+                .primaryConstructor(
+                    FunSpec.constructorBuilder()
+                        .addParameter("data", String::class)
+                        .build()
+                )
+                .addProperty(
+                    PropertySpec.builder("data", String::class)
+                        .initializer("data")
+                        .build()
+                )
+                .build()
+        )
+        .build()
+    println(file.toString())
 }

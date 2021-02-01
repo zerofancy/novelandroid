@@ -41,6 +41,12 @@ sourceSets {
     }
 }
 
+kapt {
+    arguments {
+        arg("zeroConfigHolder","top.ntutn.zeroconfigutil.ZeroConfigHolder")
+    }
+}
+
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

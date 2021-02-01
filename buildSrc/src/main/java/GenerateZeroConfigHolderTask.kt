@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken
 import java.nio.file.Files
 import java.nio.file.Paths
 
+@Deprecated("我现在又觉得运行时再去读json更好了")
 object GenerateZeroConfigHolderTask {
 
     fun generateCode() {
