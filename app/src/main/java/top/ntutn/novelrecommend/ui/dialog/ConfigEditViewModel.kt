@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import top.ntutn.zeroconfigutil.ZeroConfigHelper
 
 class ConfigEditViewModel : ViewModel() {
     private val _key = MutableLiveData<String>()
@@ -15,12 +16,17 @@ class ConfigEditViewModel : ViewModel() {
     val key: LiveData<String> = _key
     val value: LiveData<String> = _value
 
-    fun setData(key: String, value: String) {
+    private suspend fun prepareData(key: String): String? {
+        return withContext(Dispatchers.IO) {
+            ZeroConfigHelper.readRawConfig(key)
+        }
+    }
+
+    fun setData(key: String) {
+        if (_key.value == key) return
         viewModelScope.launch {
-            withContext(Dispatchers.Main) {
-                _key.value = key
-                _value.value = value
-            }
+            _key.value = key
+            _value.value = prepareData(key)
         }
     }
 }

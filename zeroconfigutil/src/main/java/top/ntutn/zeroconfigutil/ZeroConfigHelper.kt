@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import com.google.gson.Gson
 import top.ntutn.libzeroconfig.IZeroConfigHolder
-import top.ntutn.libzeroconfig.ZeroConfig
 import top.ntutn.libzeroconfig.ZeroConfigInformation
 
 object ZeroConfigHelper {
@@ -15,8 +14,7 @@ object ZeroConfigHelper {
     private var configs: MutableMap<String, ZeroConfigInformation> = mutableMapOf()
 
     private fun getKeyOfClass(clazz: Class<*>): String {
-        val configAnnotation = clazz.getAnnotation(ZeroConfig::class.java)
-        return configAnnotation!!.key
+        return configs.filter { it.value.clazz == clazz.canonicalName }.keys.first()
     }
 
     fun addConfigHolder(configHolder: IZeroConfigHolder): ZeroConfigHelper {
@@ -49,6 +47,25 @@ object ZeroConfigHelper {
             val jsonString = sp.getString(getKeyOfClass(clazz), "{}")
             gson.fromJson(jsonString, clazz)
         } as T
+    }
+
+    private fun getClassByKey(key: String): Class<*>? {
+        val className = configs[key]?.clazz ?: return null
+        return Class.forName(className)
+    }
+
+    fun readRawConfig(key: String): String? {
+        val clazz = getClassByKey(key) ?: return null
+        return sp.getString(getKeyOfClass(clazz), "{}")
+    }
+
+    @Throws(ClassNotFoundException::class)
+    fun saveRawConfig(key: String, value: String) {
+        val clazz = getClassByKey(key) ?: throw ClassNotFoundException("未找到配置项：$key")
+        bufferMap.remove(clazz)
+        sp.edit {
+            putString(getKeyOfClass(clazz), value)
+        }
     }
 
     fun removeConfig(clazz: Class<*>) {

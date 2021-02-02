@@ -7,9 +7,11 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.databinding.ItemDebugConfigBinding
 import top.ntutn.novelrecommend.databinding.ItemDebugConfigScopeBinding
 import top.ntutn.novelrecommend.model.DebugConfigListModel
+import top.ntutn.novelrecommend.ui.activity.DebugHelperActivity
 import top.ntutn.novelrecommend.ui.dialog.ConfigEditDialogFragment
 
 class DebugConfigAdapter(private val activity: FragmentActivity) :
@@ -46,14 +48,15 @@ class DebugConfigAdapter(private val activity: FragmentActivity) :
             is ItemDebugConfigBinding -> {
                 holder.binding.apply {
                     root.setBackgroundColor(if (position % 2 == 1) Color.LTGRAY else Color.WHITE)
-                    ownerTextView.text = data.configInformation?.owner
+                    activity.getString(R.string.template_owner)
+                        .format(data.configInformation?.owner).also { ownerTextView.text = it }
                     scopeTextView.text = data.configInformation?.scope
                     titleTextView.text = data.configInformation?.title
                     keyTextView.text = data.configInformation?.key
                     root.setOnClickListener {
                         ConfigEditDialogFragment.newInstance(
                             data.configInformation?.key ?: "",
-                            "value" //TODO 获取value，并完成保存的操作
+                            DebugHelperActivity.REQUEST_EDIT_DIALOG
                         ).show(activity.supportFragmentManager, "Edit")
                     }
                 }

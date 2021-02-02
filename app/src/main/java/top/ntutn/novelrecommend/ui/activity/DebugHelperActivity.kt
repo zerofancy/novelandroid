@@ -37,7 +37,13 @@ class DebugHelperActivity : BaseActivity() {
         debugConfigViewModel.initList()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
     companion object {
+        const val REQUEST_EDIT_DIALOG = 0
+
         fun actionStart(context: Context) {
             val intent = Intent(context, DebugHelperActivity::class.java)
             context.startActivity(intent)
