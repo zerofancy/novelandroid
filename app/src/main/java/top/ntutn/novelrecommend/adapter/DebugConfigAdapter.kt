@@ -11,7 +11,6 @@ import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.databinding.ItemDebugConfigBinding
 import top.ntutn.novelrecommend.databinding.ItemDebugConfigScopeBinding
 import top.ntutn.novelrecommend.model.DebugConfigListModel
-import top.ntutn.novelrecommend.ui.activity.DebugHelperActivity
 import top.ntutn.novelrecommend.ui.dialog.ConfigEditDialogFragment
 
 class DebugConfigAdapter(private val activity: FragmentActivity) :
@@ -55,8 +54,7 @@ class DebugConfigAdapter(private val activity: FragmentActivity) :
                     keyTextView.text = data.configInformation?.key
                     root.setOnClickListener {
                         ConfigEditDialogFragment.newInstance(
-                            data.configInformation?.key ?: "",
-                            DebugHelperActivity.REQUEST_EDIT_DIALOG
+                            data.configInformation?.key ?: ""
                         ).show(activity.supportFragmentManager, "Edit")
                     }
                 }

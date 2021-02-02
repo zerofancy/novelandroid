@@ -9,6 +9,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import timber.log.Timber
 import top.ntutn.novelrecommend.utils.AppUtil
+import top.ntutn.novelrecommend.utils.EventBusWrapper
 
 open class BaseActivity : AppCompatActivity() {
     /**
@@ -33,6 +34,7 @@ open class BaseActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         Timber.v("${javaClass.simpleName} onStart()")
+        EventBusWrapper.register(this)
     }
 
     /**
@@ -57,6 +59,7 @@ open class BaseActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         Timber.v("${javaClass.simpleName} onStop()")
+        EventBusWrapper.unregister(this)
     }
 
     /**

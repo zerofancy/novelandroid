@@ -26,7 +26,11 @@ class ConfigEditViewModel : ViewModel() {
         if (_key.value == key) return
         viewModelScope.launch {
             _key.value = key
-            _value.value = prepareData(key)
+            _value.value = withContext(Dispatchers.IO) { prepareData(key) }
         }
+    }
+
+    fun editValue(value: String) {
+        if (_value.value != value) _value.value = value
     }
 }

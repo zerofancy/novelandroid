@@ -5,9 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import org.greenrobot.eventbus.Subscribe
 import top.ntutn.novelrecommend.adapter.DebugConfigAdapter
 import top.ntutn.novelrecommend.databinding.ActivityDebugHelperBinding
 import top.ntutn.novelrecommend.ui.base.BaseActivity
+import top.ntutn.novelrecommend.ui.event.ConfigEditDialogCloseEvent
 
 class DebugHelperActivity : BaseActivity() {
     private lateinit var binding: ActivityDebugHelperBinding
@@ -37,8 +39,10 @@ class DebugHelperActivity : BaseActivity() {
         debugConfigViewModel.initList()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+    @Subscribe
+    fun onConfigEditDialogCloseEvent(event: ConfigEditDialogCloseEvent) {
+        if (!event.saveResult || event.key == null || event.value == null) return
+        debugConfigViewModel.updateConfig(event.key, event.value)
     }
 
     companion object {

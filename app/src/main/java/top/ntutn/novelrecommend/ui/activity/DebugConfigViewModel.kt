@@ -27,4 +27,12 @@ class DebugConfigViewModel : ViewModel() {
     fun initList() {
         viewModelScope.launch { _configList.value = getList() }
     }
+
+    fun updateConfig(key: String, value: String) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                ZeroConfigHelper.saveRawConfig(key,value)
+            }
+        }
+    }
 }

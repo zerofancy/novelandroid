@@ -56,7 +56,7 @@ object ZeroConfigHelper {
 
     fun readRawConfig(key: String): String? {
         val clazz = getClassByKey(key) ?: return null
-        return sp.getString(getKeyOfClass(clazz), "{}")
+        return sp.getString(getKeyOfClass(clazz), "{}") // TODO 默认参数换成定义的默认值
     }
 
     @Throws(ClassNotFoundException::class)
