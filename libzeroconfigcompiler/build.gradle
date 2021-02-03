@@ -10,13 +10,11 @@ java {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    //noinspection AnnotationProcessorOnCompilePath
-    compileOnly 'com.google.auto.service:auto-service:1.0-rc6'
-    kapt 'com.google.auto.service:auto-service:1.0-rc6'
-    implementation 'com.google.code.gson:gson:2.8.6'
-    // https://mvnrepository.com/artifact/com.squareup/kotlinpoet
-    implementation group: 'com.squareup', name: 'kotlinpoet', version: '1.7.2'
+    implementation Deps.Kotlin.STD_LIB
+    compileOnly Deps.AUTO_SERVICE
+    kapt Deps.AUTO_SERVICE
+    implementation Deps.GSON
+    implementation Deps.KOTLIN_POET
 
     implementation project(':libzeroconfig')
 }
