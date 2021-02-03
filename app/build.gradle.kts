@@ -75,6 +75,9 @@ dependencies {
     implementation(Deps.EVENTBUS)
     kapt(Deps.EVENTBUS_PROCESSOR)
 
+    implementation(Deps.ABOUT_PAGE)
+    implementation(Deps.ABOUT_TYPE)
+
     kapt(project(":libzeroconfigcompiler"))
     implementation(project(":libzeroconfig"))
     implementation(project(":zeroconfigutil"))

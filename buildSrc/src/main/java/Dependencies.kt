@@ -12,6 +12,8 @@ object Vers {
     const val EVENTBUS = "3.2.0"
     const val AUTO_SERVICE = "1.0-rc7"
     const val KOTLIN_POET = "1.7.2"
+    const val DRAKEET_ABOUT = "2.4.1"
+    const val DRAKEET_MUTITYPE = "4.0.0"
 }
 
 @Suppress("unused", "SpellCheckingInspection")
@@ -28,6 +30,9 @@ object Deps {
 
     const val AUTO_SERVICE = "com.google.auto.service:auto-service:${Vers.AUTO_SERVICE}"
     const val KOTLIN_POET = "com.squareup:kotlinpoet:${Vers.KOTLIN_POET}"
+
+    const val ABOUT_PAGE = "com.drakeet.about:about:${Vers.DRAKEET_ABOUT}"
+    const val ABOUT_TYPE = "com.drakeet.multitype:multitype:${Vers.DRAKEET_MUTITYPE}"
 }
 
 @Suppress("unused", "SpellCheckingInspection")
