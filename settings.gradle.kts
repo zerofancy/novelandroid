@@ -1,3 +1,4 @@
+include(":app:readview")
 include(":zeroconfigutil")
 include(":libzeroconfigcompiler")
 include(":libzeroconfig")
