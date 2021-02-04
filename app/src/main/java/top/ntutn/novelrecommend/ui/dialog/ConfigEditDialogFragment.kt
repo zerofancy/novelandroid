@@ -8,7 +8,6 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import top.ntutn.novelrecommend.databinding.DialogConfigEditBinding
-import top.ntutn.novelrecommend.ui.event.ConfigEditDialogCloseEvent
 import top.ntutn.novelrecommend.utils.EventBusWrapper
 
 class ConfigEditDialogFragment : DialogFragment() {
@@ -82,3 +81,5 @@ class ConfigEditDialogFragment : DialogFragment() {
             }
     }
 }
+
+data class ConfigEditDialogCloseEvent(val saveResult: Boolean, val key: String?, val value: String?)

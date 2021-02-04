@@ -41,7 +41,9 @@ object KotlinDependency {
     const val GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Vers.kotlin_version}"
     const val NO_ARGS = "org.jetbrains.kotlin:kotlin-noarg:${Vers.kotlin_version}"
     const val STD_LIB = "org.jetbrains.kotlin:kotlin-stdlib:${Vers.kotlin_version}"
-    const val COROUTINES_ANDROID = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
+    const val COROUTINES_ANDROID =
+        "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
+    const val REFLECT = "org.jetbrains.kotlin:reflect:${Vers.kotlin_version}"
 }
 
 @Suppress("unused")

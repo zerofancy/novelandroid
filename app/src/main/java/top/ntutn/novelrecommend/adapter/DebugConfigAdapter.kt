@@ -3,7 +3,7 @@ package top.ntutn.novelrecommend.adapter
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
@@ -12,8 +12,9 @@ import top.ntutn.novelrecommend.databinding.ItemDebugConfigBinding
 import top.ntutn.novelrecommend.databinding.ItemDebugConfigScopeBinding
 import top.ntutn.novelrecommend.model.DebugConfigListModel
 import top.ntutn.novelrecommend.ui.dialog.ConfigEditDialogFragment
+import top.ntutn.novelrecommend.ui.fragment.DebugConfigFragment
 
-class DebugConfigAdapter(private val activity: FragmentActivity) :
+class DebugConfigAdapter(private val fragment: Fragment) :
     RecyclerView.Adapter<DebugConfigAdapter.ViewHolder>() {
     var configList: List<DebugConfigListModel> = listOf()
         set(value) {
@@ -47,15 +48,17 @@ class DebugConfigAdapter(private val activity: FragmentActivity) :
             is ItemDebugConfigBinding -> {
                 holder.binding.apply {
                     root.setBackgroundColor(if (position % 2 == 1) Color.LTGRAY else Color.WHITE)
-                    activity.getString(R.string.template_owner)
+                    fragment.getString(R.string.template_owner)
                         .format(data.configInformation?.owner).also { ownerTextView.text = it }
                     scopeTextView.text = data.configInformation?.scope
                     titleTextView.text = data.configInformation?.title
                     keyTextView.text = data.configInformation?.key
                     root.setOnClickListener {
-                        ConfigEditDialogFragment.newInstance(
-                            data.configInformation?.key ?: ""
-                        ).show(activity.supportFragmentManager, "Edit")
+                        fragment.parentFragmentManager.let { it1 ->
+                            ConfigEditDialogFragment.newInstance(
+                                data.configInformation?.key ?: ""
+                            ).show(it1, "Edit")
+                        }
                     }
                 }
             }
