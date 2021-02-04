@@ -34,7 +34,6 @@ open class BaseActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         Timber.v("${javaClass.simpleName} onStart()")
-        EventBusWrapper.register(this)
     }
 
     /**
@@ -59,7 +58,6 @@ open class BaseActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         Timber.v("${javaClass.simpleName} onStop()")
-        EventBusWrapper.unregister(this)
     }
 
     /**

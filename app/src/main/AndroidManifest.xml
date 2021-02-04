@@ -12,7 +12,7 @@
         android:theme="@style/Theme.Novelrecommend">
         <activity
             android:name=".ui.activity.DebugHelperActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.MainActivity"
             android:screenOrientation="portrait">
@@ -22,6 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activity.AboutActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.About"/>
     </application>
 
 </manifest>

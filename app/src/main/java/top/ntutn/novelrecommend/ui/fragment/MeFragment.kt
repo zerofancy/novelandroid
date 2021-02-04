@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import top.ntutn.novelrecommend.BuildConfig
 import top.ntutn.novelrecommend.databinding.FragmentMeBinding
+import top.ntutn.novelrecommend.ui.activity.AboutActivity
 import top.ntutn.novelrecommend.ui.activity.DebugHelperActivity
 import top.ntutn.novelrecommend.ui.base.BaseFragment
 
@@ -33,6 +34,10 @@ class MeFragment : BaseFragment() {
         meViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+
+        binding.aboutButton.setOnClickListener {
+            AboutActivity.actionStart(requireContext())
+        }
 
         if (BuildConfig.DEBUG) {
             binding.debugButton.visibility = View.VISIBLE

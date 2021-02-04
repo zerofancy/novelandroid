@@ -10,6 +10,7 @@ import top.ntutn.novelrecommend.adapter.DebugConfigAdapter
 import top.ntutn.novelrecommend.databinding.ActivityDebugHelperBinding
 import top.ntutn.novelrecommend.ui.base.BaseActivity
 import top.ntutn.novelrecommend.ui.event.ConfigEditDialogCloseEvent
+import top.ntutn.novelrecommend.utils.EventBusWrapper
 
 class DebugHelperActivity : BaseActivity() {
     private lateinit var binding: ActivityDebugHelperBinding
@@ -23,6 +24,16 @@ class DebugHelperActivity : BaseActivity() {
 
         initView()
         initData()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBusWrapper.register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBusWrapper.unregister(this)
     }
 
     private fun initView() {
