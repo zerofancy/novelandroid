@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <declare-styleable name="ReadView">
+        <attr name="color" format="color" />
+        <attr name="fontSize" format="dimension" />
+        <attr name="text" format="string" />
+        <attr name="background" format="reference" />
+        <attr name="type" format="enum">
+            <enum name="common" value="1" />
+            <enum name="material" value="2" />
+        </attr>
+    </declare-styleable>
+</resources>

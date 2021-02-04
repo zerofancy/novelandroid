@@ -4,26 +4,32 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import top.ntutn.novelrecommend.R
+import top.ntutn.novelrecommend.databinding.FragmentDiscoverBinding
 import top.ntutn.novelrecommend.ui.base.BaseFragment
+import top.ntutn.readview.ReadTestActivity
 
 class DiscoverFragment : BaseFragment() {
-
+    private lateinit var binding: FragmentDiscoverBinding
     private val discoverViewModel by viewModels<DiscoverViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val root = inflater.inflate(R.layout.fragment_discover, container, false)
-        val textView: TextView = root.findViewById(R.id.text_discover)
+    ): View {
+        binding = FragmentDiscoverBinding.inflate(inflater, container, false)
+        initView()
+        return binding.root
+    }
+
+    private fun initView() {
         discoverViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+            binding.textDiscover.text = it
         })
-        return root
+        binding.textDiscover.setOnClickListener {
+            ReadTestActivity.actionStart(requireContext())
+        }
     }
 }

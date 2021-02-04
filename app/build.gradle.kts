@@ -81,4 +81,5 @@ dependencies {
     kapt(project(":libzeroconfigcompiler"))
     implementation(project(":libzeroconfig"))
     implementation(project(":zeroconfigutil"))
+    implementation(project(":app:readview"))
 }
