@@ -49,6 +49,7 @@ kapt {
         arg("eventBusIndex", "top.ntutn.novelrecommend.AppEventBusAppIndex")
         arg("verbose", true)
         arg("zeroConfigHolder", "top.ntutn.novelrecommend.ZeroConfigHolder")
+        arg("AROUTER_MODULE_NAME", project.name)
     }
 }
 
@@ -77,6 +78,9 @@ dependencies {
 
     implementation(Deps.ABOUT_PAGE)
 //    implementation(Deps.ABOUT_TYPE)
+
+    implementation(Deps.AROUTER_API)
+    kapt(Deps.AROUTER_COMPILER)
 
     kapt(project(":libzeroconfigcompiler"))
     implementation(project(":libzeroconfig"))

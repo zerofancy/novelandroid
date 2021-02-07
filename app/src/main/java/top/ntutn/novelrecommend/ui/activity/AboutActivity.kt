@@ -34,6 +34,14 @@ class AboutActivity : AbsAboutActivity() {
             )
             add(
                 License(
+                    "ARouter",
+                    "阿里巴巴",
+                    APACHE_2,
+                    "https://github.com/alibaba/ARouter/tree/master"
+                )
+            )
+            add(
+                License(
                     "AutoService",
                     "Google",
                     APACHE_2,

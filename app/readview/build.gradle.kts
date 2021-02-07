@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("kotlin-android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -38,6 +39,12 @@ android {
     }
 }
 
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.name)
+    }
+}
+
 dependencies {
 
     implementation(Deps.Kotlin.STD_LIB)
@@ -53,6 +60,10 @@ dependencies {
     implementation(Deps.AndroidX.LIVE_DATA)
 
     implementation(Deps.MATERIAL)
+
+    implementation(Deps.AROUTER_API)
+    kapt(Deps.AROUTER_COMPILER)
+
     testImplementation("junit:junit:4.13.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")

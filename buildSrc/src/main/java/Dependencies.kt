@@ -14,6 +14,7 @@ object Vers {
     const val KOTLIN_POET = "1.7.2"
     const val DRAKEET_ABOUT = "2.4.1"
     const val DRAKEET_MUTITYPE = "4.0.0"
+    const val AROUTER = "1.5.1"
 }
 
 @Suppress("unused", "SpellCheckingInspection")
@@ -33,6 +34,9 @@ object Deps {
 
     const val ABOUT_PAGE = "com.drakeet.about:about:${Vers.DRAKEET_ABOUT}"
     const val ABOUT_TYPE = "com.drakeet.multitype:multitype:${Vers.DRAKEET_MUTITYPE}"
+
+    const val AROUTER_API = "com.alibaba:arouter-api:${Vers.AROUTER}"
+    const val AROUTER_COMPILER = "com.alibaba:arouter-compiler:${Vers.AROUTER}"
 }
 
 @Suppress("unused", "SpellCheckingInspection")
