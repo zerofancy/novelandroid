@@ -82,6 +82,10 @@ dependencies {
     implementation(Deps.AROUTER_API)
     kapt(Deps.AROUTER_COMPILER)
 
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
+    implementation(Deps.RETROFIT)
+    implementation(Deps.RETROFIT_CONVERTER_GSON)
+
     kapt(project(":libzeroconfigcompiler"))
     implementation(project(":libzeroconfig"))
     implementation(project(":zeroconfigutil"))

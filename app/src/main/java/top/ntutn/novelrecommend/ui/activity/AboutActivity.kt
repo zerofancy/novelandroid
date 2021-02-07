@@ -68,6 +68,14 @@ class AboutActivity : AbsAboutActivity() {
             )
             add(
                 License(
+                    "Retrofit2",
+                    "Square",
+                    APACHE_2,
+                    "https://square.github.io/retrofit/"
+                )
+            )
+            add(
+                License(
                     "Timber",
                     "Jake Wharton",
                     APACHE_2,

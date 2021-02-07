@@ -15,6 +15,7 @@ object Vers {
     const val DRAKEET_ABOUT = "2.4.1"
     const val DRAKEET_MUTITYPE = "4.0.0"
     const val AROUTER = "1.5.1"
+    const val RETROFIT = "2.9.0"
 }
 
 @Suppress("unused", "SpellCheckingInspection")
@@ -37,6 +38,9 @@ object Deps {
 
     const val AROUTER_API = "com.alibaba:arouter-api:${Vers.AROUTER}"
     const val AROUTER_COMPILER = "com.alibaba:arouter-compiler:${Vers.AROUTER}"
+
+    const val RETROFIT = "com.squareup.retrofit2:retrofit:${Vers.RETROFIT}"
+    const val RETROFIT_CONVERTER_GSON = "com.squareup.retrofit2:retrofit:${Vers.RETROFIT}"
 }
 
 @Suppress("unused", "SpellCheckingInspection")
