@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.facade.annotation.Route
+import top.ntutn.novelrecommend.utils.showLongToast
 import top.ntutn.novelrecommend.utils.showToast
 import top.ntutn.readview.databinding.ActivityReadTestBinding
 import java.io.BufferedReader
@@ -26,11 +27,19 @@ class ReadTestActivity : AppCompatActivity() {
 
     private fun initView() {
         binding.readView.setOnItemSelectListener(object : ReadView.OnItemSelectListener {
-            override fun onPagePreviousClicked() {
+            override fun onPagePreviousClicked(isFirstPage: Boolean) {
+                if (isFirstPage) {
+                    "已是第一页".showLongToast()
+                    return
+                }
                 binding.readView.goPreviousPage()
             }
 
-            override fun onPageNextClicked() {
+            override fun onPageNextClicked(isLastPage: Boolean) {
+                if (isLastPage) {
+                    "已是最后一页".showLongToast()
+                }
+                //TODO 打开dialog
                 binding.readView.goNextPage()
             }
 

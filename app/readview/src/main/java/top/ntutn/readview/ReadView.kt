@@ -72,6 +72,8 @@ class ReadView : View {
 
     fun setText(str: String) {
         eBook = str.trimIndent()
+        chapterModel = ChapterModel(listOf(), 0)
+        readTool = ReadTool()
         requestLayout()
         invalidate()
     }
@@ -201,8 +203,10 @@ class ReadView : View {
             MotionEvent.ACTION_DOWN -> true
             MotionEvent.ACTION_UP -> {
                 when (event.x) {
-                    in 0f..(viewWidth / 3).toFloat() -> listener?.onPagePreviousClicked()
-                    in (viewWidth / 3 * 2).toFloat()..viewWidth.toFloat() -> listener?.onPageNextClicked()
+                    in 0f..(viewWidth / 3).toFloat() -> listener?.onPagePreviousClicked(chapterModel.index == 0)
+                    in (viewWidth / 3 * 2).toFloat()..viewWidth.toFloat() -> listener?.onPageNextClicked(
+                        chapterModel.index + 1 == chapterModel.pageModels.size
+                    )
                     else -> listener?.onMenuClicked()
                 }
                 true
@@ -218,9 +222,9 @@ class ReadView : View {
 
     //定义一个接口
     interface OnItemSelectListener {
-        fun onPagePreviousClicked()
+        fun onPagePreviousClicked(isFirstPage: Boolean)
 
-        fun onPageNextClicked()
+        fun onPageNextClicked(isLastPage: Boolean)
 
         fun onMenuClicked()
     }

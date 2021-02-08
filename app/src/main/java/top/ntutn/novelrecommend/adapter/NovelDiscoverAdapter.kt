@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import top.ntutn.novelrecommend.databinding.ItemNovelDiscoverBinding
 import top.ntutn.novelrecommend.model.NovelModel
+import top.ntutn.novelrecommend.ui.dialog.NovelDetailDialogFragment
+import top.ntutn.novelrecommend.utils.showLongToast
 import top.ntutn.novelrecommend.utils.showToast
 import top.ntutn.readview.ReadView
 
@@ -28,11 +30,19 @@ class NovelDiscoverAdapter : RecyclerView.Adapter<NovelDiscoverAdapter.ViewHolde
         holder.binding.apply {
             readView.setText(novelList[position].content ?: "")
             readView.setOnItemSelectListener(object : ReadView.OnItemSelectListener {
-                override fun onPagePreviousClicked() {
+                override fun onPagePreviousClicked(isFirstPage: Boolean) {
+                    if (isFirstPage) {
+                        "已是第一页".showLongToast()
+                        return
+                    }
                     readView.goPreviousPage()
                 }
 
-                override fun onPageNextClicked() {
+                override fun onPageNextClicked(isLastPage: Boolean) {
+                    if (isLastPage) {
+                        "已是最后一页".showLongToast()
+                        return
+                    }
                     readView.goNextPage()
                 }
 

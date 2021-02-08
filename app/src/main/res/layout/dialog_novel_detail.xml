@@ -6,17 +6,20 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/title_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30sp"
         tools:text="异常生物见闻录" />
 
     <TextView
+        android:id="@+id/author_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="作者：远瞳" />
 
     <TextView
+        android:id="@+id/tags_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="日常 搞笑 科幻" />
@@ -32,8 +35,8 @@
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:layout_weight="1"
-            android:text="赞"
-            android:background="#f00"/>
+            android:background="#f00"
+            android:text="赞" />
 
         <Button
             android:layout_width="wrap_content"

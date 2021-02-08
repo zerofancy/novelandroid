@@ -18,8 +18,26 @@ class NovelDetailDialogFragment : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DialogNovelDetailBinding.inflate(inflater,container,false)
+        binding = DialogNovelDetailBinding.inflate(inflater, container, false)
+        initView()
         return binding.root
     }
 
+    fun initView() {
+        val currentPosition = discoverViewModel.currentPosition.value ?: 0
+        val currentNovel = discoverViewModel.novelList.value?.get(currentPosition)
+        if (currentNovel != null) {
+            binding.titleTextView.text = currentNovel.title
+        } else {
+            dismiss()
+        }
+    }
+
+    companion object {
+        fun newInstance(): NovelDetailDialogFragment =
+            NovelDetailDialogFragment().apply {
+                arguments = Bundle().apply {
+                }
+            }
+    }
 }
