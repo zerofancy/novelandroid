@@ -52,7 +52,7 @@ class ReadView : View {
         //获取字体大小,默认大小是16dp
         fontSize = ta.getDimension(R.styleable.ReadView_fontSize, 24f).toInt()
         //获取文字内容
-        eBook = ta.getString(R.styleable.ReadView_text).toString()
+        eBook = ta.getString(R.styleable.ReadView_text).toString().trimIndent()
         //获取文字颜色，默认颜色是BLUE
         textColor = ta.getColor(R.styleable.ReadView_color, Color.BLACK)
         //获取背景
@@ -71,7 +71,7 @@ class ReadView : View {
     }
 
     fun setText(str: String) {
-        eBook = str
+        eBook = str.trimIndent()
         requestLayout()
         invalidate()
     }
