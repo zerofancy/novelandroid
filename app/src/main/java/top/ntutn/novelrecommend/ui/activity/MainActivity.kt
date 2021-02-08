@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.databinding.ActivityMainBinding
@@ -35,7 +34,8 @@ class MainActivity : BaseActivity() {
                 R.id.navigation_discover, R.id.navigation_bookshelf, R.id.navigation_me
             )
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        // 与ActionBar联动
+        //setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
 
         getString(R.string.debug_notice).showToast()
