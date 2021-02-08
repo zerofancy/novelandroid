@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
 import top.ntutn.commonutil.AppUtil
+import kotlin.random.Random
 
 /**
  * 简化Toat写法
@@ -33,7 +34,11 @@ fun View.showSnackBar(text: String, actionText: String? = null, block: () -> Uni
     snackbar.show()
 }
 
-fun View.showSnackBar(@StringRes text: Int, @StringRes actionText: Int? = null, block: () -> Unit = {}) {
+fun View.showSnackBar(
+    @StringRes text: Int,
+    @StringRes actionText: Int? = null,
+    block: () -> Unit = {}
+) {
     val snackbar = Snackbar.make(this, text, Snackbar.LENGTH_SHORT)
     actionText?.let {
         snackbar.setAction(actionText) { block() }

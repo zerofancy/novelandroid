@@ -11,7 +11,7 @@ open class CommonDiffCallback : DiffUtil.Callback() {
     override fun getNewListSize(): Int = newList.size
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-        oldList[oldItemPosition].getType() == newList[newItemPosition].getType()
+        oldList[oldItemPosition].getType() == newList[newItemPosition].getType() //TODO 有问题
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
         oldList[oldItemPosition] == newList[newItemPosition]
@@ -21,7 +21,7 @@ class SimpleListDiffCallback<T>(private val oldList: List<T>, private val newLis
     DiffUtil.Callback() {
     override fun getOldListSize() = oldList.size
     override fun getNewListSize() = newList.size
-    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) = true
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) = oldList[oldItemPosition] == newList[newItemPosition]
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
         oldList[oldItemPosition] == newList[newItemPosition]
 }

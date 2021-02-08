@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.RecyclerView
 import top.ntutn.novelrecommend.adapter.NovelDiscoverAdapter
 import top.ntutn.novelrecommend.databinding.FragmentDiscoverBinding
 import top.ntutn.novelrecommend.ui.base.BaseFragment
@@ -15,6 +16,7 @@ class DiscoverFragment : BaseFragment() {
     private lateinit var binding: FragmentDiscoverBinding
     private val discoverViewModel by activityViewModels<DiscoverViewModel>()
     private val adapter = NovelDiscoverAdapter()
+    private lateinit var layoutManager: LinearLayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,20 +30,29 @@ class DiscoverFragment : BaseFragment() {
     }
 
     private fun initView() {
+        layoutManager = LinearLayoutManager(requireContext())
         binding.discoverRecycler.apply {
-            layoutManager = LinearLayoutManager(requireContext())
+            layoutManager = this@DiscoverFragment.layoutManager
             adapter = this@DiscoverFragment.adapter
             PagerSnapHelper().attachToRecyclerView(this)
         }
+        binding.discoverRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val lastVisiblePosition: Int = layoutManager.findLastVisibleItemPosition()
+                discoverViewModel.tryLoadMore()
+                discoverViewModel.scrollTo(lastVisiblePosition)
+            }
+        })
         discoverViewModel.novelList.observe(viewLifecycleOwner) {
             adapter.novelList = it
         }
-//        binding.textDiscover.setOnClickListener {
-//            ReadTestActivity.actionStart(requireContext())
-//        }
+        discoverViewModel.currentPosition.value?.let {
+            layoutManager.scrollToPosition(it)
+        }
     }
 
     private fun initData() {
-        discoverViewModel.loadMore()
+        discoverViewModel.tryLoadMore()
     }
 }

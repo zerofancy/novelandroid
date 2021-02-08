@@ -39,7 +39,6 @@ class NovelDiscoverAdapter : RecyclerView.Adapter<NovelDiscoverAdapter.ViewHolde
                 override fun onMenuClicked() {
                     "显示菜单".showToast()
                 }
-
             })
         }
     }
