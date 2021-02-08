@@ -40,7 +40,7 @@ object Deps {
     const val AROUTER_COMPILER = "com.alibaba:arouter-compiler:${Vers.AROUTER}"
 
     const val RETROFIT = "com.squareup.retrofit2:retrofit:${Vers.RETROFIT}"
-    const val RETROFIT_CONVERTER_GSON = "com.squareup.retrofit2:retrofit:${Vers.RETROFIT}"
+    const val RETROFIT_CONVERTER_GSON = "com.squareup.retrofit2:converter-gson:${Vers.RETROFIT}"
 }
 
 @Suppress("unused", "SpellCheckingInspection")

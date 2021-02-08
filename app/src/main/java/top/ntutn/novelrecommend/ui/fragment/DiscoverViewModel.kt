@@ -7,7 +7,10 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.await
+import top.ntutn.novelrecommend.NovelService
 import top.ntutn.novelrecommend.model.NovelModel
+import top.ntutn.novelrecommend.utils.RetrofitUtil
 
 class DiscoverViewModel : ViewModel() {
 
@@ -19,10 +22,18 @@ class DiscoverViewModel : ViewModel() {
     val text: LiveData<String> = _text
     val novelList: LiveData<List<NovelModel>> = _novelList
 
+    private suspend fun getNovel(): List<NovelModel> {
+        return RetrofitUtil.create<NovelService>().getNovel().await()
+    }
+
     fun loadMore() {
         viewModelScope.launch {
             _novelList.value = withContext(Dispatchers.IO) {
-                TODO()
+                try {
+                    _novelList.value ?: listOf<NovelModel>().plus(getNovel())
+                } catch (e: Exception) {
+                    _novelList.value
+                }
             }
         }
     }

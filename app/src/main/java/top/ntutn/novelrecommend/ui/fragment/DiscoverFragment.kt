@@ -21,15 +21,20 @@ class DiscoverFragment : BaseFragment() {
     ): View {
         binding = FragmentDiscoverBinding.inflate(inflater, container, false)
         initView()
+        initData()
         return binding.root
     }
 
     private fun initView() {
-        discoverViewModel.text.observe(viewLifecycleOwner, Observer {
-            binding.textDiscover.text = it
+        discoverViewModel.novelList.observe(viewLifecycleOwner, Observer {
+            binding.textDiscover.text = it.joinToString()
         })
         binding.textDiscover.setOnClickListener {
             ReadTestActivity.actionStart(requireContext())
         }
+    }
+
+    private fun initData() {
+        discoverViewModel.loadMore()
     }
 }
