@@ -2,7 +2,10 @@ plugins {
     id("com.android.library")
     id("kotlin-android")
     id("kotlin-kapt")
+    id("kotlin-noarg")
 }
+
+noArg { annotation("top.ntutn.libzeroconfig.ZeroConfig") } // 解决data class没有默认构造函数的问题}*/
 
 android {
     compileSdkVersion(30)

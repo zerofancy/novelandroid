@@ -2,12 +2,11 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-kapt")
+    id("kotlin-noarg")
 }
 
-/**
-apply plugin: 'kotlin-noarg'
 
-noArg {annotation("ZeroConfig") // 解决data class没有默认构造函数的问题}*/
+noArg { annotation("top.ntutn.libzeroconfig.ZeroConfig") } // 解决data class没有默认构造函数的问题}*/
 
 android {
     compileSdkVersion(30)

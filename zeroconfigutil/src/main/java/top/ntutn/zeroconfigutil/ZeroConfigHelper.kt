@@ -56,7 +56,12 @@ object ZeroConfigHelper {
 
     fun readRawConfig(key: String): String? {
         val clazz = getClassByKey(key) ?: return null
-        return sp.getString(getKeyOfClass(clazz), "{}") // TODO 默认参数换成定义的默认值
+        var rawString = sp.getString(getKeyOfClass(clazz), null)
+        // 正确显示配置的默认值
+        if (rawString == null) {
+            rawString = gson.toJson(clazz.newInstance())
+        }
+        return rawString
     }
 
     @Throws(ClassNotFoundException::class)

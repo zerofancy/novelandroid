@@ -13,7 +13,7 @@ import top.ntutn.novelrecommend.model.NovelModel
 import top.ntutn.novelrecommend.utils.RetrofitUtil
 
 class DiscoverViewModel : ViewModel() {
-    private val _novelList = MutableLiveData<List<NovelModel>>()
+    private val _novelList = MutableLiveData<List<NovelModel>>().apply { value = listOf() }
     private val _currentPosition = MutableLiveData<Int>()
 
     val novelList: LiveData<List<NovelModel>> = _novelList
