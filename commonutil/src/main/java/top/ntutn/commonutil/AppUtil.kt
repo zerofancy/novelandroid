@@ -1,11 +1,12 @@
-package top.ntutn.novelrecommend.utils
+package top.ntutn.commonutil
 
+import android.content.Context
 import android.content.Intent
-import top.ntutn.novelrecommend.MyApplication
-
 
 object AppUtil {
-    fun getApplicationContext() = MyApplication.context
+    private lateinit var applicationContext: Context
+
+    fun getApplicationContext() = applicationContext
 
     fun finishAllActivities() {
         val intent = Intent()
@@ -13,8 +14,9 @@ object AppUtil {
         getApplicationContext().sendBroadcast(intent)
     }
 
-    fun init() {
+    fun init(context: Context) {
         BROADCAST_FINISH_ALL_ACTIVITIES = "${this.javaClass.`package`!!.name}.finishAll"
+        applicationContext = context
     }
 
     lateinit var BROADCAST_FINISH_ALL_ACTIVITIES: String

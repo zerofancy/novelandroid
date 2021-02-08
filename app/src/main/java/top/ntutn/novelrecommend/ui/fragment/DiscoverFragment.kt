@@ -4,15 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
+import top.ntutn.novelrecommend.adapter.NovelDiscoverAdapter
 import top.ntutn.novelrecommend.databinding.FragmentDiscoverBinding
 import top.ntutn.novelrecommend.ui.base.BaseFragment
-import top.ntutn.readview.ReadTestActivity
 
 class DiscoverFragment : BaseFragment() {
     private lateinit var binding: FragmentDiscoverBinding
-    private val discoverViewModel by viewModels<DiscoverViewModel>()
+    private val discoverViewModel by activityViewModels<DiscoverViewModel>()
+    private val adapter = NovelDiscoverAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,12 +28,17 @@ class DiscoverFragment : BaseFragment() {
     }
 
     private fun initView() {
-        discoverViewModel.novelList.observe(viewLifecycleOwner, Observer {
-            binding.textDiscover.text = it.joinToString()
-        })
-        binding.textDiscover.setOnClickListener {
-            ReadTestActivity.actionStart(requireContext())
+        binding.discoverRecycler.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = this@DiscoverFragment.adapter
+            PagerSnapHelper().attachToRecyclerView(this)
         }
+        discoverViewModel.novelList.observe(viewLifecycleOwner) {
+            adapter.novelList = it
+        }
+//        binding.textDiscover.setOnClickListener {
+//            ReadTestActivity.actionStart(requireContext())
+//        }
     }
 
     private fun initData() {

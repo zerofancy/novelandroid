@@ -77,15 +77,17 @@ class ReadView : View {
     }
 
     fun goPreviousPage() {
-        if (chapterModel.index + 1 < chapterModel.pageModels.size) {
-            chapterModel.index = chapterModel.index + 1
-        }
-    }
-
-    fun goNextPage() {
         if (chapterModel.index - 1 >= 0) {
             chapterModel.index = chapterModel.index - 1
         }
+        invalidate()
+    }
+
+    fun goNextPage() {
+        if (chapterModel.index + 1 < chapterModel.pageModels.size) {
+            chapterModel.index = chapterModel.index + 1
+        }
+        invalidate()
     }
 
     private fun setMatrix() {
@@ -151,14 +153,12 @@ class ReadView : View {
         readWidth = viewWidth - paddingLeft - paddingRight
         readHeight = viewHeight - paddingTop - paddingBottom
         getStrData(eBook)
-        val width: Int
-        val height: Int
-        width = if (widthMode == MeasureSpec.UNSPECIFIED) {
+        val width: Int = if (widthMode == MeasureSpec.UNSPECIFIED) {
             textWidth
         } else {
             widthSize
         }
-        height = if (heightMode == MeasureSpec.UNSPECIFIED) {
+        val height: Int = if (heightMode == MeasureSpec.UNSPECIFIED) {
             textHeight
         } else {
             heightSize
@@ -179,8 +179,7 @@ class ReadView : View {
         for (i in page.lineModels.indices) {
             val line: LineModel = page.lineModels[i]
             val num: Int = line.stringList.size
-            var spacing: Float
-            spacing = if (num == 0) {
+            val spacing: Float = if (num == 0) {
                 0f
             } else {
                 line.strDiff / (num - 1).toFloat()
@@ -197,22 +196,19 @@ class ReadView : View {
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        when (event.action) {
-            MotionEvent.ACTION_MOVE, MotionEvent.ACTION_DOWN -> {
-            }
+        return when (event.action) {
+            MotionEvent.ACTION_MOVE -> false
+            MotionEvent.ACTION_DOWN -> true
             MotionEvent.ACTION_UP -> {
-                val x = event.x
-                val index: Int
-                index = if (x < viewWidth / 2) {
-                    0
-                } else {
-                    1
+                when (event.x) {
+                    in 0f..(viewWidth / 3).toFloat() -> listener?.onPagePreviousClicked()
+                    in (viewWidth / 3 * 2).toFloat()..viewWidth.toFloat() -> listener?.onPageNextClicked()
+                    else -> listener?.onMenuClicked()
                 }
-                listener?.onItemSelect(index)
-                invalidate()
+                true
             }
+            else -> false
         }
-        return true
     }
 
     //获得接口对象的方法。
@@ -222,6 +218,10 @@ class ReadView : View {
 
     //定义一个接口
     interface OnItemSelectListener {
-        fun onItemSelect(index: Int)
+        fun onPagePreviousClicked()
+
+        fun onPageNextClicked()
+
+        fun onMenuClicked()
     }
 }

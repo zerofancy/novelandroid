@@ -1,24 +1,17 @@
 package top.ntutn.novelrecommend
 
-import android.annotation.SuppressLint
 import android.app.Application
-import android.content.Context
 import com.alibaba.android.arouter.launcher.ARouter
 import org.greenrobot.eventbus.EventBus
 import timber.log.Timber
-import top.ntutn.novelrecommend.utils.AppUtil
+import top.ntutn.commonutil.AppUtil
 import top.ntutn.novelrecommend.utils.CrashReportingTree
 import top.ntutn.zeroconfigutil.ZeroConfigHelper
 
 class MyApplication : Application() {
-    companion object {
-        @SuppressLint("StaticFieldLeak")
-        lateinit var context: Context
-    }
 
     override fun onCreate() {
         super.onCreate()
-        context = applicationContext
 
         // 日志工具
         if (BuildConfig.DEBUG) {
@@ -28,7 +21,7 @@ class MyApplication : Application() {
         }
 
         // App工具
-        AppUtil.init()
+        AppUtil.init(applicationContext)
 
         //ARouter
         if (BuildConfig.DEBUG) {

@@ -8,8 +8,7 @@ import android.content.IntentFilter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import timber.log.Timber
-import top.ntutn.novelrecommend.utils.AppUtil
-import top.ntutn.novelrecommend.utils.EventBusWrapper
+import top.ntutn.commonutil.AppUtil
 
 open class BaseActivity : AppCompatActivity() {
     /**

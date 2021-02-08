@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
+import top.ntutn.commonutil.AppUtil
 
 /**
  * 简化Toat写法

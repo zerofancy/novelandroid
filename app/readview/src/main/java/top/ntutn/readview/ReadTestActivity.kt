@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.facade.annotation.Route
+import top.ntutn.novelrecommend.utils.showToast
 import top.ntutn.readview.databinding.ActivityReadTestBinding
 import java.io.BufferedReader
 import java.io.InputStream
@@ -25,12 +26,16 @@ class ReadTestActivity : AppCompatActivity() {
 
     private fun initView() {
         binding.readView.setOnItemSelectListener(object : ReadView.OnItemSelectListener {
-            override fun onItemSelect(index: Int) {
-                if (index == 0) {
-                    binding.readView.goNextPage()
-                } else {
-                    binding.readView.goPreviousPage()
-                }
+            override fun onPagePreviousClicked() {
+                binding.readView.goPreviousPage()
+            }
+
+            override fun onPageNextClicked() {
+                binding.readView.goNextPage()
+            }
+
+            override fun onMenuClicked() {
+                "弹出菜单".showToast()
             }
         })
     }
@@ -63,7 +68,7 @@ class ReadTestActivity : AppCompatActivity() {
         const val PATH = "/readview/test"
 
         fun actionStart(context: Context) {
-            context.startActivity(Intent(context,ReadTestActivity::class.java))
+            context.startActivity(Intent(context, ReadTestActivity::class.java))
         }
     }
 }

@@ -11,13 +11,13 @@ import top.ntutn.novelrecommend.databinding.ItemDebugEntranceBinding
 
 class DebugEntranceAdapter(val context: Context) :
     RecyclerView.Adapter<CommonViewHolder<ViewBinding>>() {
-    val diffCalback = DebugEntranceDiffCallback()
+    private val diffCallback = CommonDiffCallback()
 
     var dataList: List<DebugEntrance> = listOf()
         set(value) {
-            diffCalback.oldList = field
-            diffCalback.newList = value
-            DiffUtil.calculateDiff(diffCalback).dispatchUpdatesTo(this)
+            diffCallback.oldList = field
+            diffCallback.newList = value
+            DiffUtil.calculateDiff(diffCallback).dispatchUpdatesTo(this)
             field = value
         }
 
@@ -58,7 +58,4 @@ class DebugEntrance(val title: String, val owner: String, val operation: () -> U
         const val TYPE_ENTRANCE = 0
     }
 }
-
-class DebugEntranceDiffCallback() :
-    CommonDiffCallback<CommonMutiItem>()
 

@@ -90,4 +90,5 @@ dependencies {
     implementation(project(":libzeroconfig"))
     implementation(project(":zeroconfigutil"))
     implementation(project(":app:readview"))
+    implementation(project(":commonutil"))
 }

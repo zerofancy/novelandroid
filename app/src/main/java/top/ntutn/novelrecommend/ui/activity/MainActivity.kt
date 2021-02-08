@@ -5,10 +5,10 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import top.ntutn.commonutil.AppUtil
 import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.databinding.ActivityMainBinding
 import top.ntutn.novelrecommend.ui.base.BaseActivity
-import top.ntutn.novelrecommend.utils.AppUtil
 import top.ntutn.novelrecommend.utils.showToast
 
 class MainActivity : BaseActivity() {
@@ -22,11 +22,11 @@ class MainActivity : BaseActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initView()
+        binding.navHostFragment.post { initView() }
     }
 
     private fun initView() {
-        navController = findNavController(R.id.nav_host_fragment)
+        navController = binding.navHostFragment.findNavController()
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
