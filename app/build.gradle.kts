@@ -85,6 +85,8 @@ dependencies {
     implementation(Deps.RETROFIT)
     implementation(Deps.RETROFIT_CONVERTER_GSON)
 
+    implementation(Deps.LIKE_VIEW)
+
     kapt(project(":libzeroconfigcompiler"))
     implementation(project(":libzeroconfig"))
     implementation(project(":zeroconfigutil"))

@@ -60,6 +60,14 @@ class AboutActivity : AbsAboutActivity() {
             add(License("KotlinPoet", "square", APACHE_2, "https://github.com/square/kotlinpoet"))
             add(
                 License(
+                    "LikeView",
+                    "jaren",
+                    APACHE_2,
+                    "https://github.com/qkxyjren/LikeView"
+                )
+            )
+            add(
+                License(
                     "Material Components for Android",
                     "Google",
                     APACHE_2,

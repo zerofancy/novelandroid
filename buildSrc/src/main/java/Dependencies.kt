@@ -16,6 +16,7 @@ object Vers {
     const val DRAKEET_MUTITYPE = "4.0.0"
     const val AROUTER = "1.5.1"
     const val RETROFIT = "2.9.0"
+    const val LIKE_VIEW = "1.2.2"
 }
 
 @Suppress("unused", "SpellCheckingInspection")
@@ -41,6 +42,8 @@ object Deps {
 
     const val RETROFIT = "com.squareup.retrofit2:retrofit:${Vers.RETROFIT}"
     const val RETROFIT_CONVERTER_GSON = "com.squareup.retrofit2:converter-gson:${Vers.RETROFIT}"
+
+    const val LIKE_VIEW = "com.jaren:likeview:${Vers.LIKE_VIEW}"
 }
 
 @Suppress("unused", "SpellCheckingInspection")

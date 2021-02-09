@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="5dp">
 
@@ -30,29 +31,64 @@
         android:layout_height="wrap_content"
         android:padding="5dp">
 
-        <Button
-            android:layout_width="wrap_content"
+        <Space
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_weight="1"
-            android:text="赞" />
+            android:layout_weight="1" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_weight="1"
-            android:text="踩" />
+        <com.jaren.lib.view.LikeView
+            android:id="@+id/like_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#0000"
+            app:defaultLikeIconRes="@drawable/ic_like"
+            app:checkedLikeIconRes="@drawable/ic_like_press"
+            app:ringColor="#e97e9b"
+            app:checkedColor="#e52e00"
+            app:defaultColor="#ffcccccc"
+            app:cirRadius="14dp"
+            app:cycleTime="500" />
 
-        <Button
-            android:layout_width="wrap_content"
+        <Space
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_weight="1"
-            android:text="收藏" />
+            android:layout_weight="1" />
+
+        <com.jaren.lib.view.LikeView
+            android:id="@+id/star_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#0000"
+            app:defaultLikeIconRes="@drawable/ic_star"
+            app:checkedLikeIconRes="@drawable/ic_star_press"
+            app:ringColor="#539be5"
+            app:checkedColor="#2a5bb7"
+            app:defaultColor="#ffcccccc"
+            app:cirRadius="14dp"
+            app:cycleTime="500" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <com.jaren.lib.view.LikeView
+            android:id="@+id/share_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#0000"
+            app:defaultLikeIconRes="@drawable/ic_share"
+            app:checkedLikeIconRes="@drawable/ic_share_press"
+            app:ringColor="#f19f3a"
+            app:checkedColor="#df7e4d"
+            app:defaultColor="#ffcccccc"
+            app:cirRadius="14dp"
+            app:cycleTime="500" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
     </LinearLayout>
 </LinearLayout>
