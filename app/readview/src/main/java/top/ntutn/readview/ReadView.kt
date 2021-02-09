@@ -43,6 +43,9 @@ class ReadView : View {
         initCustomAttrs(context, attrs)
     }
 
+    fun getPageCount() = chapterModel.pageModels.size
+    fun getCurrentPageIndex() = chapterModel.index
+
     /**
      * 获取自定义属性
      */
@@ -209,6 +212,7 @@ class ReadView : View {
                     )
                     else -> listener?.onMenuClicked()
                 }
+                listener?.onSwitchPage(getCurrentPageIndex())
                 true
             }
             else -> false
@@ -222,6 +226,11 @@ class ReadView : View {
 
     //定义一个接口
     interface OnItemSelectListener {
+        /**
+         * 切换页面时触发
+         */
+        fun onSwitchPage(index: Int)
+
         fun onPagePreviousClicked(isFirstPage: Boolean)
 
         fun onPageNextClicked(isLastPage: Boolean)

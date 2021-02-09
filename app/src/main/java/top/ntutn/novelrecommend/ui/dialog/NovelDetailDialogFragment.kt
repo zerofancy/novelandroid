@@ -23,11 +23,15 @@ class NovelDetailDialogFragment : DialogFragment() {
         return binding.root
     }
 
-    fun initView() {
+    private fun initView() {
         val currentPosition = discoverViewModel.currentPosition.value ?: 0
         val currentNovel = discoverViewModel.novelList.value?.get(currentPosition)
         if (currentNovel != null) {
-            binding.titleTextView.text = currentNovel.title
+            binding.apply {
+                titleTextView.text = currentNovel.title
+                authorTextView.text = currentNovel.author
+                tagsTextView.text = currentNovel.tags.toString()
+            }
         } else {
             dismiss()
         }

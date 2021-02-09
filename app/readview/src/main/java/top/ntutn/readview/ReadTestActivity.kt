@@ -27,6 +27,7 @@ class ReadTestActivity : AppCompatActivity() {
 
     private fun initView() {
         binding.readView.setOnItemSelectListener(object : ReadView.OnItemSelectListener {
+            override fun onSwitchPage(index: Int) = Unit
             override fun onPagePreviousClicked(isFirstPage: Boolean) {
                 if (isFirstPage) {
                     "已是第一页".showLongToast()

@@ -65,6 +65,7 @@ class DebugConfigAdapter(private val fragment: Fragment) :
             is ItemDebugConfigScopeBinding -> {
                 holder.binding.apply {
                     titleTextView.text = data.title
+
                 }
             }
             else -> throw IllegalArgumentException("没见过的参数类型:${holder.binding}")

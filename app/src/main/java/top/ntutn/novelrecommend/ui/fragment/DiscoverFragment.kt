@@ -15,7 +15,7 @@ import top.ntutn.novelrecommend.ui.base.BaseFragment
 class DiscoverFragment : BaseFragment() {
     private lateinit var binding: FragmentDiscoverBinding
     private val discoverViewModel by activityViewModels<DiscoverViewModel>()
-    private val adapter = NovelDiscoverAdapter()
+    private lateinit var adapter: NovelDiscoverAdapter
     private lateinit var layoutManager: LinearLayoutManager
 
     override fun onCreateView(
@@ -30,6 +30,7 @@ class DiscoverFragment : BaseFragment() {
     }
 
     private fun initView() {
+        adapter = NovelDiscoverAdapter(parentFragmentManager)
         layoutManager = LinearLayoutManager(requireContext())
         binding.discoverRecycler.apply {
             layoutManager = this@DiscoverFragment.layoutManager

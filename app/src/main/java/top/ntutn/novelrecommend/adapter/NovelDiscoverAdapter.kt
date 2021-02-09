@@ -2,6 +2,7 @@ package top.ntutn.novelrecommend.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import top.ntutn.novelrecommend.databinding.ItemNovelDiscoverBinding
@@ -11,7 +12,8 @@ import top.ntutn.novelrecommend.utils.showLongToast
 import top.ntutn.novelrecommend.utils.showToast
 import top.ntutn.readview.ReadView
 
-class NovelDiscoverAdapter : RecyclerView.Adapter<NovelDiscoverAdapter.ViewHolder>() {
+class NovelDiscoverAdapter(private val fragmentManager: FragmentManager) :
+    RecyclerView.Adapter<NovelDiscoverAdapter.ViewHolder>() {
     var novelList: List<NovelModel> = listOf()
         set(value) {
             DiffUtil.calculateDiff(SimpleListDiffCallback(field, value)).dispatchUpdatesTo(this)
@@ -30,6 +32,8 @@ class NovelDiscoverAdapter : RecyclerView.Adapter<NovelDiscoverAdapter.ViewHolde
         holder.binding.apply {
             readView.setText(novelList[position].content ?: "")
             readView.setOnItemSelectListener(object : ReadView.OnItemSelectListener {
+                override fun onSwitchPage(index: Int) = Unit
+
                 override fun onPagePreviousClicked(isFirstPage: Boolean) {
                     if (isFirstPage) {
                         "已是第一页".showLongToast()
@@ -41,6 +45,7 @@ class NovelDiscoverAdapter : RecyclerView.Adapter<NovelDiscoverAdapter.ViewHolde
                 override fun onPageNextClicked(isLastPage: Boolean) {
                     if (isLastPage) {
                         "已是最后一页".showLongToast()
+                        NovelDetailDialogFragment.newInstance().show(fragmentManager, "detail")
                         return
                     }
                     readView.goNextPage()
