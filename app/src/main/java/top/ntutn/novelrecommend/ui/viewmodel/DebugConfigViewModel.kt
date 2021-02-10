@@ -1,4 +1,4 @@
-package top.ntutn.novelrecommend.ui.activity
+package top.ntutn.novelrecommend.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

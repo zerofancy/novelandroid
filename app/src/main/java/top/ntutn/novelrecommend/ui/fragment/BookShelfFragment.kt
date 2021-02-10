@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.ui.base.BaseFragment
+import top.ntutn.novelrecommend.ui.viewmodel.BookShelfViewModel
 
 class BookShelfFragment : BaseFragment() {
     private val bookShelfViewModel by viewModels<BookShelfViewModel>()

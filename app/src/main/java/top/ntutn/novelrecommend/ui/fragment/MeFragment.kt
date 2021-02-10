@@ -12,6 +12,7 @@ import top.ntutn.novelrecommend.databinding.FragmentMeBinding
 import top.ntutn.novelrecommend.ui.activity.AboutActivity
 import top.ntutn.novelrecommend.ui.activity.DebugHelperActivity
 import top.ntutn.novelrecommend.ui.base.BaseFragment
+import top.ntutn.novelrecommend.ui.viewmodel.MeViewModel
 
 class MeFragment : BaseFragment() {
     private lateinit var binding: FragmentMeBinding

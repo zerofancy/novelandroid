@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import top.ntutn.novelrecommend.adapter.NovelDiscoverAdapter
 import top.ntutn.novelrecommend.databinding.FragmentDiscoverBinding
 import top.ntutn.novelrecommend.ui.base.BaseFragment
+import top.ntutn.novelrecommend.ui.viewmodel.DiscoverViewModel
 
 class DiscoverFragment : BaseFragment() {
     private lateinit var binding: FragmentDiscoverBinding

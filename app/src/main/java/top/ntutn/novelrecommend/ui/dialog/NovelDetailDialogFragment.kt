@@ -1,7 +1,5 @@
 package top.ntutn.novelrecommend.ui.dialog
 
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import top.ntutn.novelrecommend.databinding.DialogNovelDetailBinding
-import top.ntutn.novelrecommend.ui.fragment.DiscoverViewModel
+import top.ntutn.novelrecommend.ui.viewmodel.DiscoverViewModel
 import top.ntutn.novelrecommend.utils.showSnackBar
 
 class NovelDetailDialogFragment : DialogFragment() {

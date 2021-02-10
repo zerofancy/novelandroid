@@ -8,6 +8,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import top.ntutn.novelrecommend.databinding.DialogConfigEditBinding
+import top.ntutn.novelrecommend.ui.viewmodel.ConfigEditViewModel
 import top.ntutn.novelrecommend.utils.EventBusWrapper
 
 class ConfigEditDialogFragment : DialogFragment() {

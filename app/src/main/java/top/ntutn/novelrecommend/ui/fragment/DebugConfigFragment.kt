@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import org.greenrobot.eventbus.Subscribe
 import top.ntutn.novelrecommend.adapter.DebugConfigAdapter
 import top.ntutn.novelrecommend.databinding.FragmentDebugConfigBinding
-import top.ntutn.novelrecommend.ui.activity.DebugConfigViewModel
+import top.ntutn.novelrecommend.ui.viewmodel.DebugConfigViewModel
 import top.ntutn.novelrecommend.ui.base.BaseFragment
 import top.ntutn.novelrecommend.ui.dialog.ConfigEditDialogCloseEvent
 import top.ntutn.novelrecommend.utils.EventBusWrapper

@@ -6,11 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import top.ntutn.novelrecommend.adapter.CommonDiffCallback
-import top.ntutn.novelrecommend.adapter.CommonMutiItem
 import top.ntutn.novelrecommend.adapter.DebugEntranceAdapter
 import top.ntutn.novelrecommend.databinding.FragmentDebugEntranceBinding
 import top.ntutn.novelrecommend.ui.base.BaseFragment
+import top.ntutn.novelrecommend.ui.viewmodel.DebugEntranceViewModel
 
 class DebugEntranceFragment : BaseFragment() {
     private lateinit var binding: FragmentDebugEntranceBinding
