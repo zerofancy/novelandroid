@@ -2,6 +2,7 @@ package top.ntutn.novelrecommend
 
 import android.app.Application
 import com.alibaba.android.arouter.launcher.ARouter
+import com.facebook.drawee.backends.pipeline.Fresco
 import org.greenrobot.eventbus.EventBus
 import timber.log.Timber
 import top.ntutn.commonutil.AppUtil
@@ -22,6 +23,8 @@ class MyApplication : Application() {
 
         // App工具
         AppUtil.init(applicationContext)
+
+        Fresco.initialize(applicationContext)
 
         //ARouter
         if (BuildConfig.DEBUG) {

@@ -20,6 +20,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
+        // https://github.com/react-native-camera/react-native-camera/issues/2940
+        multiDexEnabled = true
     }
 
     buildTypes {
@@ -86,6 +88,8 @@ dependencies {
     implementation(Deps.RETROFIT_CONVERTER_GSON)
 
     implementation(Deps.LIKE_VIEW)
+
+    implementation(Deps.FRESCO)
 
     kapt(project(":libzeroconfigcompiler"))
     implementation(project(":libzeroconfig"))

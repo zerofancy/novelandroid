@@ -34,7 +34,7 @@ class DebugEntranceFragment : BaseFragment() {
     private fun initView() {
 //        binding.entranceRecyclerView.adapter
         binding.entranceRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = DebugEntranceAdapter(requireContext())
+        adapter = DebugEntranceAdapter()
         binding.entranceRecyclerView.adapter = adapter
         debugEntranceViewModel.debugEntranceList.observe(viewLifecycleOwner) {
             adapter.dataList = it

@@ -12,7 +12,6 @@ import top.ntutn.novelrecommend.databinding.ItemDebugConfigBinding
 import top.ntutn.novelrecommend.databinding.ItemDebugConfigScopeBinding
 import top.ntutn.novelrecommend.model.DebugConfigListModel
 import top.ntutn.novelrecommend.ui.dialog.ConfigEditDialogFragment
-import top.ntutn.novelrecommend.ui.fragment.DebugConfigFragment
 
 class DebugConfigAdapter(private val fragment: Fragment) :
     RecyclerView.Adapter<DebugConfigAdapter.ViewHolder>() {

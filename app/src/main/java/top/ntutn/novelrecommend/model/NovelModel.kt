@@ -6,5 +6,6 @@ data class NovelModel(
     val author: String? = "佚名",
     val content: String? = "",
     val tags: Set<String>? = hashSetOf(),
+    val cover: String? = null,
     val localId: Long? = 0L // 防止抓到重复视频
 )

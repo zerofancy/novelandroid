@@ -56,6 +56,14 @@ class AboutActivity : AbsAboutActivity() {
                     "https://github.com/greenrobot/EventBus"
                 )
             )
+            add(
+                License(
+                    "Fresco",
+                    "facebook",
+                    MIT,
+                    "https://github.com/facebook/fresco"
+                )
+            )
             add(License("Gson", "Google", APACHE_2, "https://github.com/google/gson"))
             add(License("KotlinPoet", "square", APACHE_2, "https://github.com/square/kotlinpoet"))
             add(

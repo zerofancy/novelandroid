@@ -23,18 +23,6 @@ object ZeroConfigHelper {
         bufferMap = mutableMapOf()
     }
 
-    /**
-     * 获取所有已经定义的配置
-     * 相当耗时
-     */
-    fun getAllDefinedConfigs(): List<Class<*>> {
-        TODO("kapt")
-    }
-
-    fun fetchConfigFromNetwork() {
-        //TODO 从互联网更新配置
-    }
-
     fun <T> saveConfig(clazz: Class<*>, value: T) {
         bufferMap[clazz] = value
         sp.edit {

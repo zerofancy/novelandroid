@@ -17,6 +17,7 @@ object Vers {
     const val AROUTER = "1.5.1"
     const val RETROFIT = "2.9.0"
     const val LIKE_VIEW = "1.2.2"
+    const val FRESCO = "2.4.0"
 }
 
 @Suppress("unused", "SpellCheckingInspection")
@@ -44,6 +45,8 @@ object Deps {
     const val RETROFIT_CONVERTER_GSON = "com.squareup.retrofit2:converter-gson:${Vers.RETROFIT}"
 
     const val LIKE_VIEW = "com.jaren:likeview:${Vers.LIKE_VIEW}"
+
+    const val FRESCO = "com.facebook.fresco:fresco:${Vers.FRESCO}"
 }
 
 @Suppress("unused", "SpellCheckingInspection")

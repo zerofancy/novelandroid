@@ -15,6 +15,7 @@ class BookShelfViewModel : ViewModel() {
     val books: LiveData<List<NovelModel>> = _books
 
     fun addBook(book: NovelModel) {
+        // TODO 持久化
         viewModelScope.launch {
             val result: Pair<Boolean, List<NovelModel>?> = withContext(Dispatchers.IO) {
                 val isExists = (_books.value?.find { it.id == book.id }) != null

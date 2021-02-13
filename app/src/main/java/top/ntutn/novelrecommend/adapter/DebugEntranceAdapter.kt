@@ -1,6 +1,5 @@
 package top.ntutn.novelrecommend.adapter
 
-import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import top.ntutn.novelrecommend.databinding.ItemDebugEntranceBinding
 
-class DebugEntranceAdapter(val context: Context) :
+class DebugEntranceAdapter :
     RecyclerView.Adapter<CommonViewHolder<ViewBinding>>() {
     private val diffCallback = CommonDiffCallback()
 
@@ -27,7 +26,7 @@ class DebugEntranceAdapter(val context: Context) :
     ): CommonViewHolder<ViewBinding> = when (viewType) {
         DebugEntrance.TYPE_ENTRANCE -> {
             val binding =
-                ItemDebugEntranceBinding.inflate(LayoutInflater.from(context), parent, false)
+                ItemDebugEntranceBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             CommonViewHolder(binding)
         }
         else -> {
