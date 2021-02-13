@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
-    <debug-overrides>
+    <!--TODO 停用http-->
+    <base-config cleartextTrafficPermitted="true">
         <trust-anchors>
             <certificates
                 overridePins="true"
@@ -9,5 +10,5 @@
                 overridePins="true"
                 src="user" />
         </trust-anchors>
-    </debug-overrides>
+    </base-config>
 </network-security-config>

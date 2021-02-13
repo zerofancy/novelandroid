@@ -21,7 +21,7 @@ class AboutActivity : AbsAboutActivity() {
             add(Card(getText(R.string.description)))
 
             add(Category("Developer"))
-            add(Contributor(R.drawable.avatar, "刘海鑫", "Developer & designer", "https://ntutn.top"))
+            add(Contributor(R.mipmap.avatar, "刘海鑫", "Developer & designer", "https://ntutn.top"))
 
             add(Category("Open Source Licenses"))
             add(

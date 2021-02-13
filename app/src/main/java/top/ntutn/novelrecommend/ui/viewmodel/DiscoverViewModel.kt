@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.await
+import timber.log.Timber
 import top.ntutn.novelrecommend.NovelService
 import top.ntutn.novelrecommend.model.NovelModel
 import top.ntutn.novelrecommend.utils.RetrofitUtil
@@ -30,6 +31,7 @@ class DiscoverViewModel : ViewModel() {
                 try {
                     (_novelList.value ?: listOf()).plus(getNovel())
                 } catch (e: Exception) {
+                    Timber.e(e, "获取小说失败")
                     _novelList.value
                 }
             }
