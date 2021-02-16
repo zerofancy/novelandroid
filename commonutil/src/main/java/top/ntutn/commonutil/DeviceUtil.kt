@@ -36,6 +36,7 @@ object DeviceUtil {
             applicationContext.contentResolver,
             Settings.Secure.ANDROID_ID
         )
+        // 这个id是假id https://www.cnblogs.com/lqminn/p/4204855.html
         if (androidId == "9774d56d682e549c") return null
         return androidId
     }
@@ -50,4 +51,18 @@ object DeviceUtil {
         }
         return guid
     }
+
+    fun getDeviceInfo() = DeviceInfo(
+        imei = getIMEI(),
+        androidId = getAndroidId(),
+        guid = getGUID()
+    )
+
+    fun getDeviceInfoMap(): Map<String, String> = mutableMapOf<String, String>().apply {
+        getIMEI()?.let { put("imei", it) }
+        getAndroidId()?.let { put("android_id", it) }
+        put("guid", getGUID())
+    }
 }
+
+data class DeviceInfo(val imei: String?, val androidId: String?, val guid: String?)

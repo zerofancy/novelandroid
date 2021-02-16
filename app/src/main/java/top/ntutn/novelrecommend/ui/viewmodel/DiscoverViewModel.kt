@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.await
 import timber.log.Timber
+import top.ntutn.commonutil.DeviceUtil
 import top.ntutn.novelrecommend.NovelService
 import top.ntutn.novelrecommend.model.NovelModel
 import top.ntutn.novelrecommend.utils.RetrofitUtil
@@ -21,7 +22,9 @@ class DiscoverViewModel : ViewModel() {
     val currentPosition: LiveData<Int> = _currentPosition
 
     private suspend fun getNovel(): List<NovelModel> {
-        return RetrofitUtil.create<NovelService>().getNovel().await()
+        return RetrofitUtil.create<NovelService>()
+            .getNovel(deviceInfo = DeviceUtil.getDeviceInfoMap())
+            .await()
             .map { it.copy(localId = (0..Long.MAX_VALUE).random()) }  //TODO 解决id重复的问题
     }
 
