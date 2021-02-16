@@ -6,10 +6,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import top.ntutn.commonutil.AppUtil
+import top.ntutn.commonutil.showToast
 import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.databinding.ActivityMainBinding
 import top.ntutn.novelrecommend.ui.base.BaseActivity
-import top.ntutn.novelrecommend.utils.showToast
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding

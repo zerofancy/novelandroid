@@ -32,14 +32,14 @@ class AboutActivity : AbsAboutActivity() {
                     "https://github.com/drakeet/about-page"
                 )
             )
-            add(
-                License(
-                    "ARouter",
-                    "阿里巴巴",
-                    APACHE_2,
-                    "https://github.com/alibaba/ARouter/tree/master"
-                )
-            )
+//            add(
+//                License(
+//                    "ARouter",
+//                    "阿里巴巴",
+//                    APACHE_2,
+//                    "https://github.com/alibaba/ARouter/tree/master"
+//                )
+//            )
             add(
                 License(
                     "AutoService",

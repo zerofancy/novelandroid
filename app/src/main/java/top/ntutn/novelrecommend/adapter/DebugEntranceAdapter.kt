@@ -1,5 +1,6 @@
 package top.ntutn.novelrecommend.adapter
 
+import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -40,7 +41,7 @@ class DebugEntranceAdapter :
             is ItemDebugEntranceBinding -> {
                 holder.viewBinding.title.text = dataList[position].title
                 holder.viewBinding.owner.text = dataList[position].owner
-                holder.viewBinding.root.setOnClickListener { dataList[position].operation() }
+                holder.viewBinding.root.setOnClickListener { dataList[position].operation(holder.viewBinding.root.context) }
             }
             else -> Unit
         }
@@ -49,7 +50,7 @@ class DebugEntranceAdapter :
     override fun getItemCount(): Int = dataList.size
 }
 
-class DebugEntrance(val title: String, val owner: String, val operation: () -> Unit) :
+class DebugEntrance(val title: String, val owner: String, val operation: (context:Context) -> Unit) :
     CommonMutiItem {
     override fun getType(): Int = TYPE_ENTRANCE
 

@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
+import top.ntutn.commonutil.showSnackBar
 import top.ntutn.novelrecommend.databinding.DialogNovelDetailBinding
 import top.ntutn.novelrecommend.ui.viewmodel.BookShelfViewModel
 import top.ntutn.novelrecommend.ui.viewmodel.DiscoverViewModel
-import top.ntutn.novelrecommend.utils.showSnackBar
 
 class NovelDetailDialogFragment : DialogFragment() {
     private lateinit var binding: DialogNovelDetailBinding

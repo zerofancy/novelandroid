@@ -1,11 +1,9 @@
-package top.ntutn.novelrecommend.utils
+package top.ntutn.commonutil
 
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
-import top.ntutn.commonutil.AppUtil
-import kotlin.random.Random
 
 /**
  * 简化Toat写法

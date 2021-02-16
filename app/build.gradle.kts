@@ -80,8 +80,8 @@ dependencies {
     implementation(Deps.ABOUT_PAGE)
 //    implementation(Deps.ABOUT_TYPE)
 
-    implementation(Deps.AROUTER_API)
-    kapt(Deps.AROUTER_COMPILER)
+//    implementation(Deps.AROUTER_API)
+//    kapt(Deps.AROUTER_COMPILER)
 
     // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
     implementation(Deps.RETROFIT)

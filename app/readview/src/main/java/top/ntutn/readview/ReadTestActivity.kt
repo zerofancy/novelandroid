@@ -4,15 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.alibaba.android.arouter.facade.annotation.Route
-import top.ntutn.novelrecommend.utils.showLongToast
-import top.ntutn.novelrecommend.utils.showToast
+import top.ntutn.commonutil.showLongToast
+import top.ntutn.commonutil.showToast
 import top.ntutn.readview.databinding.ActivityReadTestBinding
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
 
-@Route(path = ReadTestActivity.PATH)
+//@Route(path = ReadTestActivity.PATH)
 class ReadTestActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReadTestBinding
 

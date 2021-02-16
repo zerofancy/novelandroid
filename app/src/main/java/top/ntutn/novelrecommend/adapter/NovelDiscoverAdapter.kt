@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import top.ntutn.commonutil.showLongToast
+import top.ntutn.commonutil.showToast
 import top.ntutn.novelrecommend.databinding.ItemNovelDiscoverBinding
 import top.ntutn.novelrecommend.model.NovelModel
 import top.ntutn.novelrecommend.ui.dialog.NovelDetailDialogFragment
-import top.ntutn.novelrecommend.utils.showLongToast
-import top.ntutn.novelrecommend.utils.showToast
 import top.ntutn.readview.ReadView
 
 class NovelDiscoverAdapter(private val fragmentManager: FragmentManager) :

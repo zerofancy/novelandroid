@@ -61,8 +61,8 @@ dependencies {
 
     implementation(Deps.MATERIAL)
 
-    implementation(Deps.AROUTER_API)
-    kapt(Deps.AROUTER_COMPILER)
+//    implementation(Deps.AROUTER_API)
+//    kapt(Deps.AROUTER_COMPILER)
 
     testImplementation("junit:junit:4.13.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
