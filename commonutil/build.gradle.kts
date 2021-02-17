@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("kotlin-android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -35,6 +36,12 @@ android {
     }
 }
 
+kapt {
+    arguments {
+        arg("zeroConfigHolder", "top.ntutn.commonutil.ZeroConfigHolder")
+    }
+}
+
 dependencies {
     implementation(Deps.Kotlin.STD_LIB)
     implementation(Deps.AndroidX.CORE)
@@ -43,6 +50,10 @@ dependencies {
     implementation(Deps.TIMBER)
 
     implementation(project(":analytics_lib"))
+
+    kapt(project(":libzeroconfigcompiler"))
+    implementation(project(":libzeroconfig"))
+    implementation(project(":zeroconfigutil"))
 
     testImplementation("junit:junit:4.13.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")

@@ -1,6 +1,5 @@
 package com.ccj.client.android.analytics;
 
-import android.app.Application;
 import android.content.Context;
 import android.os.Process;
 
@@ -20,7 +19,7 @@ public final class JJEventManager {
 
     public static boolean IS_DEBUG = EConstant.DEVELOP_MODE;
 
-    private static Application app;//全局持有app,保证sdk正常运转. app引用与进程同生命周期, 即 进程被销毁, jvm会随之销毁,app引用会随之销毁. so不存在内存泄漏.
+    private static Context applicationContext;//全局持有app,保证sdk正常运转. app引用与进程同生命周期, 即 进程被销毁, jvm会随之销毁,app引用会随之销毁. so不存在内存泄漏.
     protected volatile static boolean hasInit = false;
 
     /**
@@ -29,30 +28,30 @@ public final class JJEventManager {
      * @return
      */
     public static Context getContext() {
-        if (app == null) {
+        if (applicationContext == null) {
             throw new EventException("请先在application中实例化JJEventManager");
         }
-        return app;
+        return applicationContext;
     }
 
 
     /**
      * 初始化sdk, 要在application中的onCreate() 方法中进行初始化.
      *
-     * @param application 全局上下文
+     * @param applicationContext 全局上下文
      * @param cookie      宿主app中的通用cookie
      * @param isDebug     是否是debug模式(控制开启log等)
      */
-    public static void init(Application application, String cookie,boolean isDebug) {
+    public static void init(Context applicationContext, String cookie,boolean isDebug) {
 
-            if (application==null){
-                ELogger.logWrite(EConstant.TAG, " JJEventManager application==null!");
+            if (applicationContext==null){
+                ELogger.logWrite(EConstant.TAG, " JJEventManager applicationContext==null!");
                 return;
             }
 
             //处理app拥有多个进程
-            String processName = EDeviceUtils.getProcessName(application, Process.myPid());
-            if (processName==null||!processName.equals(application.getPackageName()+"")) {
+            String processName = EDeviceUtils.getProcessName(applicationContext, Process.myPid());
+            if (processName==null||!processName.equals(applicationContext.getPackageName()+"")) {
                 ELogger.logWrite(EConstant.TAG, " JJEventManager 初始化进程为:" + processName + ",不在主进程中!");
                 return;
             }
@@ -71,7 +70,7 @@ public final class JJEventManager {
 
 
             /****************进行初始化*************************/
-            app = application;
+            JJEventManager.applicationContext = applicationContext;
             EPushService.startService();
 
             EventDecorator.initCookie(cookie);
@@ -127,7 +126,7 @@ public final class JJEventManager {
      */
     public static class Builder {
 
-        private Application application;
+        private Context applicationContext;
 
         private boolean DEVELOP_MODE = EConstant.DEVELOP_MODE;
 
@@ -139,8 +138,8 @@ public final class JJEventManager {
         private CookieFacade cookieIntercept;
 
 
-        public Builder(Application application) {
-            this.application = application;
+        public Builder(Context application) {
+            this.applicationContext = application;
 
         }
 
@@ -220,14 +219,14 @@ public final class JJEventManager {
         public void start() {
             ELogger.logWrite(EConstant.TAG, " JJEventManager.Builder#start() " );
 
-            if (application == null) {
+            if (applicationContext == null) {
                 ELogger.logWrite(EConstant.TAG, " JJEventManager.Builder#start() application:" + "不能为空!");
                 return;
             }
 
             //处理app拥有多个进程
-            String processName = EDeviceUtils.getProcessName(application, Process.myPid());
-            if (!processName.equals(application.getPackageName())) {
+            String processName = EDeviceUtils.getProcessName(applicationContext, Process.myPid());
+            if (!processName.equals(applicationContext.getPackageName())) {
                 ELogger.logWrite(EConstant.TAG, " JJEventManager.Builder#start() 初始化进程为:" + processName + " 不在主进程中!");
                 return;
             }
@@ -237,7 +236,7 @@ public final class JJEventManager {
             EConstant.PUSH_FINISH_DATE = PUSH_FINISH_DATE;
             EGsonRequest.cookieIntercept=cookieIntercept;
 
-            JJEventManager.init(application, cookie, DEVELOP_MODE);
+            JJEventManager.init(applicationContext, cookie, DEVELOP_MODE);
         }
     }
 

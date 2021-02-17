@@ -22,10 +22,11 @@ object ZeroConfigHelper {
         return this
     }
 
-    fun init(context: Context) {
+    fun init(context: Context):ZeroConfigHelper {
         gson = Gson()
         sp = context.getSharedPreferences(CONFIG_FILE_NAME, Context.MODE_PRIVATE)
         bufferMap = mutableMapOf()
+        return this
     }
 
     /**

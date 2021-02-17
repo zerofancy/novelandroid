@@ -5,6 +5,7 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import org.greenrobot.eventbus.EventBus
 import timber.log.Timber
 import top.ntutn.commonutil.AppUtil
+import top.ntutn.commonutil.MetricsUtil
 import top.ntutn.novelrecommend.utils.CrashReportingTree
 import top.ntutn.zeroconfigutil.ZeroConfigHelper
 
@@ -33,8 +34,12 @@ class MyApplication : Application() {
 //        ARouter.init(this)
 
         ZeroConfigHelper.init(applicationContext)
-        ZeroConfigHelper.addConfigHolder(top.ntutn.zeroconfigutil.ZeroConfigHolder())
+            .addConfigHolder(top.ntutn.zeroconfigutil.ZeroConfigHolder())
             .addConfigHolder(ZeroConfigHolder())
+            .addConfigHolder(top.ntutn.commonutil.ZeroConfigHolder())
+
+        //埋点工具，要在配置工具之后init
+        MetricsUtil.init(applicationContext)
 
         EventBus.builder().addIndex(AppEventBusAppIndex()).installDefaultEventBus()
     }
