@@ -15,21 +15,7 @@ object DeviceUtil {
     private const val PREF_NAME = "DeviceInfo"
     private const val PREF_GUID = "GUID"
 
-    fun getIMEI(): String? {
-        val manager =
-            applicationContext.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager?
-                ?: return null
-        return try {
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                manager.imei
-            } else {
-                manager.deviceId
-            }
-        } catch (e: Exception) {
-            Timber.w(e)
-            null
-        }
-    }
+    fun getIMEI(): String? = null // 好像只有系统应用能读了
 
     fun getAndroidId(): String? {
         val androidId = Settings.Secure.getString(
