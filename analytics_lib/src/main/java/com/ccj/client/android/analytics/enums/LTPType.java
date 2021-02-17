@@ -6,6 +6,7 @@ package com.ccj.client.android.analytics.enums;
  */
 
 public enum LTPType {
+    SCREEN_LTP_DEFAULT(0),
     SCREEN_LTP_REFRESH(1),//下拉刷新
     SCREEN_LTP_NEXT_PAGE(2), //翻页
     SCREEN_LTP_NEXT_TAB(3),//标签切换

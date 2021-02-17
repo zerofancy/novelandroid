@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import top.ntutn.commonutil.ClipboardUtil
 import top.ntutn.commonutil.DeviceUtil
+import top.ntutn.commonutil.MetricsUtil
 import top.ntutn.commonutil.showToast
 import top.ntutn.novelrecommend.adapter.DebugEntrance
 import top.ntutn.readview.ReadTestActivity
@@ -34,6 +35,11 @@ class DebugEntranceViewModel : ViewModel() {
                         "已复制到剪贴板".showToast()
                     }
                 }.create().show()
+            },
+            DebugEntrance(title = "主动推送埋点事件", owner = "liuhaixin.zero") {
+                "主动推送埋点事件".showToast()
+                MetricsUtil.onEvent("ping")
+                MetricsUtil.push()
             }
         )
     }

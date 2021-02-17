@@ -29,6 +29,9 @@
             android:name=".ui.activity.AboutActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.About" />
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
     </application>
 
 </manifest>

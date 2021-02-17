@@ -6,6 +6,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import top.ntutn.commonutil.AppUtil
+import top.ntutn.commonutil.MetricsUtil
 import top.ntutn.commonutil.showToast
 import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.databinding.ActivityMainBinding
@@ -23,6 +24,11 @@ class MainActivity : BaseActivity() {
         setContentView(binding.root)
 
         binding.navHostFragment.post { initView() }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        MetricsUtil.onEvent("main_resume")
     }
 
     private fun initView() {
