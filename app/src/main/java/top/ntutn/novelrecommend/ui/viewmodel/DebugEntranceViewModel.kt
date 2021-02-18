@@ -38,7 +38,12 @@ class DebugEntranceViewModel : ViewModel() {
             },
             DebugEntrance(title = "主动推送埋点事件", owner = "liuhaixin.zero") {
                 "主动推送埋点事件".showToast()
-                MetricsUtil.onEvent("ping")
+                MetricsUtil.onEvent(
+                    "ping", mapOf(
+                        "random1" to (0..100).random().toString(),
+                        "random2" to (0..100).random().toString()
+                    )
+                )
                 MetricsUtil.push()
             }
         )

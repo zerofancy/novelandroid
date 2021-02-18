@@ -28,12 +28,12 @@ class EventDecorator {
 
     private static final AtomicInteger eventNum = new AtomicInteger(0);//当满足连续操作大于100条,就进行上传服务
 
-   // private static  volatile long hitsCount = 0;//当前页面在一次访问中的第几次数据请求；与session_id关联，当session_id变化时重新计数，从1开始
+    // private static  volatile long hitsCount = 0;//当前页面在一次访问中的第几次数据请求；与session_id关联，当session_id变化时重新计数，从1开始
 
-    private static  final AtomicInteger hitsCount=new AtomicInteger(0) ;//当前页面在一次访问中的第几次数据请求；与session_id关联，当session_id变化时重新计数，从1开始
+    private static final AtomicInteger hitsCount = new AtomicInteger(0);//当前页面在一次访问中的第几次数据请求；与session_id关联，当session_id变化时重新计数，从1开始
 
     //MD5摘要，用于校验md5(dt+cid+type+salt)
-    private static String salt="d41d8cd98f00b204e9800998ecf84";
+    private static String salt = "d41d8cd98f00b204e9800998ecf84";
 
 
     public static synchronized void initCookie(String cookieStr) {
@@ -59,6 +59,7 @@ class EventDecorator {
 
     /**
      * 把 修改全局静态变量, 都放在这里处理,用synchronized修饰, 保证线程安全.
+     *
      * @param ecp
      * @return
      */
@@ -105,7 +106,7 @@ class EventDecorator {
     /**
      * 访问结束的标志:不活动状态超过15分钟；由客户端生成
      */
-    public static synchronized   String getSID() {
+    public static synchronized String getSID() {
         //
         String newDate = getNowDate();
 
@@ -118,7 +119,7 @@ class EventDecorator {
     }
 
 
-    public static synchronized   String getNowDate() {
+    public static synchronized String getNowDate() {
         //    SimpleDateFormat myFmt2=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//等价于now.toLocaleString()
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
@@ -136,18 +137,18 @@ class EventDecorator {
         return String.valueOf(System.currentTimeMillis());
     }
 
-    private static  synchronized String getNewUniqueSid() {
+    private static synchronized String getNewUniqueSid() {
         int radom = (int) (Math.random() * 9000 + 1000);//四位随机数
         return System.currentTimeMillis() + "" + radom;
     }
 
 
-    public static synchronized  String  getHnbCount() {
-        return hitsCount.incrementAndGet()+"";
+    public static synchronized String getHnbCount() {
+        return hitsCount.incrementAndGet() + "";
     }
 
 
-    public static  void refreshCurrentEventDate() {
+    public static void refreshCurrentEventDate() {
         old_date = getNowDate();
     }
 
@@ -159,16 +160,16 @@ class EventDecorator {
     }
 
 
-    public static  int getEventNum() {
+    public static int getEventNum() {
         return eventNum.get();
     }
 
-    public static  void addEventNum() {
+    public static void addEventNum() {
         eventNum.incrementAndGet();
     }
 
-    public static  void clearEventNum() {
-        eventNum .set(0);
+    public static void clearEventNum() {
+        eventNum.set(0);
     }
 
 
