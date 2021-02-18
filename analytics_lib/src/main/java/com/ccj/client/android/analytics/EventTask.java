@@ -2,6 +2,8 @@ package com.ccj.client.android.analytics;
 
 import com.ccj.client.android.analytics.bean.EventBean;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Map;
 
 /**
@@ -10,15 +12,10 @@ import java.util.Map;
 
 public class EventTask implements Runnable {
 
-
-    private String ec;
-    private String ea;
     private String el;
     private Map ecp;
 
-    public EventTask(String ec, String ea, String el, Map ecp) {
-        this.ec = ec;
-        this.ea = ea;
+    public EventTask(String el, Map ecp) {
         this.el = el;
         this.ecp = ecp;
     }
@@ -38,7 +35,7 @@ public class EventTask implements Runnable {
 
         try {
 
-            EventBean bean = EventDecorator.generateEventBean(ec, ea, el, ecp);
+            EventBean bean = EventDecorator.generateEventBean(el, ecp);
 
             if (bean == null) {
                 ELogger.logWrite(EConstant.TAG, " event bean == null");
@@ -62,11 +59,10 @@ public class EventTask implements Runnable {
     }
 
 
+    @NotNull
     @Override
     public String toString() {
         return "EventTask{" +
-                "ec='" + ec + '\'' +
-                ", ea='" + ea + '\'' +
                 ", el='" + el + '\'' +
                 ", ecp=" + ecp +
                 '}';

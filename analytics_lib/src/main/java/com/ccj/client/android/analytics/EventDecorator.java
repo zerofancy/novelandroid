@@ -45,18 +45,10 @@ class EventDecorator {
     }
 
 
-    public static synchronized EventBean generateEventBean(String ec, String ea, String el, Map ecp) {
+    public static synchronized EventBean generateEventBean(String el, Map ecp) {
 
 
         EventBean bean = generateCommonBean(ecp);
-        //event
-        if (ec != null && !ec.isEmpty()) {
-            bean.setEc(ec);
-        }
-
-        if (ea != null && !ea.isEmpty()) {
-            bean.setEa(ea);
-        }
 
         if (el != null && !el.isEmpty()) {
             bean.setEl(el);

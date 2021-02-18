@@ -31,7 +31,7 @@ object MetricsUtil {
      * @param data 自定义参数
      */
     fun onEvent(eventName: String, data: Map<String, String> = mapOf()) {
-        JJEvent.event("default", "default", eventName, data)
+        JJEvent.event(eventName, data)
     }
 
     /**

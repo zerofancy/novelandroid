@@ -23,8 +23,6 @@ public class EventBean implements Serializable{
     private String hnb; //当前页面在一次访问中的第几次数据请求；与session_id关联，当session_id变化时重新计数，从1开始
     private String  v; //当前值为“1”。只有出现不向后兼容的更改时，此值才会改变。
     private String did;//格式为 UA-XXXX-Y。所有收集的数据都与此 ID 相关联。
-    private String  ec;//事件类别
-    private String  ea;//事件操作
     private String  el;//事件标签
 
     private String ecp;//自定义map 存储
@@ -80,22 +78,6 @@ public class EventBean implements Serializable{
         this.did = did;
     }
 
-    public String getEc() {
-        return ec;
-    }
-
-    public void setEc(String ec) {
-        this.ec = ec;
-    }
-
-    public String getEa() {
-        return ea;
-    }
-
-    public void setEa(String ea) {
-        this.ea = ea;
-    }
-
     public String getEl() {
         return el;
     }
@@ -121,8 +103,6 @@ public class EventBean implements Serializable{
                 ", hnb='" + hnb + '\'' +
                 ", v='" + v + '\'' +
                 ", did='" + did + '\'' +
-                ", ec='" + ec + '\'' +
-                ", ea='" + ea + '\'' +
                 ", el='" + el + '\'' +
                 ", ecp='" + ecp + '\'' +
                 '}';
