@@ -25,6 +25,7 @@ class BookShelfFragment : BaseFragment() {
     ): View {
         binding = FragmentBookshelfBinding.inflate(inflater, container, false)
         initView()
+        initData()
         return binding.root
     }
 
@@ -43,5 +44,9 @@ class BookShelfFragment : BaseFragment() {
         bookShelfViewModel.books.observe(viewLifecycleOwner) {
             adapter.bookList = it
         }
+    }
+
+    private fun initData() {
+        bookShelfViewModel.initBookShelf()
     }
 }
