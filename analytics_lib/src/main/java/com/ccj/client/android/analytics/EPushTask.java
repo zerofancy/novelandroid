@@ -75,7 +75,7 @@ import java.util.List;
                 //请求失败;不做处理.
 
             }
-        }).sendEvent(EConstant.EVENT_TYPE_DEFAULT, list);
+        }).sendEvent(list);
 
 
     }

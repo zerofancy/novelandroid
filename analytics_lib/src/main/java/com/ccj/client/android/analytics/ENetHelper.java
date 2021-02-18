@@ -23,7 +23,7 @@ import static com.ccj.client.android.analytics.EConstant.TAG;
  * Created by chenchangjun on 18/2/8.
  */
 
- class ENetHelper {
+class ENetHelper {
 
     private static ENetHelper ENetHelper;
     private static boolean isLoading = false;
@@ -50,25 +50,8 @@ import static com.ccj.client.android.analytics.EConstant.TAG;
     }
 
 
-    public void sendEvent(String style, List<EventBean> list) {
-
-        switch (style) {
-
-            case EConstant.EVENT_TYPE_PV:
-                loadData(list);
-                break;
-            case EConstant.EVENT_TYPE_EVENT:
-                loadData(list);
-                break;
-            case EConstant.EVENT_TYPE_EXPOSE:
-                loadData(list);
-                break;
-            default:
-                loadData(list);
-
-                break;
-        }
-
+    public void sendEvent(List<EventBean> list) {
+        loadData(list);
     }
 
 

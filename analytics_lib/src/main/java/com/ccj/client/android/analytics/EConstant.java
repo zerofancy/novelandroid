@@ -43,20 +43,4 @@ package com.ccj.client.android.analytics;
      * sid改变周期的标志:默认 15分钟
      */
     static int PUSH_FINISH_DATE = 1;
-
-
-
-    /**
-     * 统计类别
-     */
-    public static final String EVENT_TYPE_DEFAULT = "default";//暂时先用默认值
-    public static final String EVENT_TYPE_PV = "screenview";//屏幕
-    public static final String EVENT_TYPE_EVENT = "event";//点击
-    public static final String EVENT_TYPE_EXPOSE = "show";//曝光,接口不同
-
-
-
-
-
-
 }

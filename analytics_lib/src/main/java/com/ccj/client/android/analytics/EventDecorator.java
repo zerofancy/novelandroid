@@ -1,13 +1,10 @@
 package com.ccj.client.android.analytics;
 
-import android.text.TextUtils;
-
 import com.ccj.client.android.analyticlib.BuildConfig;
 import com.ccj.client.android.analytics.bean.EventBean;
-import com.ccj.client.android.analytics.enums.LTPType;
 import com.ccj.client.android.analytics.net.gson.EGson;
 import com.ccj.client.android.analytics.net.gson.GsonBuilder;
-import com.ccj.client.android.analytics.utils.EMD5Utils;
+import com.ccj.client.android.analytics.utils.DeviceUtil;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -64,28 +61,9 @@ class EventDecorator {
         if (el != null && !el.isEmpty()) {
             bean.setEl(el);
         }
-        bean.setType(EConstant.EVENT_TYPE_EVENT);
-
         return bean;
     }
 
-
-    public static synchronized EventBean generateScreenBean(String sn, LTPType ltp, Map ecp) {
-
-        EventBean bean = generateCommonBean(ecp);
-
-        //screen
-
-        if (sn != null && !sn.isEmpty()) {
-            bean.setSn(sn);
-        }
-        if (ltp != null) {
-            bean.setLtp(ltp.getTypeName());
-        }
-        bean.setType(EConstant.EVENT_TYPE_PV);
-
-        return bean;
-    }
 
     /**
      * 把 修改全局静态变量, 都放在这里处理,用synchronized修饰, 保证线程安全.
@@ -99,10 +77,9 @@ class EventDecorator {
         //common
         bean.setV(BuildConfig.VERSION_NAME);
         bean.setIt(EventDecorator.getIT());
-        bean.setTid(EventDecorator.getTID());
+        bean.setDid(EventDecorator.getDID());
         bean.setSid(EventDecorator.getSID());
         bean.setHnb(EventDecorator.getHnbCount());
-        bean.setDs("app");
         //自定义
         if (ecp != null && !ecp.isEmpty()) {
 
@@ -117,39 +94,6 @@ class EventDecorator {
     }
 
 
-
-
-    public static  synchronized  EventBean generateExposedBean(String exposeID, String ec, String ea, Map mapEcp) {
-
-
-
-        EventBean bean = generateCommonBean(mapEcp);
-
-        //expsed
-        if (ec != null && !ec.isEmpty()) {
-            bean.setEc(ec);
-        }
-
-        if (ea != null && !ea.isEmpty()) {
-            bean.setEa(ea);
-        }
-
-
-
-        if (!TextUtils.isEmpty(exposeID)){
-            bean.setExposed_id(exposeID);
-
-        }else {
-            bean.setExposed_id("");
-
-        }
-
-
-        bean.setM(EMD5Utils.MD5(bean.getEa()+"?"+bean.getIt()+salt));
-        bean.setType(EConstant.EVENT_TYPE_EXPOSE);
-        return bean;
-    }
-
     static synchronized void pushEventByNum() {
         EventDecorator.addEventNum();
         if (EventDecorator.getEventNum() >= EConstant.PUSH_CUT_NUMBER) { //当满足连续操作大于100条,就进行上传服务
@@ -162,9 +106,8 @@ class EventDecorator {
     }
 
 
-    public static String getTID() {
-        //TODO
-        return "UA-1000000-2";
+    public static String getDID() {
+        return DeviceUtil.INSTANCE.getDid();
     }
 
     /**
