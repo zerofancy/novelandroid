@@ -11,6 +11,7 @@ import top.ntutn.commonutil.showToast
 import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.databinding.ActivityMainBinding
 import top.ntutn.novelrecommend.ui.base.BaseActivity
+import top.ntutn.novelrecommend.utils.TimeUtil
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -20,15 +21,11 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        calculateStartTime()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.navHostFragment.post { initView() }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        MetricsUtil.onEvent("main_resume")
     }
 
     private fun initView() {
@@ -55,6 +52,45 @@ class MainActivity : BaseActivity() {
             exitTime = System.currentTimeMillis()
             R.string.press_again_to_exit.showToast()
         }
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus && true
+        /**没有经过广告或者引导页**/
+        ) {
+            val hotStartTime = TimeUtil.getTimeCalculate(TimeUtil.HOT_START)
+            if (TimeUtil.sColdStartTime > 0 && hotStartTime > 0) {
+                // 真正的冷启动时间 = Application启动时间 + 热启动时间
+                val coldStartTime = TimeUtil.sColdStartTime + hotStartTime;
+                // 过滤掉异常启动时间
+                if (coldStartTime < 50000) {
+                    // 上传冷启动时间coldStartTime
+                    MetricsUtil.onEvent(
+                        "cold_start", mapOf(
+                            "coldStartTime" to coldStartTime.toString()
+                        )
+                    )
+                }
+            } else if (hotStartTime > 0) {
+                // 过滤掉异常启动时间
+                if (hotStartTime < 30000) {
+                    // 上传热启动时间hotStartTime
+                    MetricsUtil.onEvent(
+                        "hot_start", mapOf(
+                            "hotStartTime" to hotStartTime.toString()
+                        )
+                    )
+                }
+            }
+        }
+    }
+
+    private fun calculateStartTime() {
+        val coldStartTime: Long = TimeUtil.getTimeCalculate(TimeUtil.COLD_START)
+        // 这里记录的TimeUtils.coldStartTime是指Application启动的时间，最终的冷启动时间等于Application启动时间+热启动时间
+        TimeUtil.sColdStartTime = if (coldStartTime > 0) coldStartTime else 0
+        TimeUtil.beginTimeCalculate(TimeUtil.HOT_START)
     }
 
     companion object {

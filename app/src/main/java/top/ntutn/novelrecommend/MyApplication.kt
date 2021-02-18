@@ -1,15 +1,19 @@
 package top.ntutn.novelrecommend
 
 import android.app.Application
+import android.content.Context
+import android.os.Looper
 import com.facebook.drawee.backends.pipeline.Fresco
 import org.greenrobot.eventbus.EventBus
 import timber.log.Timber
 import top.ntutn.commonutil.AppUtil
 import top.ntutn.commonutil.MetricsUtil
 import top.ntutn.novelrecommend.utils.CrashReportingTree
+import top.ntutn.novelrecommend.utils.TimeUtil
 import top.ntutn.zeroconfigutil.ZeroConfigHelper
 
 class MyApplication : Application() {
+    private val isMainThread = Looper.getMainLooper() == Looper.myLooper()
 
     override fun onCreate() {
         super.onCreate()
@@ -42,5 +46,12 @@ class MyApplication : Application() {
         MetricsUtil.init(applicationContext)
 
         EventBus.builder().addIndex(AppEventBusAppIndex()).installDefaultEventBus()
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        if(isMainThread) {
+            TimeUtil.beginTimeCalculate(TimeUtil.COLD_START)
+        }
     }
 }
