@@ -93,6 +93,14 @@ class AboutActivity : AbsAboutActivity() {
             )
             add(
                 License(
+                    "SwipeRecyclerView",
+                    "严振杰",
+                    APACHE_2,
+                    "https://github.com/yanzhenjie/SwipeRecyclerView"
+                )
+            )
+            add(
+                License(
                     "Timber",
                     "Jake Wharton",
                     APACHE_2,

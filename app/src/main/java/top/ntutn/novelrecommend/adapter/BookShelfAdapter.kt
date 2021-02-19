@@ -12,7 +12,7 @@ import top.ntutn.novelrecommend.model.NovelModel
 class BookShelfAdapter : RecyclerView.Adapter<CommonViewHolder<ItemBookshelfBinding>>() {
     var bookList: List<NovelModel> = listOf()
         set(value) {
-            DiffUtil.calculateDiff(SimpleListDiffCallback<NovelModel>(field, value))
+            DiffUtil.calculateDiff(SimpleListDiffCallback(field, value))
                 .dispatchUpdatesTo(this)
             field = value
         }

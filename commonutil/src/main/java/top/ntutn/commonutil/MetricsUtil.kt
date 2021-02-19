@@ -41,7 +41,7 @@ object MetricsUtil {
         JJEventManager.pushEvent()
     }
 
-    const val DEFAULT_PUSH_URL = "http://10.78.207.28:8080/api"
+    const val DEFAULT_PUSH_URL = "http://10.78.207.28:8080/api/tracking/report"
     const val DEFAULT_PERIOD_MINUTES = 15
     const val DEFAULT_PUSH_LIMIT_MINUTES = 1.0
     const val DEFAULT_PUSH_LIMIT_NUM = 100

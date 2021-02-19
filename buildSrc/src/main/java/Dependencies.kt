@@ -14,10 +14,12 @@ object Vers {
     const val KOTLIN_POET = "1.7.2"
     const val DRAKEET_ABOUT = "2.4.1"
     const val DRAKEET_MUTITYPE = "4.0.0"
-//    const val AROUTER = "1.5.1"
+
+    //    const val AROUTER = "1.5.1"
     const val RETROFIT = "2.9.0"
     const val LIKE_VIEW = "1.2.2"
     const val FRESCO = "2.4.0"
+    const val SWIPE_RECYCLER_VIEW = "1.3.2"
 }
 
 @Suppress("unused", "SpellCheckingInspection")
@@ -47,6 +49,8 @@ object Deps {
     const val LIKE_VIEW = "com.jaren:likeview:${Vers.LIKE_VIEW}"
 
     const val FRESCO = "com.facebook.fresco:fresco:${Vers.FRESCO}"
+
+    const val SWIPE_RECYCLER_VIEW = "com.yanzhenjie.recyclerview:x:${Vers.SWIPE_RECYCLER_VIEW}"
 }
 
 @Suppress("unused", "SpellCheckingInspection")

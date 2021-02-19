@@ -7,11 +7,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import top.ntutn.commonutil.AppUtil
 import top.ntutn.novelrecommend.model.NovelModel
+import java.lang.reflect.Type
 
 class BookShelfViewModel : ViewModel() {
     private val gson = Gson()
@@ -31,8 +33,8 @@ class BookShelfViewModel : ViewModel() {
                 _books.value?.let { result.addAll(it) }
                 val resultString = gson.toJson(result)
                 AppUtil.getApplicationContext()
-                    .getSharedPreferences("bookShelf", Context.MODE_PRIVATE).edit {
-                        putString("json", resultString)
+                    .getSharedPreferences(SP_NAME, Context.MODE_PRIVATE).edit {
+                        putString(SP_KEY, resultString)
                     }
                 true to result
             }
@@ -50,8 +52,8 @@ class BookShelfViewModel : ViewModel() {
                 targetBook?.let { result?.remove(it) }
                 val resultString = gson.toJson(result)
                 AppUtil.getApplicationContext()
-                    .getSharedPreferences("bookShelf", Context.MODE_PRIVATE).edit {
-                        putString("json", resultString)
+                    .getSharedPreferences(SP_NAME, Context.MODE_PRIVATE).edit {
+                        putString(SP_KEY, resultString)
                     }
                 result
             }
@@ -65,11 +67,25 @@ class BookShelfViewModel : ViewModel() {
                 val result = withContext(Dispatchers.IO) {
                     loadBookShelfFromLocal()
                 }
+                result?.let {
+                    _books.value = it
+                }
             }
         }
     }
 
-    private suspend fun loadBookShelfFromLocal() {
-        TODO()
+    private fun loadBookShelfFromLocal(): List<NovelModel>? {
+        val json =
+            AppUtil.getApplicationContext().getSharedPreferences(SP_NAME, Context.MODE_PRIVATE)
+                .getString(
+                    SP_KEY, "{}"
+                )
+        val listType: Type = object : TypeToken<List<NovelModel>?>() {}.type
+        return gson.fromJson(json, listType)
+    }
+
+    companion object {
+        const val SP_NAME = "bookShelf"
+        const val SP_KEY = "json"
     }
 }
