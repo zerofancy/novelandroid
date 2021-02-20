@@ -18,7 +18,7 @@ class DebugConfigAdapter(private val fragment: Fragment) :
     var configList: List<DebugConfigListModel> = listOf()
         set(value) {
             DiffUtil.calculateDiff(DebugConfigDiffCallback(field, value)).dispatchUpdatesTo(this)
-            field = value
+            field = value.toList()
         }
 
     class ViewHolder(val binding: ViewBinding) : RecyclerView.ViewHolder(binding.root)

@@ -8,8 +8,8 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import top.ntutn.commonutil.showSnackBar
 import top.ntutn.novelrecommend.databinding.DialogNovelDetailBinding
-import top.ntutn.novelrecommend.ui.viewmodel.BookShelfViewModel
-import top.ntutn.novelrecommend.ui.viewmodel.DiscoverViewModel
+import top.ntutn.novelrecommend.ui.viewmodel.main.BookShelfViewModel
+import top.ntutn.novelrecommend.ui.viewmodel.main.DiscoverViewModel
 
 class NovelDetailDialogFragment : DialogFragment() {
     private lateinit var binding: DialogNovelDetailBinding
@@ -27,12 +27,8 @@ class NovelDetailDialogFragment : DialogFragment() {
     }
 
     private fun initView() {
-        val currentPosition = discoverViewModel.currentPosition.value ?: 0
-        val currentNovel = discoverViewModel.novelList.value?.get(currentPosition)
-        if (currentNovel == null) {
-            dismiss()
-            return
-        }
+        val currentPosition = discoverViewModel.currentPosition.value
+        val currentNovel = discoverViewModel.novelList.value[currentPosition]
 
         binding.apply {
             likeButton.setOnClickListener { likeButton.toggle() } // TODO 点赞
@@ -51,7 +47,7 @@ class NovelDetailDialogFragment : DialogFragment() {
             authorTextView.text = currentNovel.author
             tagsTextView.text = currentNovel.tags.toString()
         }
-        binding.starButton.setCheckedWithoutAnimator((bookShelfViewModel.books.value?.find { it.id == currentNovel.id }) != null)
+        binding.starButton.setCheckedWithoutAnimator((bookShelfViewModel.books.value.find { it.id == currentNovel.id }) != null)
     }
 
     companion object {

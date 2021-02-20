@@ -17,7 +17,7 @@ class NovelDiscoverAdapter(private val fragmentManager: FragmentManager) :
     var novelList: List<NovelModel> = listOf()
         set(value) {
             DiffUtil.calculateDiff(SimpleListDiffCallback(field, value)).dispatchUpdatesTo(this)
-            field = value
+            field = value.toList()
         }
 
     class ViewHolder(val binding: ItemNovelDiscoverBinding) : RecyclerView.ViewHolder(binding.root)

@@ -1,26 +1,26 @@
 package top.ntutn.novelrecommend.ui.viewmodel
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import top.ntutn.novelrecommend.arch.CheckedLiveData
+import top.ntutn.novelrecommend.arch.InitedLiveData
 import top.ntutn.novelrecommend.model.DebugConfigListModel
 import top.ntutn.zeroconfigutil.ZeroConfigHelper
 
 class DebugConfigViewModel : ViewModel() {
-    private val _configList = MutableLiveData<List<DebugConfigListModel>>()
+    private val _configList = InitedLiveData<MutableList<DebugConfigListModel>> { mutableListOf() }
 
-    val configList: LiveData<List<DebugConfigListModel>> = _configList
+    val configList: CheckedLiveData<MutableList<DebugConfigListModel>> = _configList
 
-    private suspend fun getList(): List<DebugConfigListModel> {
+    private suspend fun getList(): MutableList<DebugConfigListModel> {
         return withContext(Dispatchers.IO) {
-            listOf(DebugConfigListModel(DebugConfigListModel.TYPE_SCOPE, "默认分组")).plus(
-                ZeroConfigHelper.getAllDefinedConfigs()
-                    .map { DebugConfigListModel(DebugConfigListModel.TYPE_CONFIG_ITEM, "默认分组", it) }
-            )
+            ZeroConfigHelper.getAllDefinedConfigs()
+                .map { DebugConfigListModel(DebugConfigListModel.TYPE_CONFIG_ITEM, "默认分组", it) }
+                .toMutableList()
         }
     }
 
@@ -31,7 +31,7 @@ class DebugConfigViewModel : ViewModel() {
     fun updateConfig(key: String, value: String) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                ZeroConfigHelper.saveRawConfig(key,value)
+                ZeroConfigHelper.saveRawConfig(key, value)
             }
         }
     }

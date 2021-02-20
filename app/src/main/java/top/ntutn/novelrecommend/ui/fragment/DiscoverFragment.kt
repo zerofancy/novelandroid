@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import top.ntutn.novelrecommend.adapter.NovelDiscoverAdapter
 import top.ntutn.novelrecommend.databinding.FragmentDiscoverBinding
 import top.ntutn.novelrecommend.ui.base.BaseFragment
-import top.ntutn.novelrecommend.ui.viewmodel.DiscoverViewModel
+import top.ntutn.novelrecommend.ui.viewmodel.main.DiscoverViewModel
 
 class DiscoverFragment : BaseFragment() {
     private lateinit var binding: FragmentDiscoverBinding
@@ -49,9 +49,7 @@ class DiscoverFragment : BaseFragment() {
         discoverViewModel.novelList.observe(viewLifecycleOwner) {
             adapter.novelList = it
         }
-        discoverViewModel.currentPosition.value?.let {
-            layoutManager.scrollToPosition(it)
-        }
+        layoutManager.scrollToPosition(discoverViewModel.currentPosition.value)
     }
 
     private fun initData() {

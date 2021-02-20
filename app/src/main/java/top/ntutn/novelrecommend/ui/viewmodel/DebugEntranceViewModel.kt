@@ -2,18 +2,19 @@ package top.ntutn.novelrecommend.ui.viewmodel
 
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import top.ntutn.commonutil.ClipboardUtil
 import top.ntutn.commonutil.DeviceUtil
 import top.ntutn.commonutil.MetricsUtil
 import top.ntutn.commonutil.showToast
 import top.ntutn.novelrecommend.adapter.DebugEntrance
+import top.ntutn.novelrecommend.arch.CheckedLiveData
+import top.ntutn.novelrecommend.arch.InitedLiveData
 import top.ntutn.readview.ReadTestActivity
 
 class DebugEntranceViewModel : ViewModel() {
-    private val _debugEntranceList = MutableLiveData<List<DebugEntrance>>()
-    val debugEntranceList: LiveData<List<DebugEntrance>> = _debugEntranceList
+    private val _debugEntranceList = InitedLiveData<List<DebugEntrance>> { listOf() }
+    val debugEntranceList: CheckedLiveData<List<DebugEntrance>> = _debugEntranceList
 
     fun initData() {
         _debugEntranceList.value = listOf(

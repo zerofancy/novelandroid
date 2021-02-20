@@ -14,7 +14,7 @@ class BookShelfAdapter : RecyclerView.Adapter<CommonViewHolder<ItemBookshelfBind
         set(value) {
             DiffUtil.calculateDiff(SimpleListDiffCallback(field, value))
                 .dispatchUpdatesTo(this)
-            field = value
+            field = value.toList()
         }
 
     override fun onCreateViewHolder(

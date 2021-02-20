@@ -18,7 +18,7 @@ class DebugEntranceAdapter :
             diffCallback.oldList = field
             diffCallback.newList = value
             DiffUtil.calculateDiff(diffCallback).dispatchUpdatesTo(this)
-            field = value
+            field = value.toList()
         }
 
     override fun onCreateViewHolder(

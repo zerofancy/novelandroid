@@ -14,7 +14,7 @@ import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.adapter.BookShelfAdapter
 import top.ntutn.novelrecommend.databinding.FragmentBookshelfBinding
 import top.ntutn.novelrecommend.ui.base.BaseFragment
-import top.ntutn.novelrecommend.ui.viewmodel.BookShelfViewModel
+import top.ntutn.novelrecommend.ui.viewmodel.main.BookShelfViewModel
 
 class BookShelfFragment : BaseFragment() {
     private val bookShelfViewModel by activityViewModels<BookShelfViewModel>()
@@ -38,7 +38,7 @@ class BookShelfFragment : BaseFragment() {
         layoutManager = LinearLayoutManager(requireContext())
         binding.bookshelfRecyclerView.apply {
             setOnItemClickListener { _, adapterPosition ->
-                bookShelfViewModel.books.value?.get(adapterPosition)?.title?.showToast()
+                bookShelfViewModel.books.value[adapterPosition]?.title?.showToast()
                 // TODO 点击详细介绍
             }
             setOnItemLongClickListener { _, adapterPosition ->
