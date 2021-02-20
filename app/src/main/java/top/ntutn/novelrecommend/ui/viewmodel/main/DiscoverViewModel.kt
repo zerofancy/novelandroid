@@ -8,6 +8,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.await
 import timber.log.Timber
 import top.ntutn.commonutil.DeviceUtil
+import top.ntutn.commonutil.MetricsUtil
 import top.ntutn.novelrecommend.NovelService
 import top.ntutn.novelrecommend.arch.CheckedLiveData
 import top.ntutn.novelrecommend.arch.InitedLiveData
@@ -18,6 +19,9 @@ class DiscoverViewModel : ViewModel() {
     private val _novelList =
         InitedLiveData<MutableList<NovelModel>> { mutableListOf() }
     private val _currentPosition = InitedLiveData { 0 }
+
+    private val _pageCount = InitedLiveData { 1 }
+    private val _currentPage = InitedLiveData { 0 }
 
     val novelList: CheckedLiveData<MutableList<NovelModel>> = _novelList
     val currentPosition: CheckedLiveData<Int> = _currentPosition
@@ -49,6 +53,17 @@ class DiscoverViewModel : ViewModel() {
     }
 
     fun scrollTo(position: Int) {
+        val previousBook = _novelList.value[_currentPosition.value]
+        MetricsUtil.onEvent(
+            "switch_book", mapOf(
+                "id" to (previousBook.id ?: -1L),
+                "liked" to previousBook.isLiked,
+                "stared" to previousBook.isStared,
+                "page_ount" to _pageCount.value,
+                "current_page_index" to _currentPage.value
+            )
+        )
+
         _currentPosition.value = position
     }
 
@@ -60,5 +75,10 @@ class DiscoverViewModel : ViewModel() {
     fun bookStaredChange(stared: Boolean) {
         _novelList.value[currentPosition.value].isStared = stared
         _novelList.value = _novelList.value
+    }
+
+    fun switchPage(pageCount: Int, currentPage: Int) {
+        _pageCount.value = pageCount
+        _currentPage.value = currentPage
     }
 }

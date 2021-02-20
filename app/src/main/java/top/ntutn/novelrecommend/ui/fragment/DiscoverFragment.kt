@@ -31,7 +31,7 @@ class DiscoverFragment : BaseFragment() {
     }
 
     private fun initView() {
-        adapter = NovelDiscoverAdapter(parentFragmentManager)
+        adapter = NovelDiscoverAdapter(this)
         layoutManager = LinearLayoutManager(requireContext())
         binding.discoverRecycler.apply {
             layoutManager = this@DiscoverFragment.layoutManager
@@ -42,6 +42,7 @@ class DiscoverFragment : BaseFragment() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 val lastVisiblePosition: Int = layoutManager.findLastVisibleItemPosition()
+                if (discoverViewModel.currentPosition.value == lastVisiblePosition) return
                 discoverViewModel.tryLoadMore()
                 discoverViewModel.scrollTo(lastVisiblePosition)
             }

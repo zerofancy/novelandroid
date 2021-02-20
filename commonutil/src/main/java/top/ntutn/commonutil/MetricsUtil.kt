@@ -30,7 +30,7 @@ object MetricsUtil {
      * @param eventName 事件名
      * @param data 自定义参数
      */
-    fun onEvent(eventName: String, data: Map<String, String> = mapOf()) {
+    fun onEvent(eventName: String, data: Map<String, Any> = mapOf()) {
         JJEvent.event(eventName, data)
     }
 

@@ -2,18 +2,21 @@ package top.ntutn.novelrecommend.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import top.ntutn.commonutil.showLongToast
 import top.ntutn.commonutil.showToast
 import top.ntutn.novelrecommend.databinding.ItemNovelDiscoverBinding
 import top.ntutn.novelrecommend.model.NovelModel
 import top.ntutn.novelrecommend.ui.dialog.NovelDetailDialogFragment
+import top.ntutn.novelrecommend.ui.fragment.DiscoverFragment
+import top.ntutn.novelrecommend.ui.viewmodel.main.DiscoverViewModel
 import top.ntutn.readview.ReadView
 
-class NovelDiscoverAdapter(private val fragmentManager: FragmentManager) :
+class NovelDiscoverAdapter(private val discoverFragment: DiscoverFragment) :
     RecyclerView.Adapter<NovelDiscoverAdapter.ViewHolder>() {
+    private val discoverViewModel by discoverFragment.activityViewModels<DiscoverViewModel>()
+
     var novelList: List<NovelModel> = listOf()
         set(value) {
             DiffUtil.calculateDiff(SimpleListDiffCallback(field, value)).dispatchUpdatesTo(this)
@@ -32,7 +35,9 @@ class NovelDiscoverAdapter(private val fragmentManager: FragmentManager) :
         holder.binding.apply {
             readView.setText(novelList[position].content ?: "")
             readView.setOnItemSelectListener(object : ReadView.OnItemSelectListener {
-                override fun onSwitchPage(index: Int) = Unit
+                override fun onSwitchPage(index: Int) {
+                    discoverViewModel.switchPage(readView.getPageCount(), index)
+                }
 
                 override fun onPagePreviousClicked(isFirstPage: Boolean) {
                     if (isFirstPage) {
@@ -45,7 +50,8 @@ class NovelDiscoverAdapter(private val fragmentManager: FragmentManager) :
                 override fun onPageNextClicked(isLastPage: Boolean) {
                     if (isLastPage) {
 //                        "已是最后一页".showLongToast()
-                        NovelDetailDialogFragment.newInstance().show(fragmentManager, "detail")
+                        NovelDetailDialogFragment.newInstance()
+                            .show(discoverFragment.parentFragmentManager, "detail")
                         return
                     }
                     readView.goNextPage()
