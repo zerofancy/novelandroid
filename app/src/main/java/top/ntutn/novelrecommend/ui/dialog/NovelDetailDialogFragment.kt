@@ -31,7 +31,10 @@ class NovelDetailDialogFragment : DialogFragment() {
         val currentNovel = discoverViewModel.novelList.value[currentPosition]
 
         binding.apply {
-            likeButton.setOnClickListener { likeButton.toggle() } // TODO 点赞
+            likeButton.setOnClickListener {
+                likeButton.toggle()
+                discoverViewModel.bookLikedChange(likeButton.isChecked)
+            }
             starButton.setOnClickListener {
                 starButton.toggle()
                 if (starButton.isChecked) {
@@ -39,6 +42,7 @@ class NovelDetailDialogFragment : DialogFragment() {
                 } else {
                     bookShelfViewModel.removeBook(currentNovel)
                 }
+                discoverViewModel.bookStaredChange(starButton.isChecked)
             }
             shareButton.setOnClickListener { shareButton.showSnackBar("分享功能暂时不可用") }
         }
@@ -48,6 +52,7 @@ class NovelDetailDialogFragment : DialogFragment() {
             tagsTextView.text = currentNovel.tags.toString()
         }
         binding.starButton.setCheckedWithoutAnimator((bookShelfViewModel.books.value.find { it.id == currentNovel.id }) != null)
+        binding.likeButton.setCheckedWithoutAnimator(discoverViewModel.novelList.value[discoverViewModel.currentPosition.value].isLiked)
     }
 
     companion object {

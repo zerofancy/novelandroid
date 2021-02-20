@@ -1,6 +1,7 @@
 package top.ntutn.novelrecommend.ui.activity
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -11,11 +12,15 @@ import top.ntutn.commonutil.showToast
 import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.databinding.ActivityMainBinding
 import top.ntutn.novelrecommend.ui.base.BaseActivity
+import top.ntutn.novelrecommend.ui.viewmodel.main.BookShelfViewModel
+import top.ntutn.novelrecommend.ui.viewmodel.main.DiscoverViewModel
 import top.ntutn.novelrecommend.utils.TimeUtil
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+    private val bookShelfViewModel by viewModels<BookShelfViewModel>()
+    private val discoverViewModel by viewModels<DiscoverViewModel>()
 
     private var exitTime = 0L
 
@@ -25,7 +30,10 @@ class MainActivity : BaseActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.navHostFragment.post { initView() }
+        binding.navHostFragment.post {
+            initView()
+            initData()
+        }
     }
 
     private fun initView() {
@@ -42,6 +50,11 @@ class MainActivity : BaseActivity() {
         binding.navView.setupWithNavController(navController)
 
         getString(R.string.debug_notice).showToast()
+    }
+
+    private fun initData() {
+        bookShelfViewModel.initBookShelf()
+        discoverViewModel.loadMore()
     }
 
     override fun onBackPressed() {

@@ -43,7 +43,7 @@ class DiscoverViewModel : ViewModel() {
     }
 
     fun tryLoadMore() {
-        val currentPosition = _currentPosition.value ?: 0
+        val currentPosition = _currentPosition.value
         val novelCount = _novelList.value.size
         if (currentPosition + 3 >= novelCount) loadMore()
     }
@@ -52,11 +52,13 @@ class DiscoverViewModel : ViewModel() {
         _currentPosition.value = position
     }
 
-    fun likeBook(bookId: Long) {
-
+    fun bookLikedChange(liked: Boolean) {
+        _novelList.value[currentPosition.value].isLiked = liked
+        _novelList.value = _novelList.value
     }
 
-    fun starBook(bookId: Long) {
-
+    fun bookStaredChange(stared: Boolean) {
+        _novelList.value[currentPosition.value].isStared = stared
+        _novelList.value = _novelList.value
     }
 }

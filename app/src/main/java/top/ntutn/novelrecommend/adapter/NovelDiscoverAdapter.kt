@@ -36,7 +36,7 @@ class NovelDiscoverAdapter(private val fragmentManager: FragmentManager) :
 
                 override fun onPagePreviousClicked(isFirstPage: Boolean) {
                     if (isFirstPage) {
-                        "已是第一页".showLongToast()
+//                        "已是第一页".showLongToast()
                         return
                     }
                     readView.goPreviousPage()
@@ -44,7 +44,7 @@ class NovelDiscoverAdapter(private val fragmentManager: FragmentManager) :
 
                 override fun onPageNextClicked(isLastPage: Boolean) {
                     if (isLastPage) {
-                        "已是最后一页".showLongToast()
+//                        "已是最后一页".showLongToast()
                         NovelDetailDialogFragment.newInstance().show(fragmentManager, "detail")
                         return
                     }

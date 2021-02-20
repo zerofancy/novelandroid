@@ -8,6 +8,6 @@ data class NovelModel(
     val tags: Set<String>? = hashSetOf(),
     val cover: String? = null,
     val localId: Long? = 0L, // 防止抓到重复视频
-    val isLiked: Boolean = false,
-    val isStared: Boolean = false
+    var isLiked: Boolean = false,
+    var isStared: Boolean = false
 )

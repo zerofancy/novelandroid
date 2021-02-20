@@ -38,11 +38,11 @@ class BookShelfFragment : BaseFragment() {
         layoutManager = LinearLayoutManager(requireContext())
         binding.bookshelfRecyclerView.apply {
             setOnItemClickListener { _, adapterPosition ->
-                bookShelfViewModel.books.value[adapterPosition]?.title?.showToast()
+                bookShelfViewModel.books.value[adapterPosition].title?.showToast()
                 // TODO 点击详细介绍
             }
             setOnItemLongClickListener { _, adapterPosition ->
-                "长按菜单${bookShelfViewModel.books.value?.get(adapterPosition)?.title}".showToast()
+                "长按菜单${bookShelfViewModel.books.value[adapterPosition].title}".showToast()
                 // TODO 长按删除
             }
             // 允许拖拽排序 （貌似与长按动作冲突）
@@ -59,7 +59,7 @@ class BookShelfFragment : BaseFragment() {
 
                 override fun onItemDismiss(srcHolder: RecyclerView.ViewHolder?) {
                     val position = srcHolder?.layoutPosition ?: return
-                    val book = bookShelfViewModel.books.value?.get(position) ?: return
+                    val book = bookShelfViewModel.books.value[position]
                     bookShelfViewModel.removeBook(book)
                 }
             })
