@@ -3,7 +3,7 @@ package top.ntutn.novelrecommend.arch
 import androidx.lifecycle.LiveData
 
 /**
- * 解决Livedata的空安全问题
+ * 解决LiveData的空安全问题
  *
  */
 abstract class CheckedLiveData<T> : LiveData<T>() {

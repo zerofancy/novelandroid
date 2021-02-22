@@ -12,7 +12,6 @@ class ZeroConfigDelegate<T>(private val clazz: Class<T>) {
 
 /**
  * 委托获取配置值
- * 泛型实化，调用更方便
  * @param clazz 配置类型
  */
 fun <T> zeroConfig(clazz: Class<T>): ZeroConfigDelegate<T> = ZeroConfigDelegate(clazz)
