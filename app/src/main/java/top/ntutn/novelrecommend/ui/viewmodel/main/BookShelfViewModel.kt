@@ -80,7 +80,11 @@ class BookShelfViewModel : ViewModel() {
                     SP_KEY, "{}"
                 )
         val listType: Type = object : TypeToken<List<NovelModel>?>() {}.type
-        return gson.fromJson(json, listType)
+        return try {
+            gson.fromJson(json, listType)
+        } catch (e: Exception) {
+            mutableListOf()
+        }
     }
 
     companion object {

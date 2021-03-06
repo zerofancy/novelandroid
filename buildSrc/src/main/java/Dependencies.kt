@@ -20,6 +20,7 @@ object Vers {
     const val LIKE_VIEW = "1.2.2"
     const val FRESCO = "2.4.0"
     const val SWIPE_RECYCLER_VIEW = "1.3.2"
+    const val LAYOUT_MANAGER_GROUP = "1e6f4f96eb"
 }
 
 @Suppress("unused", "SpellCheckingInspection")
@@ -51,6 +52,7 @@ object Deps {
     const val FRESCO = "com.facebook.fresco:fresco:${Vers.FRESCO}"
 
     const val SWIPE_RECYCLER_VIEW = "com.yanzhenjie.recyclerview:x:${Vers.SWIPE_RECYCLER_VIEW}"
+    const val LAYOUT_MANAGER_GROUP = "com.github.DingMouRen:LayoutManagerGroup:${Vers.LAYOUT_MANAGER_GROUP}"
 }
 
 @Suppress("unused", "SpellCheckingInspection")

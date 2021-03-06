@@ -19,6 +19,7 @@ object RetrofitUtil {
                 val originalHttpUrl = originalRequest.url()
                 val url = originalHttpUrl.newBuilder()
 //                    .addQueryParameter("deviceInfo", deviceInfo.toString())
+                    .addQueryParameter("did", DeviceUtil.getDid())
                     .build()
                 val request = originalRequest.newBuilder()
                     .url(url)

@@ -8,16 +8,18 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.dingmouren.layoutmanagergroup.viewpager.OnViewPagerListener
+import com.dingmouren.layoutmanagergroup.viewpager.ViewPagerLayoutManager
 import top.ntutn.novelrecommend.adapter.NovelDiscoverAdapter
 import top.ntutn.novelrecommend.databinding.FragmentDiscoverBinding
 import top.ntutn.novelrecommend.ui.base.BaseFragment
 import top.ntutn.novelrecommend.ui.viewmodel.main.DiscoverViewModel
 
-class DiscoverFragment : BaseFragment() {
+class DiscoverFragment : BaseFragment(),OnViewPagerListener {
     private lateinit var binding: FragmentDiscoverBinding
     private val discoverViewModel by activityViewModels<DiscoverViewModel>()
     private lateinit var adapter: NovelDiscoverAdapter
-    private lateinit var layoutManager: LinearLayoutManager
+    private lateinit var layoutManager: ViewPagerLayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,21 +34,12 @@ class DiscoverFragment : BaseFragment() {
 
     private fun initView() {
         adapter = NovelDiscoverAdapter(this)
-        layoutManager = LinearLayoutManager(requireContext())
+        layoutManager = ViewPagerLayoutManager(requireContext(), ViewPagerLayoutManager.VERTICAL)
+        layoutManager.setOnViewPagerListener(this)
         binding.discoverRecycler.apply {
             layoutManager = this@DiscoverFragment.layoutManager
             adapter = this@DiscoverFragment.adapter
-            PagerSnapHelper().attachToRecyclerView(this)
         }
-        binding.discoverRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val lastVisiblePosition: Int = layoutManager.findLastVisibleItemPosition()
-                if (discoverViewModel.currentPosition.value == lastVisiblePosition) return
-                discoverViewModel.tryLoadMore()
-                discoverViewModel.scrollTo(lastVisiblePosition)
-            }
-        })
         discoverViewModel.novelList.observe(viewLifecycleOwner) {
             adapter.novelList = it
         }
@@ -55,5 +48,15 @@ class DiscoverFragment : BaseFragment() {
 
     private fun initData() {
         discoverViewModel.tryLoadMore()
+    }
+
+    override fun onInitComplete() = Unit
+
+    override fun onPageRelease(isNext: Boolean, position: Int) = Unit
+
+    override fun onPageSelected(position: Int, isBottom: Boolean) {
+        if (discoverViewModel.currentPosition.value == position) return
+        discoverViewModel.tryLoadMore()
+        discoverViewModel.scrollTo(position)
     }
 }
