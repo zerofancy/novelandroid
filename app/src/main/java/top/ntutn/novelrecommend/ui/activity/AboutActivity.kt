@@ -69,6 +69,14 @@ class AboutActivity : AbsAboutActivity() {
             add(License("KotlinPoet", "square", APACHE_2, "https://github.com/square/kotlinpoet"))
             add(
                 License(
+                    "LayoutManagerGroup",
+                    "钉某人",
+                    APACHE_2,
+                    "https://github.com/DingMouRen/LayoutManagerGroup"
+                )
+            )
+            add(
+                License(
                     "LikeView",
                     "jaren",
                     APACHE_2,

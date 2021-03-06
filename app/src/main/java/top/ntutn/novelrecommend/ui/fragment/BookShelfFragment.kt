@@ -58,7 +58,10 @@ class BookShelfFragment : BaseFragment() {
                 }
 
                 override fun onItemDismiss(srcHolder: RecyclerView.ViewHolder?) {
-                    val position = srcHolder?.layoutPosition ?: return
+                    val rawPosition = srcHolder?.layoutPosition ?: return
+                    // 只有书籍条目可以划走
+                    if (this@BookShelfFragment.adapter.getItemViewType(rawPosition) != BookShelfAdapter.ItemType.BOOK.ordinal) return
+                    val position = rawPosition - 1
                     val book = bookShelfViewModel.books.value[position]
                     bookShelfViewModel.removeBook(book)
                 }
