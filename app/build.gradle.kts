@@ -90,7 +90,6 @@ dependencies {
     implementation(Deps.LIKE_VIEW)
 
     implementation(Deps.FRESCO)
-    implementation(Deps.SWIPE_RECYCLER_VIEW)
     implementation(Deps.LAYOUT_MANAGER_GROUP)
 
     kapt(project(":libzeroconfigcompiler"))

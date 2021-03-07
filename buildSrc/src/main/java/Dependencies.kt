@@ -74,8 +74,8 @@ object AndroidXVersion {
     const val NAVIGATION_FRAGMENT = "2.3.3"
     const val NAVIGATION_UI = "2.3.3"
     const val VECTOR_DRAWABLE = "1.1.0"
-    const val VIEW_MODEL = "2.2.0"
-    const val LIVE_DATA = "2.2.0"
+    const val VIEW_MODEL = "2.3.0"
+    const val LIVE_DATA = "2.3.0"
 }
 
 @Suppress("unused", "SpellCheckingInspection")

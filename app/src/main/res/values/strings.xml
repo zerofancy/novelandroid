@@ -22,4 +22,5 @@
         <i>6、实现推荐模型的自动更新。</i>
     </string>
     <string name="about">关于</string>
+    <string name="remove">移除</string>
 </resources>

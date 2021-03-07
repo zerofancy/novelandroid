@@ -10,7 +10,6 @@ import top.ntutn.zeroconfigutil.zeroConfig
 object RetrofitUtil {
     internal const val BASE_URL = "https://ntutn.top/novel/"
     private val retrofitConfig by zeroConfig<RetrofitConfig>()
-    private val deviceInfo by lazy { DeviceUtil.getDeviceInfo() }
 
     private val okHttpClient by lazy {
         OkHttpClient.Builder()

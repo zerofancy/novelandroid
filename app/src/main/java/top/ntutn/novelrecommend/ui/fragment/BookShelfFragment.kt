@@ -6,10 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.yanzhenjie.recyclerview.touch.OnItemMoveListener
 import com.yanzhenjie.recyclerview.widget.DefaultItemDecoration
-import top.ntutn.commonutil.showToast
 import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.adapter.BookShelfAdapter
 import top.ntutn.novelrecommend.databinding.FragmentBookshelfBinding
@@ -34,38 +31,31 @@ class BookShelfFragment : BaseFragment() {
     }
 
     private fun initView() {
-        adapter = BookShelfAdapter()
+        adapter = BookShelfAdapter().apply {
+            onItemRemoveListener = {
+                val book = bookShelfViewModel.books.value[it]
+                bookShelfViewModel.removeBook(book)
+            }
+        }
         layoutManager = LinearLayoutManager(requireContext())
         binding.bookshelfRecyclerView.apply {
-            setOnItemClickListener { _, adapterPosition ->
-                bookShelfViewModel.books.value[adapterPosition].title?.showToast()
-                // TODO 点击详细介绍
-            }
-            setOnItemLongClickListener { _, adapterPosition ->
-                "长按菜单${bookShelfViewModel.books.value[adapterPosition].title}".showToast()
-                // TODO 长按删除
-            }
-            // 允许拖拽排序 （貌似与长按动作冲突）
-            isLongPressDragEnabled = false
-            // 允许侧滑删除
-            isItemViewSwipeEnabled = true
-            setOnItemMoveListener(object : OnItemMoveListener {
-                override fun onItemMove(
-                    srcHolder: RecyclerView.ViewHolder?,
-                    targetHolder: RecyclerView.ViewHolder?
-                ): Boolean {
-                    return false
-                }
-
-                override fun onItemDismiss(srcHolder: RecyclerView.ViewHolder?) {
-                    val rawPosition = srcHolder?.layoutPosition ?: return
-                    // 只有书籍条目可以划走
-                    if (this@BookShelfFragment.adapter.getItemViewType(rawPosition) != BookShelfAdapter.ItemType.BOOK.ordinal) return
-                    val position = rawPosition - 1
-                    val book = bookShelfViewModel.books.value[position]
-                    bookShelfViewModel.removeBook(book)
-                }
-            })
+//            setOnItemMoveListener(object : OnItemMoveListener {
+//                override fun onItemMove(
+//                    srcHolder: RecyclerView.ViewHolder?,
+//                    targetHolder: RecyclerView.ViewHolder?
+//                ): Boolean {
+//                    return false
+//                }
+//
+//                override fun onItemDismiss(srcHolder: RecyclerView.ViewHolder?) {
+//                    val rawPosition = srcHolder?.layoutPosition ?: return
+//                    // 只有书籍条目可以划走
+//                    if (this@BookShelfFragment.adapter.getItemViewType(rawPosition) != BookShelfAdapter.ItemType.BOOK.ordinal) return
+//                    val position = rawPosition - 1
+//                    val book = bookShelfViewModel.books.value[position]
+//                    bookShelfViewModel.removeBook(book)
+//                }
+//            })
 
             adapter = this@BookShelfFragment.adapter
             layoutManager = this@BookShelfFragment.layoutManager

@@ -1,5 +1,6 @@
 package top.ntutn.novelrecommend.ui.viewmodel.main
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
@@ -27,12 +28,18 @@ class DiscoverViewModel : ViewModel() {
     val currentPosition: CheckedLiveData<Int> = _currentPosition
 
     private suspend fun getNovel(): List<NovelModel> {
-        return RetrofitUtil.create<NovelService>()
-            .getNovel(deviceInfo = DeviceUtil.getDeviceInfoMap())
-            .await()
-            .map { it.copy(localId = (0..Long.MAX_VALUE).random()) }  //TODO 解决id重复的问题
+        return try {
+            RetrofitUtil.create<NovelService>()
+                .getNovel(deviceInfo = DeviceUtil.getDeviceInfoMap())
+                .await()
+                .map { it.copy(localId = (0..Long.MAX_VALUE).random()) }  //TODO 解决id重复的问题
+        }catch (e:Exception){
+            Timber.e(e, "获取小说失败")
+            throw e
+        }
     }
 
+    @SuppressLint("NullSafeMutableLiveData")
     fun loadMore() {
         viewModelScope.launch {
             _novelList.value = withContext(Dispatchers.IO) {
