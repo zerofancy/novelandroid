@@ -38,24 +38,6 @@ class BookShelfFragment : BaseFragment() {
         }
         layoutManager = LinearLayoutManager(requireContext())
         binding.bookshelfRecyclerView.apply {
-//            setOnItemMoveListener(object : OnItemMoveListener {
-//                override fun onItemMove(
-//                    srcHolder: RecyclerView.ViewHolder?,
-//                    targetHolder: RecyclerView.ViewHolder?
-//                ): Boolean {
-//                    return false
-//                }
-//
-//                override fun onItemDismiss(srcHolder: RecyclerView.ViewHolder?) {
-//                    val rawPosition = srcHolder?.layoutPosition ?: return
-//                    // 只有书籍条目可以划走
-//                    if (this@BookShelfFragment.adapter.getItemViewType(rawPosition) != BookShelfAdapter.ItemType.BOOK.ordinal) return
-//                    val position = rawPosition - 1
-//                    val book = bookShelfViewModel.books.value[position]
-//                    bookShelfViewModel.removeBook(book)
-//                }
-//            })
-
             adapter = this@BookShelfFragment.adapter
             layoutManager = this@BookShelfFragment.layoutManager
             addItemDecoration(

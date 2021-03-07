@@ -11,6 +11,7 @@ import top.ntutn.novelrecommend.R
 class AboutActivity : AbsAboutActivity() {
     override fun onCreateHeader(icon: ImageView, slogan: TextView, version: TextView) {
         icon.setImageResource(R.mipmap.ic_launcher_treasure)
+        title = getString(R.string.app_name)
         slogan.text = getString(R.string.slogan)
         version.text = "v${BuildConfig.VERSION_NAME}"
     }

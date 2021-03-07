@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">小说推荐</string>
+    <string name="app_name">书虫</string>
     <string name="template_owner">\@%1$s</string>
-    <string name="title_activity_main">小说推荐系统</string>
+    <string name="title_activity_main">书虫</string>
     <string name="title_discover">发现</string>
     <string name="title_bookshelf">书架</string>
     <string name="title_me">我的</string>
