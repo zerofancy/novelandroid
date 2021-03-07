@@ -1,4 +1,4 @@
-package top.ntutn.novelrecommend.arch
+package top.ntutn.novelrecommend.common
 
 import androidx.lifecycle.LiveData
 

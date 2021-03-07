@@ -10,8 +10,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import top.ntutn.commonutil.AppUtil
-import top.ntutn.novelrecommend.arch.CheckedLiveData
-import top.ntutn.novelrecommend.arch.InitedLiveData
+import top.ntutn.novelrecommend.common.CheckedLiveData
+import top.ntutn.novelrecommend.common.InitedLiveData
 import top.ntutn.novelrecommend.model.NovelModel
 import java.lang.reflect.Type
 

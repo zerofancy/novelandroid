@@ -5,8 +5,8 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import top.ntutn.novelrecommend.arch.CheckedLiveData
-import top.ntutn.novelrecommend.arch.InitedLiveData
+import top.ntutn.novelrecommend.common.CheckedLiveData
+import top.ntutn.novelrecommend.common.InitedLiveData
 import top.ntutn.novelrecommend.model.DebugConfigListModel
 import top.ntutn.zeroconfigutil.ZeroConfigHelper
 

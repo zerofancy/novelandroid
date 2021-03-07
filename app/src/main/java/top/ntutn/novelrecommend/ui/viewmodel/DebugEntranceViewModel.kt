@@ -7,8 +7,8 @@ import top.ntutn.commonutil.DeviceUtil
 import top.ntutn.commonutil.MetricsUtil
 import top.ntutn.commonutil.showToast
 import top.ntutn.novelrecommend.adapter.DebugEntrance
-import top.ntutn.novelrecommend.arch.CheckedLiveData
-import top.ntutn.novelrecommend.arch.InitedLiveData
+import top.ntutn.novelrecommend.common.CheckedLiveData
+import top.ntutn.novelrecommend.common.InitedLiveData
 import top.ntutn.readview.ReadTestActivity
 
 class DebugEntranceViewModel : ViewModel() {

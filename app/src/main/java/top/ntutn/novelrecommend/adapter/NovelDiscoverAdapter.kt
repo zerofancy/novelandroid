@@ -6,6 +6,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import top.ntutn.commonutil.showToast
+import top.ntutn.novelrecommend.common.SimpleListDiffCallback
 import top.ntutn.novelrecommend.databinding.ItemNovelDiscoverBinding
 import top.ntutn.novelrecommend.model.NovelModel
 import top.ntutn.novelrecommend.ui.dialog.NovelDetailDialogFragment

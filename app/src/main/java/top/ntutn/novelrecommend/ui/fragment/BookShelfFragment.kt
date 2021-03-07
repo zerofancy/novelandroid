@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.yanzhenjie.recyclerview.widget.DefaultItemDecoration
-import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.adapter.BookShelfAdapter
+import top.ntutn.novelrecommend.common.SimpleItemDecoration
 import top.ntutn.novelrecommend.databinding.FragmentBookshelfBinding
 import top.ntutn.novelrecommend.ui.base.BaseFragment
 import top.ntutn.novelrecommend.ui.viewmodel.main.BookShelfViewModel
@@ -59,13 +58,12 @@ class BookShelfFragment : BaseFragment() {
 
             adapter = this@BookShelfFragment.adapter
             layoutManager = this@BookShelfFragment.layoutManager
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                addItemDecoration(
-                    DefaultItemDecoration(
-                        this@BookShelfFragment.requireContext().getColor(R.color.divider_color)
-                    )
+            addItemDecoration(
+                SimpleItemDecoration(
+                    this@BookShelfFragment.requireContext(),
+                    SimpleItemDecoration.VERTICAL
                 )
-            }
+            )
         }
         bookShelfViewModel.books.observe(viewLifecycleOwner) {
             adapter.bookList = it

@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import top.ntutn.novelrecommend.common.CommonDiffCallback
+import top.ntutn.novelrecommend.common.CommonMutiItem
+import top.ntutn.novelrecommend.common.CommonViewHolder
 import top.ntutn.novelrecommend.databinding.ItemDebugEntranceBinding
 
 class DebugEntranceAdapter :
