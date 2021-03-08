@@ -19,10 +19,28 @@
         <item name="colorPrimaryDark">@color/purple_700</item>
         <item name="colorAccent">@android:color/black</item>
 
-<!--        &lt;!&ndash;optional&ndash;&gt;-->
-<!--        <item name="aboutPageHeaderBackground">reference|color</item>-->
-<!--        <item name="aboutPageHeaderContentScrim">reference|color</item>-->
-<!--        <item name="aboutPageHeaderTextColor">color</item>-->
-<!--        <item name="aboutPageNavigationIcon">reference</item>-->
+
+        <!--        &lt;!&ndash;optional&ndash;&gt;-->
+        <!--        <item name="aboutPageHeaderBackground">reference|color</item>-->
+        <!--        <item name="aboutPageHeaderContentScrim">reference|color</item>-->
+        <!--        <item name="aboutPageHeaderTextColor">color</item>-->
+        <!--        <item name="aboutPageNavigationIcon">reference</item>-->
+    </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.FullScreen" parent="AppTheme.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="SplashTheme" parent="AppTheme.NoActionBar.FullScreen">
+        <item name="android:windowBackground">@drawable/splash</item>
     </style>
 </resources>

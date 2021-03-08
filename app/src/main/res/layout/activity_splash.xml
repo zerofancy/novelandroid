@@ -6,4 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.SplashActivity">
 
+    <com.seagazer.animlogoview.AnimLogoView
+        android:id="@+id/anim_logo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:gradientAnimDuration="1500"
+        app:gradientColor="#f00"
+        app:logoName="ntutn.com"
+        app:offsetAnimDuration="1000"
+        app:showGradient="true"
+        app:autoPlay="false"
+        app:textColor="#000"
+        app:textSize="30sp"
+        app:verticalOffset="100dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

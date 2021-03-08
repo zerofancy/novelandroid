@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId = "top.ntutn.novelrecommend"
-        minSdkVersion(19)
+        minSdkVersion(22)
         targetSdkVersion(30)
         versionCode = 1
         versionName = "1.0"
@@ -94,6 +94,7 @@ dependencies {
 
     implementation(Deps.FRESCO)
     implementation(Deps.LAYOUT_MANAGER_GROUP)
+    implementation(Deps.ANIM_LOGO_VIEW)
 
     kapt(project(":libzeroconfigcompiler"))
     implementation(project(":libzeroconfig"))

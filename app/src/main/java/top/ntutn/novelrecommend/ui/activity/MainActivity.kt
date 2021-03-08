@@ -1,5 +1,7 @@
 package top.ntutn.novelrecommend.ui.activity
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.navigation.NavController
@@ -60,7 +62,7 @@ class MainActivity : BaseActivity() {
     override fun onBackPressed() {
         if (System.currentTimeMillis() - exitTime <= EXIT_TIME) {
             AppUtil.finishAllActivities()
-//            finish()
+            startActivity(Intent(Intent.ACTION_MAIN).apply { addCategory(Intent.CATEGORY_HOME) })
         } else {
             exitTime = System.currentTimeMillis()
             R.string.press_again_to_exit.showToast()
@@ -109,5 +111,9 @@ class MainActivity : BaseActivity() {
     companion object {
         // 两次返回退出的时间间隔
         private const val EXIT_TIME = 2000L
+
+        fun actionStart(context: Context) {
+            context.startActivity(Intent(context, MainActivity::class.java))
+        }
     }
 }

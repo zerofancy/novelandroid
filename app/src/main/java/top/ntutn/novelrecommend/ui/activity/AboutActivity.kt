@@ -33,6 +33,14 @@ class AboutActivity : AbsAboutActivity() {
                     "https://github.com/drakeet/about-page"
                 )
             )
+            add(
+                License(
+                    "AnimLogoView",
+                    "seagazer",
+                    APACHE_2,
+                    "https://github.com/seagazer/animlogoview"
+                )
+            )
 //            add(
 //                License(
 //                    "ARouter",
