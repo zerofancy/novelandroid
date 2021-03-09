@@ -11,7 +11,15 @@ import top.ntutn.novelrecommend.databinding.ActivitySplashBinding
 class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
     private val handler = Handler(Looper.getMainLooper())
-    private val startMainActivity = Runnable {
+    private val waitRunnable = Runnable {
+        isWaitFinished = true
+        tryStartMainActivity()
+    }
+    private var isAnimFinished = false
+    private var isWaitFinished = false
+
+    private fun tryStartMainActivity() {
+        if (!isAnimFinished || !isWaitFinished) return
         MainActivity.actionStart(this)
         finish()
     }
@@ -26,33 +34,33 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        handler.postDelayed(startMainActivity, 5000)
+        handler.postDelayed(waitRunnable, 5000)
     }
 
     override fun onStop() {
         super.onStop()
-        handler.removeCallbacks(startMainActivity)
+        handler.removeCallbacks(waitRunnable)
     }
 
     override fun onBackPressed() = Unit
 
     private fun initView() {
         binding.animLogo.apply {
-            addOffsetAnimListener(object : Animator.AnimatorListener{
+            addOffsetAnimListener(object : Animator.AnimatorListener {
                 override fun onAnimationStart(animation: Animator?) = Unit
-                override fun onAnimationEnd(animation: Animator?) {
-                    "OfffsetAnim End".showToast()
-                }
-                override fun onAnimationCancel(animation: Animator?)=Unit
-                override fun onAnimationRepeat(animation: Animator?) =Unit
+                override fun onAnimationEnd(animation: Animator?) = Unit
+                override fun onAnimationCancel(animation: Animator?) = Unit
+                override fun onAnimationRepeat(animation: Animator?) = Unit
             })
-            addGradientAnimListener(object : Animator.AnimatorListener{
+            addGradientAnimListener(object : Animator.AnimatorListener {
                 override fun onAnimationStart(animation: Animator?) = Unit
                 override fun onAnimationEnd(animation: Animator?) {
-                    "GradientAnim End".showToast()
+                    isAnimFinished = true
+                    tryStartMainActivity()
                 }
-                override fun onAnimationCancel(animation: Animator?)=Unit
-                override fun onAnimationRepeat(animation: Animator?) =Unit
+
+                override fun onAnimationCancel(animation: Animator?) = Unit
+                override fun onAnimationRepeat(animation: Animator?) = Unit
             })
             startAnimation()
         }
