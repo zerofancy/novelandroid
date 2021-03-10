@@ -9,6 +9,7 @@ import top.ntutn.commonutil.showToast
 import top.ntutn.novelrecommend.adapter.DebugEntrance
 import top.ntutn.novelrecommend.common.CheckedLiveData
 import top.ntutn.novelrecommend.common.InitedLiveData
+import top.ntutn.novelrecommend.ui.activity.SettingsActivity
 import top.ntutn.readview.ReadTestActivity
 
 class DebugEntranceViewModel : ViewModel() {
@@ -45,6 +46,8 @@ class DebugEntranceViewModel : ViewModel() {
                     )
                 )
                 MetricsUtil.push()
+            }, DebugEntrance(title = "设置页面", owner = "liuhaixin.zero") {
+                SettingsActivity.actionStart(it)
             }
         )
     }

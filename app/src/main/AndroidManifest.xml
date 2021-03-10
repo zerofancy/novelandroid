@@ -13,9 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_treasure_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Novelrecommend">
-        <activity android:name=".ui.activity.SplashActivity"
-            android:theme="@style/SplashTheme"
-            android:screenOrientation="portrait">
+        <activity
+            android:name=".ui.activity.SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
+        <activity
+            android:name=".ui.activity.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,7 +31,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.MainActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.AboutActivity"
             android:screenOrientation="portrait"
