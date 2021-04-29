@@ -60,6 +60,9 @@ dependencies {
     implementation(Deps.AndroidX.LIVE_DATA)
 
     implementation(Deps.MATERIAL)
+    implementation("androidx.appcompat:appcompat:1.2.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
 
 //    implementation(Deps.AROUTER_API)
 //    kapt(Deps.AROUTER_COMPILER)

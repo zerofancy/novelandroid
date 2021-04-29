@@ -10,6 +10,7 @@ import top.ntutn.novelrecommend.adapter.DebugEntrance
 import top.ntutn.novelrecommend.common.CheckedLiveData
 import top.ntutn.novelrecommend.common.InitedLiveData
 import top.ntutn.novelrecommend.ui.activity.SettingsActivity
+import top.ntutn.readview.BreakReadTestActivity
 import top.ntutn.readview.ReadTestActivity
 
 class DebugEntranceViewModel : ViewModel() {
@@ -20,7 +21,9 @@ class DebugEntranceViewModel : ViewModel() {
         _debugEntranceList.value = listOf(
             DebugEntrance(title = "小说浏览Demo", "liuhaixin.zero") {
                 ReadTestActivity.actionStart(it)
-//                ARouter.getInstance().build(ReadTestActivity.PATH).navigation()
+            },
+            DebugEntrance(title = "新小说组件Demo", "liuhaixin.zero") {
+                BreakReadTestActivity.actionStart(it)
             },
             DebugEntrance(title = "获取设备信息", owner = "liuhaixin.zero") { context ->
                 val message = """
