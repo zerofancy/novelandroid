@@ -18,11 +18,16 @@ class LoginDataSource {
                 .login(username, password)
                 .await()
                 .let {
-                    if (it.code == 0) {
-                        Result.Success(LoggedInUser("test_uid", "test_nickname"))
-                    } else {
-                        Result.Error(RuntimeException(it.message))
+                    if (it.code != 0) {
+                        throw RuntimeException(it.message)
                     }
+                }
+            RetrofitUtil.create<LoginService>()
+                .getUserInfo()
+                .await()
+                .let {
+                    it ?: throw RuntimeException("获取用户信息失败")
+                    Result.Success(it)
                 }
         } catch (e: Exception) {
             Result.Error(IOException("Error logging in", e))

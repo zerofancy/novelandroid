@@ -12,7 +12,7 @@ import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.data.LoginRepository
 import top.ntutn.novelrecommend.data.Result
 
-class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
+class LoginViewModel : ViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
@@ -23,10 +23,14 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     fun login(username: String, password: String) {
         // can be launched in a separate asynchronous job
         viewModelScope.launch {
-            val result = withContext(Dispatchers.IO) { loginRepository.login(username, password) }
+            val result = withContext(Dispatchers.IO) { LoginRepository.login(username, password) }
             if (result is Result.Success) {
                 _loginResult.value =
-                    LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
+                    LoginResult(
+                        success = LoggedInUserView(
+                            displayName = result.data.nickname ?: result.data.username
+                        )
+                    )
             } else {
                 _loginResult.value = LoginResult(error = R.string.login_failed)
             }

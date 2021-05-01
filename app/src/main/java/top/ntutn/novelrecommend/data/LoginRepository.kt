@@ -7,7 +7,9 @@ import top.ntutn.novelrecommend.data.model.LoggedInUser
  * maintains an in-memory cache of login status and user credentials information.
  */
 
-class LoginRepository(val dataSource: LoginDataSource) {
+object LoginRepository {
+
+    private val dataSource = LoginDataSource()
 
     // in-memory cache of the loggedInUser object
     var user: LoggedInUser? = null
@@ -36,6 +38,11 @@ class LoginRepository(val dataSource: LoginDataSource) {
         }
 
         return result
+    }
+
+
+    suspend fun refresh() {
+        TODO("用于定时刷新用户")
     }
 
     private fun setLoggedInUser(loggedInUser: LoggedInUser) {
