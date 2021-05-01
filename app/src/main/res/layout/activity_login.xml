@@ -19,7 +19,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:placeholderImage="@drawable/default_avatar" />
+        app:placeholderImage="@drawable/default_avatar"
+        app:roundAsCircle="true"/>
 
     <EditText
         android:id="@+id/username"

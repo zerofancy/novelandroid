@@ -2,5 +2,5 @@ package top.ntutn.novelrecommend.ui.base
 
 import androidx.fragment.app.Fragment
 
-open class BaseFragment:Fragment() {
+open class BaseFragment : Fragment() {
 }

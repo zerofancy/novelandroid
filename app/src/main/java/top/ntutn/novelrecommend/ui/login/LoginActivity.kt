@@ -13,8 +13,8 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.databinding.ActivityLoginBinding
 
@@ -23,6 +23,19 @@ class LoginActivity : AppCompatActivity() {
     companion object {
         fun actionStart(context: Context) {
             context.startActivity(Intent(context, LoginActivity::class.java))
+        }
+
+        fun startForResult(activity: Activity, code: Int) {
+            activity.startActivityForResult(Intent(activity, LoginActivity::class.java), code)
+        }
+
+        fun startForResult(fragment: Fragment, code: Int) {
+            fragment.startActivityForResult(
+                Intent(
+                    fragment.requireContext(),
+                    LoginActivity::class.java
+                ), code
+            )
         }
     }
 
@@ -106,6 +119,8 @@ class LoginActivity : AppCompatActivity() {
                 isChecked
             )
         }
+
+        binding.avatar.setActualImageResource(R.drawable.default_avatar)
     }
 
     private fun updateUiWithUser(model: LoggedInUserView) {

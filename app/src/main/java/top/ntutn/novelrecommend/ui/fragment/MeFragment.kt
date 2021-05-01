@@ -1,5 +1,6 @@
 package top.ntutn.novelrecommend.ui.fragment
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -9,15 +10,21 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import top.ntutn.commonutil.showSnackBar
 import top.ntutn.novelrecommend.BuildConfig
+import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.common.viewLifecycle
 import top.ntutn.novelrecommend.databinding.FragmentMeBinding
 import top.ntutn.novelrecommend.ui.activity.AboutActivity
 import top.ntutn.novelrecommend.ui.activity.DebugHelperActivity
 import top.ntutn.novelrecommend.ui.activity.SettingsActivity
 import top.ntutn.novelrecommend.ui.base.BaseFragment
+import top.ntutn.novelrecommend.ui.login.LoginActivity
 import top.ntutn.novelrecommend.ui.viewmodel.main.MeViewModel
 
 class MeFragment : BaseFragment() {
+    companion object {
+        private const val REQ_START_LOGIN = 0
+    }
+
     private var binding by viewLifecycle<FragmentMeBinding>()
     private val meViewModel by viewModels<MeViewModel>()
 
@@ -80,6 +87,35 @@ class MeFragment : BaseFragment() {
             binding.debugToolContainer.visibility = View.VISIBLE
             binding.debugToolContainer.setOnClickListener {
                 DebugHelperActivity.actionStart(this.requireContext())
+            }
+        }
+
+        binding.userInfoContainer.setOnClickListener {
+            if (!meViewModel.isLoggedIn) {
+                LoginActivity.startForResult(this, REQ_START_LOGIN)
+            }
+        }
+
+        meViewModel.currentUser.observe(viewLifecycleOwner) {
+            if (it == null) {
+                binding.avatar.setActualImageResource(R.drawable.default_avatar)
+                binding.nicknameTextView.text = "未登陆"
+                binding.descriptionTextView.text = "说说你的看法吧……"
+            } else {
+                binding.avatar.setImageURI(it.avatar)
+                binding.nicknameTextView.text = it.nickname ?: it.username
+                binding.descriptionTextView.text = it.description
+            }
+        }
+        meViewModel.refreshUserInfo()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            REQ_START_LOGIN -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    meViewModel.refreshUserInfo()
+                }
             }
         }
     }

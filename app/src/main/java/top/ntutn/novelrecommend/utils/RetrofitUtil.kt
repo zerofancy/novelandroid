@@ -12,6 +12,7 @@ import timber.log.Timber
 import top.ntutn.commonutil.AppUtil
 import top.ntutn.commonutil.DeviceUtil
 import top.ntutn.libzeroconfig.ZeroConfig
+import top.ntutn.novelrecommend.data.LoginRepository
 import top.ntutn.zeroconfigutil.zeroConfig
 import java.io.IOException
 
@@ -73,6 +74,7 @@ object RetrofitUtil {
                 val url = originalHttpUrl.newBuilder()
 //                    .addQueryParameter("deviceInfo", deviceInfo.toString())
                     .addQueryParameter("did", DeviceUtil.getDid())
+                    .addQueryParameter("uid", LoginRepository.user?.id?.toString())
                     .build()
                 val request = originalRequest.newBuilder()
                     .url(url)

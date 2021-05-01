@@ -9,6 +9,7 @@ import top.ntutn.commonutil.showToast
 import top.ntutn.novelrecommend.adapter.DebugEntrance
 import top.ntutn.novelrecommend.common.CheckedLiveData
 import top.ntutn.novelrecommend.common.InitedLiveData
+import top.ntutn.novelrecommend.data.LoginRepository
 import top.ntutn.novelrecommend.ui.activity.SettingsActivity
 import top.ntutn.novelrecommend.ui.login.LoginActivity
 import top.ntutn.readview.BreakReadTestActivity
@@ -31,6 +32,7 @@ class DebugEntranceViewModel : ViewModel() {
                         IMEI: ${DeviceUtil.getIMEI()}
                         Android ID: ${DeviceUtil.getAndroidId()}
                         GUID: ${DeviceUtil.getGUID()}
+                        UID: ${LoginRepository.user?.id}
                     """.trimIndent()
 
                 AlertDialog.Builder(context).apply {

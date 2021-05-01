@@ -1,5 +1,9 @@
 package top.ntutn.novelrecommend.data
 
+import android.content.Context
+import androidx.core.content.edit
+import com.google.gson.Gson
+import top.ntutn.commonutil.AppUtil
 import top.ntutn.novelrecommend.data.model.LoggedInUser
 
 /**
@@ -8,8 +12,11 @@ import top.ntutn.novelrecommend.data.model.LoggedInUser
  */
 
 object LoginRepository {
+    private const val SP_FILE = "current_user"
+    private const val SP_KEY_USER_JSON = "user_json"
 
     private val dataSource = LoginDataSource()
+    private val gson by lazy { Gson() }
 
     // in-memory cache of the loggedInUser object
     var user: LoggedInUser? = null
@@ -21,7 +28,13 @@ object LoginRepository {
     init {
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
-        user = null
+        val sp = AppUtil.getApplicationContext().getSharedPreferences(SP_FILE, Context.MODE_PRIVATE)
+        val json = sp.getString(SP_KEY_USER_JSON, null)
+        user = try {
+            gson.fromJson(json, LoggedInUser::class.java)
+        } catch (e: Exception) {
+            null
+        }
     }
 
     suspend fun logout() {
@@ -47,6 +60,9 @@ object LoginRepository {
 
     private fun setLoggedInUser(loggedInUser: LoggedInUser) {
         this.user = loggedInUser
+        AppUtil.getApplicationContext().getSharedPreferences(SP_FILE, Context.MODE_PRIVATE).edit {
+            putString(SP_KEY_USER_JSON, gson.toJson(loggedInUser))
+        }
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
     }
