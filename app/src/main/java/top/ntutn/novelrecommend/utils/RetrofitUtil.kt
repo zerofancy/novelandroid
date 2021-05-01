@@ -1,11 +1,65 @@
 package top.ntutn.novelrecommend.utils
 
+import android.content.Context
+import android.content.SharedPreferences
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import timber.log.Timber
+import top.ntutn.commonutil.AppUtil
 import top.ntutn.commonutil.DeviceUtil
 import top.ntutn.libzeroconfig.ZeroConfig
 import top.ntutn.zeroconfigutil.zeroConfig
+import java.io.IOException
+
+//https://www.jianshu.com/p/82fc13810e22
+/**
+ * @author : jc.lu
+ * @create : 17/07/07.
+ */
+class ReceivedCookiesInterceptor : Interceptor {
+    @Throws(IOException::class)
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val originalResponse: Response = chain.proceed(chain.request())
+        if (!originalResponse.headers("Set-Cookie").isEmpty()) {
+            val cookies: HashSet<String> = HashSet()
+            for (header in originalResponse.headers("Set-Cookie")) {
+                cookies.add(header)
+            }
+            val config: SharedPreferences.Editor = AppUtil.getApplicationContext()
+                .getSharedPreferences("config", Context.MODE_PRIVATE)
+                .edit()
+            config.putStringSet("cookie", cookies)
+            config.apply()
+        }
+        return originalResponse
+    }
+}
+
+/**
+ * @author : jc.lu
+ * @create : 17/07/07.
+ */
+class AddCookiesInterceptor : Interceptor {
+    @Throws(IOException::class)
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val builder: Request.Builder = chain.request().newBuilder()
+        val preferences = AppUtil.getApplicationContext().getSharedPreferences(
+            "config",
+            Context.MODE_PRIVATE
+        ).getStringSet("cookie", null)
+        if (preferences != null) {
+            for (cookie in preferences) {
+                builder.addHeader("Cookie", cookie)
+                Timber.v("Adding Header: $cookie")
+            }
+        }
+        return chain.proceed(builder.build())
+    }
+}
 
 object RetrofitUtil {
     internal const val BASE_URL = "https://ntutn.top/novel/"
@@ -26,6 +80,8 @@ object RetrofitUtil {
                     .build()
                 return@addInterceptor chain.proceed(request)
             }
+            .addInterceptor(ReceivedCookiesInterceptor()) // 持久化并使用保存cookie
+            .addInterceptor(AddCookiesInterceptor())
             .build()
     }
 
