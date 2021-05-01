@@ -10,14 +10,14 @@ noArg { annotation("top.ntutn.libzeroconfig.ZeroConfig") } // 解决data class�
 
 android {
     compileSdkVersion(30)
-    buildToolsVersion = "30.0.2"
+    buildToolsVersion = "30.0.3"
 
     defaultConfig {
         applicationId = "top.ntutn.novelrecommend"
         minSdkVersion(22)
         targetSdkVersion(30)
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1"
 
         testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
         // https://github.com/react-native-camera/react-native-camera/issues/2940
