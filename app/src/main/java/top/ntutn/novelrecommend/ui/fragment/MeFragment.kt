@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import top.ntutn.novelrecommend.BuildConfig
+import top.ntutn.novelrecommend.common.viewLifecycle
 import top.ntutn.novelrecommend.databinding.FragmentMeBinding
 import top.ntutn.novelrecommend.ui.activity.AboutActivity
 import top.ntutn.novelrecommend.ui.activity.DebugHelperActivity
@@ -15,7 +16,7 @@ import top.ntutn.novelrecommend.ui.base.BaseFragment
 import top.ntutn.novelrecommend.ui.viewmodel.main.MeViewModel
 
 class MeFragment : BaseFragment() {
-    private lateinit var binding: FragmentMeBinding
+    private var binding by viewLifecycle<FragmentMeBinding>()
     private val meViewModel by viewModels<MeViewModel>()
 
     override fun onCreateView(
