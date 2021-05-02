@@ -10,14 +10,14 @@ noArg { annotation("top.ntutn.libzeroconfig.ZeroConfig") } // 解决data class�
 
 android {
     compileSdkVersion(30)
-    buildToolsVersion = "30.0.2"
+    buildToolsVersion = "30.0.3"
 
     defaultConfig {
         applicationId = "top.ntutn.novelrecommend"
         minSdkVersion(22)
         targetSdkVersion(30)
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1"
 
         testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
         // https://github.com/react-native-camera/react-native-camera/issues/2940
@@ -72,6 +72,10 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     implementation("androidx.preference:preference:1.1.1")
+    implementation("com.google.android.material:material:1.3.0")
+    implementation("androidx.annotation:annotation:1.1.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
     testImplementation("junit:junit:4.13.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")

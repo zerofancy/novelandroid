@@ -3,7 +3,7 @@
     package="top.ntutn.readview">
 
     <application>
-        <activity android:name=".BreakReadTestActivity"></activity>
+        <activity android:name=".BreakReadTestActivity" />
         <activity android:name=".ReadTestActivity" />
     </application>
 

@@ -14,8 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Novelrecommend">
         <activity
+            android:name=".ui.login.LoginActivity"
+            android:label="@string/title_activity_login" />
+        <activity
             android:name=".ui.activity.SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/title_activity_settings" />
         <activity
             android:name=".ui.activity.SplashActivity"
             android:screenOrientation="portrait"
@@ -41,5 +44,11 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
     </application>
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+        </intent>
+    </queries>
 
 </manifest>
