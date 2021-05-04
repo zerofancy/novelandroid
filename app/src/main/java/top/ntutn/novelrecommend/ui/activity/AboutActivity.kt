@@ -74,6 +74,7 @@ class AboutActivity : AbsAboutActivity() {
                 )
             )
             add(License("Gson", "Google", APACHE_2, "https://github.com/google/gson"))
+            add(License("IconPark", "字节跳动", APACHE_2, "https://github.com/bytedance/IconPark"))
             add(License("JJEvent", "ccj659", APACHE_2, "https://github.com/ccj659/JJEvent"))
             add(License("KotlinPoet", "square", APACHE_2, "https://github.com/square/kotlinpoet"))
             add(

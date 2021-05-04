@@ -1,7 +1,7 @@
 package top.ntutn.novelrecommend.data
 
 import retrofit2.await
-import top.ntutn.novelrecommend.data.model.LoggedInUser
+import top.ntutn.commonutil.LoggedInUser
 import top.ntutn.novelrecommend.ui.login.LoginService
 import top.ntutn.novelrecommend.utils.RetrofitUtil
 import java.io.IOException
@@ -22,6 +22,20 @@ class LoginDataSource {
                         throw RuntimeException(it.message)
                     }
                 }
+            RetrofitUtil.create<LoginService>()
+                .getUserInfo()
+                .await()
+                .let {
+                    it ?: throw RuntimeException("获取用户信息失败")
+                    Result.Success(it)
+                }
+        } catch (e: Exception) {
+            Result.Error(IOException("Error logging in", e))
+        }
+    }
+
+    suspend fun getUserInfo(): Result<LoggedInUser> {
+        return try {
             RetrofitUtil.create<LoginService>()
                 .getUserInfo()
                 .await()

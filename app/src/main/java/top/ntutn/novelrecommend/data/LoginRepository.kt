@@ -4,7 +4,8 @@ import android.content.Context
 import androidx.core.content.edit
 import com.google.gson.Gson
 import top.ntutn.commonutil.AppUtil
-import top.ntutn.novelrecommend.data.model.LoggedInUser
+import top.ntutn.commonutil.LoggedInUser
+import top.ntutn.commonutil.LoggedInUserHolder
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -18,16 +19,21 @@ object LoginRepository {
     private val dataSource = LoginDataSource()
     private val gson by lazy { Gson() }
 
+    var lastRefreshTime = 0L
+        private set
+
     // in-memory cache of the loggedInUser object
     var user: LoggedInUser? = null
-        private set
+        private set(value) {
+            field = value
+            LoggedInUserHolder.user = value
+        }
 
     val isLoggedIn: Boolean
         get() = user != null
 
     init {
-        // If user credentials will be cached in local storage, it is recommended it be encrypted
-        // @see https://developer.android.com/training/articles/keystore
+        // FIXME 用户信息存储加密
         val sp = AppUtil.getApplicationContext().getSharedPreferences(SP_FILE, Context.MODE_PRIVATE)
         val json = sp.getString(SP_KEY_USER_JSON, null)
         user = try {
@@ -45,25 +51,28 @@ object LoginRepository {
     suspend fun login(username: String, password: String): Result<LoggedInUser> {
         // handle login
         val result = dataSource.login(username, password)
-
-        if (result is Result.Success) {
-            setLoggedInUser(result.data)
-        }
-
+        setLoggedInUser(result)
         return result
     }
 
 
-    suspend fun refresh() {
-        TODO("用于定时刷新用户")
+    suspend fun refresh(): Result<LoggedInUser> {
+        user?.let {
+            // 避免重复刷新
+            if (System.currentTimeMillis() - lastRefreshTime < 1000 * 60) {
+                return Result.Success(it)
+            }
+        }
+        val result = dataSource.getUserInfo()
+        setLoggedInUser(result)
+        return result
     }
 
-    private fun setLoggedInUser(loggedInUser: LoggedInUser) {
-        this.user = loggedInUser
+    private fun setLoggedInUser(result: Result<LoggedInUser>) {
+        this.user = if (result is Result.Success) result.data else null
+        lastRefreshTime = System.currentTimeMillis()
         AppUtil.getApplicationContext().getSharedPreferences(SP_FILE, Context.MODE_PRIVATE).edit {
-            putString(SP_KEY_USER_JSON, gson.toJson(loggedInUser))
+            putString(SP_KEY_USER_JSON, gson.toJson(user))
         }
-        // If user credentials will be cached in local storage, it is recommended it be encrypted
-        // @see https://developer.android.com/training/articles/keystore
     }
 }

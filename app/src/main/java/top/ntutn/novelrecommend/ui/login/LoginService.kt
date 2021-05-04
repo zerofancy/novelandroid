@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
 import top.ntutn.novelrecommend.data.OperationResult
-import top.ntutn.novelrecommend.data.model.LoggedInUser
+import top.ntutn.commonutil.LoggedInUser
 
 interface LoginService {
     @POST("login")

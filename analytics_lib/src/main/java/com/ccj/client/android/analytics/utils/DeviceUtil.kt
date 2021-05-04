@@ -13,6 +13,8 @@ object DeviceUtil {
     private const val PREF_NAME = "DeviceInfo"
     private const val PREF_GUID = "GUID"
 
+    var uid: Long? = null
+
     fun getIMEI(): String? = null // 好像只有系统应用能读了
 
     fun getAndroidId(): String? {

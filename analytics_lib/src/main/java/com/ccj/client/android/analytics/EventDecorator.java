@@ -71,6 +71,7 @@ class EventDecorator {
         bean.setV(BuildConfig.VERSION_NAME);
         bean.setIt(EventDecorator.getIT());
         bean.setDid(EventDecorator.getDID());
+        bean.setUid(EventDecorator.getUID());
         bean.setSid(EventDecorator.getSID());
         bean.setHnb(EventDecorator.getHnbCount());
         //自定义
@@ -102,6 +103,11 @@ class EventDecorator {
     public static String getDID() {
         return DeviceUtil.INSTANCE.getDid();
     }
+
+    public static Long getUID() {
+        return DeviceUtil.INSTANCE.getUid();
+    }
+
 
     /**
      * 访问结束的标志:不活动状态超过15分钟；由客户端生成
