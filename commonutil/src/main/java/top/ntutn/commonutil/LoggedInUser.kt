@@ -1,4 +1,4 @@
-package top.ntutn.novelrecommend.data.model
+package top.ntutn.commonutil
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository
