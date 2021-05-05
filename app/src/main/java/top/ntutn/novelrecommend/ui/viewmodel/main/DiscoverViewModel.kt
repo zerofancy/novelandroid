@@ -3,13 +3,13 @@ package top.ntutn.novelrecommend.ui.viewmodel.main
 import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.smile.analytics_lib_api.MetricsService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.await
 import timber.log.Timber
 import top.ntutn.commonutil.DeviceUtil
-import top.ntutn.commonutil.MetricsUtil
 import top.ntutn.novelrecommend.NovelService
 import top.ntutn.novelrecommend.common.CheckedLiveData
 import top.ntutn.novelrecommend.common.InitedLiveData
@@ -61,7 +61,7 @@ class DiscoverViewModel : ViewModel() {
 
     fun scrollTo(position: Int) {
         val previousBook = _novelList.value[_currentPosition.value]
-        MetricsUtil.onEvent(
+        MetricsService.getInstance()?.onEvent(
             "switch_book", mapOf(
                 "id" to (previousBook.id ?: -1L),
                 "liked" to previousBook.isLiked,

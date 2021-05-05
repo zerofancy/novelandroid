@@ -2,9 +2,9 @@ package top.ntutn.novelrecommend.ui.viewmodel
 
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModel
+import com.smile.analytics_lib_api.MetricsService
 import top.ntutn.commonutil.ClipboardUtil
 import top.ntutn.commonutil.DeviceUtil
-import top.ntutn.commonutil.MetricsUtil
 import top.ntutn.commonutil.showToast
 import top.ntutn.novelrecommend.adapter.DebugEntrance
 import top.ntutn.novelrecommend.common.CheckedLiveData
@@ -45,13 +45,13 @@ class DebugEntranceViewModel : ViewModel() {
             },
             DebugEntrance(title = "主动推送埋点事件", owner = "liuhaixin.zero") {
                 "主动推送埋点事件".showToast()
-                MetricsUtil.onEvent(
+                MetricsService.getInstance()?.onEvent(
                     "ping", mapOf(
                         "random1" to (0..100).random().toString(),
                         "random2" to (0..100).random().toString()
                     )
                 )
-                MetricsUtil.push()
+                MetricsService.getInstance()?.push()
             }, DebugEntrance(title = "设置页面", owner = "liuhaixin.zero") {
                 SettingsActivity.actionStart(it)
             },

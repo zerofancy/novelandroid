@@ -6,6 +6,7 @@ import com.ccj.client.android.analytics.JJEventManager
 import top.ntutn.libzeroconfig.ZeroConfig
 import top.ntutn.zeroconfigutil.zeroConfig
 
+@Deprecated("SPI改造", ReplaceWith("MetricsService.getInstance()"))
 object MetricsUtil {
     fun init(context: Context) {
         val metricsConfig by zeroConfig<MetricsConfig>()

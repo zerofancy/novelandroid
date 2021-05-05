@@ -8,6 +8,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.smile.analytics_lib_api.MetricsService
 import top.ntutn.commonutil.AppUtil
 import top.ntutn.commonutil.MetricsUtil
 import top.ntutn.commonutil.showToast
@@ -81,7 +82,7 @@ class MainActivity : BaseActivity() {
                 // 过滤掉异常启动时间
                 if (coldStartTime < 50000) {
                     // 上传冷启动时间coldStartTime
-                    MetricsUtil.onEvent(
+                    MetricsService.getInstance()?.onEvent(
                         "cold_start", mapOf(
                             "coldStartTime" to coldStartTime.toString()
                         )
@@ -91,7 +92,7 @@ class MainActivity : BaseActivity() {
                 // 过滤掉异常启动时间
                 if (hotStartTime < 30000) {
                     // 上传热启动时间hotStartTime
-                    MetricsUtil.onEvent(
+                    MetricsService.getInstance()?.onEvent(
                         "hot_start", mapOf(
                             "hotStartTime" to hotStartTime.toString()
                         )

@@ -73,10 +73,10 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     implementation("androidx.preference:preference:1.1.1")
     implementation("com.google.android.material:material:1.3.0")
-    implementation("androidx.annotation:annotation:1.1.0")
+    implementation("androidx.annotation:annotation:1.2.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
-    testImplementation("junit:junit:4.13.1")
+    testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
 
@@ -106,4 +106,5 @@ dependencies {
     implementation(project(":zeroconfigutil"))
     implementation(project(":app:readview"))
     implementation(project(":commonutil"))
+    implementation(project(":analytics_lib_api"))
 }
