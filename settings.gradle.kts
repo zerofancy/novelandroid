@@ -1,5 +1,5 @@
 include(":commonutil")
-include(":app:readview")
+include(":readview")
 include(":zeroconfigutil")
 include(":libzeroconfigcompiler")
 include(":libzeroconfig")

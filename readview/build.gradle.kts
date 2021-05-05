@@ -6,7 +6,7 @@ plugins {
 
 android {
     compileSdkVersion(30)
-    buildToolsVersion = "30.0.2"
+    buildToolsVersion = "30.0.3"
 
     defaultConfig {
         minSdkVersion(19)
@@ -60,14 +60,11 @@ dependencies {
     implementation(Deps.AndroidX.LIVE_DATA)
 
     implementation(Deps.MATERIAL)
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
 
 //    implementation(Deps.AROUTER_API)
 //    kapt(Deps.AROUTER_COMPILER)
 
-    testImplementation("junit:junit:4.13.1")
+    testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
 
