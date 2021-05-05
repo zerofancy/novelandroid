@@ -101,7 +101,7 @@ dependencies {
     implementation(Deps.LAYOUT_MANAGER_GROUP)
     implementation(Deps.ANIM_LOGO_VIEW)
 
-    kapt(project(":libzeroconfigcompiler"))
+    kapt(project(":libzeroconfig"))
     implementation(project(":libzeroconfig"))
     implementation(project(":zeroconfigutil"))
     implementation(project(":readview"))

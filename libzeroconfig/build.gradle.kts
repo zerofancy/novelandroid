@@ -1,6 +1,7 @@
 plugins {
     id("java-library")
     id("kotlin")
+    id("kotlin-kapt")
 }
 
 java {
@@ -10,4 +11,8 @@ java {
 
 dependencies {
     implementation(Deps.Kotlin.STD_LIB)
+    compileOnly(Deps.AUTO_SERVICE)
+    kapt(Deps.AUTO_SERVICE)
+    implementation(Deps.GSON)
+    implementation(Deps.KOTLIN_POET)
 }

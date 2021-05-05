@@ -1,12 +1,8 @@
-package top.ntutn.libzeroconfigcompiler
+package top.ntutn.libzeroconfig
 
 import com.google.auto.service.AutoService
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
-import top.ntutn.libzeroconfig.DefaultScope
-import top.ntutn.libzeroconfig.IZeroConfigHolder
-import top.ntutn.libzeroconfig.ZeroConfig
-import top.ntutn.libzeroconfig.ZeroConfigInformation
 import javax.annotation.processing.*
 import javax.lang.model.SourceVersion
 import javax.lang.model.element.TypeElement
@@ -50,7 +46,7 @@ class ZeroConfigProcessor : AbstractProcessor() {
         classInfoMap = mutableMapOf()
 
         val fullPackagePath = processingEnv.options[OPTION_CONFIG_HOLDER] ?: let {
-            error("必须设置${OPTION_CONFIG_HOLDER}")
+            error("必须设置$OPTION_CONFIG_HOLDER")
             return
         }
         zeroConfigHolderClassName = fullPackagePath.split('.').last()

@@ -6,7 +6,7 @@ plugins {
 
 android {
     compileSdkVersion(30)
-    buildToolsVersion = "30.0.2"
+    buildToolsVersion = "30.0.3"
 
     defaultConfig {
         minSdkVersion(19)
@@ -51,11 +51,11 @@ dependencies {
 
     implementation(project(":analytics_lib"))
 
-    kapt(project(":libzeroconfigcompiler"))
+    kapt(project(":libzeroconfig"))
     implementation(project(":libzeroconfig"))
     implementation(project(":zeroconfigutil"))
 
-    testImplementation("junit:junit:4.13.1")
+    testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
 }
