@@ -5,7 +5,7 @@ import com.github.zerofancy.login_api.LoggedInUser
 import com.github.zerofancy.login_api.LoginService
 import com.google.auto.service.AutoService
 
-@AutoService
+@AutoService(LoginService::class)
 class LoginServiceImpl : LoginService {
     override fun getCurrentLoginUser(): LoggedInUser? {
         TODO("Not yet implemented")
