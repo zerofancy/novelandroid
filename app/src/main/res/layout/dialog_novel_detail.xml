@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-        <com.jaren.lib.view.LikeView
+        <com.github.zerofancy.lib.LikeView
             android:id="@+id/like_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-        <com.jaren.lib.view.LikeView
+        <com.github.zerofancy.lib.LikeView
             android:id="@+id/star_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-        <com.jaren.lib.view.LikeView
+        <com.github.zerofancy.lib.LikeView
             android:id="@+id/share_button"
             android:layout_width="50dp"
             android:layout_height="50dp"

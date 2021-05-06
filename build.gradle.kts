@@ -3,7 +3,7 @@ buildscript {
     val kotlin_version by extra("1.4.21")
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath("com.android.tools.build:gradle:4.2.0")
@@ -19,7 +19,7 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
         maven("https://jitpack.io")
     }
 }
