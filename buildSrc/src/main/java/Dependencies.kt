@@ -72,28 +72,33 @@ object KotlinDependency {
 
 @Suppress("unused")
 object AndroidXVersion {
+    const val ANNOTATION = "1.2.0"
     const val COMPAT = "1.2.0"
     const val CORE = "1.3.2"
     const val CONSTRAINT_LAYOUT = "2.0.4"
+    const val LIVE_DATA = "2.3.0"
     const val NAVIGATION_FRAGMENT = "2.3.3"
     const val NAVIGATION_UI = "2.3.3"
+    const val PREFERENCE = "1.1.1"
     const val VECTOR_DRAWABLE = "1.1.0"
     const val VIEW_MODEL = "2.3.0"
-    const val LIVE_DATA = "2.3.0"
 }
 
 @Suppress("unused", "SpellCheckingInspection")
 object AndroidXDependency {
+    const val ANNOTATION = "androidx.annotation:annotation:${AndroidXVersion.ANNOTATION}"
     const val COMPAT = "androidx.appcompat:appcompat:${AndroidXVersion.COMPAT}"
     const val CORE = "androidx.core:core-ktx:${AndroidXVersion.CORE}"
     const val CONSTRAINT_LAYOUT =
         "androidx.constraintlayout:constraintlayout:${AndroidXVersion.CONSTRAINT_LAYOUT}"
+    const val LIVE_DATA = "androidx.lifecycle:lifecycle-livedata-ktx:${AndroidXVersion.VIEW_MODEL}"
     const val NAVIGATION_FRAGMENT =
         "androidx.navigation:navigation-fragment-ktx:${AndroidXVersion.NAVIGATION_FRAGMENT}"
-    const val NAVIGATION_UI = "androidx.navigation:navigation-ui-ktx:2.3.3"
+    const val NAVIGATION_UI =
+        "androidx.navigation:navigation-ui-ktx:${AndroidXVersion.NAVIGATION_UI}"
+    const val PREFERENCE = "androidx.preference:preference:${AndroidXVersion.PREFERENCE}"
     const val VECTOR_DRAWABLE =
         "androidx.vectordrawable:vectordrawable:${AndroidXVersion.VECTOR_DRAWABLE}"
     const val VIEW_MODEL =
         "androidx.lifecycle:lifecycle-viewmodel-ktx:${AndroidXVersion.VIEW_MODEL}"
-    const val LIVE_DATA = "androidx.lifecycle:lifecycle-livedata-ktx:${AndroidXVersion.VIEW_MODEL}"
 }

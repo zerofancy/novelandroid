@@ -9,7 +9,7 @@ android {
     buildToolsVersion = "30.0.3"
 
     defaultConfig {
-        minSdkVersion(19)
+        minSdkVersion(16)
         targetSdkVersion(30)
         versionCode = 1
         versionName = "1.0"
@@ -36,24 +36,17 @@ android {
     }
 }
 
-kapt {
-    arguments {
-        arg("zeroConfigHolder", "top.ntutn.commonutil.ZeroConfigHolder")
-    }
-}
-
 dependencies {
+
     implementation(Deps.Kotlin.STD_LIB)
     implementation(Deps.AndroidX.CORE)
     implementation(Deps.AndroidX.COMPAT)
     implementation(Deps.MATERIAL)
-    implementation(Deps.TIMBER)
-
-    kapt(project(":libzeroconfig"))
-    implementation(project(":libzeroconfig"))
-    implementation(project(":zeroconfigutil"))
-
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+
+    implementation(project(":login_api"))
+    compileOnly(Deps.AUTO_SERVICE)
+    kapt(Deps.AUTO_SERVICE)
 }

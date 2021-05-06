@@ -63,7 +63,7 @@ class AddCookiesInterceptor : Interceptor {
 }
 
 object RetrofitUtil {
-    internal const val BASE_URL = "https://ntutn.top/novel/"
+    internal const val BASE_URL = "http://8.141.64.84:8080/"
     private val retrofitConfig by zeroConfig<RetrofitConfig>()
 
     private val okHttpClient by lazy {

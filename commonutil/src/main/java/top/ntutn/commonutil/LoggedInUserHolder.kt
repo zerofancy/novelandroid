@@ -7,6 +7,6 @@ object LoggedInUserHolder {
     var user: LoggedInUser? = null
         set(value) {
             field = value
-            com.ccj.client.android.analytics.utils.DeviceUtil.uid = value?.id
+            DeviceUtil.uid = value?.id
         }
 }

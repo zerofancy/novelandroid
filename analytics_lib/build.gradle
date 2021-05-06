@@ -48,6 +48,7 @@ dependencies {
     implementation(project(":analytics_lib_api"))
     compileOnly(Deps.AUTO_SERVICE)
     kapt(Deps.AUTO_SERVICE)
+    implementation(project(":commonutil"))
 }
 
 

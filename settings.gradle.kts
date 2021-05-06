@@ -6,3 +6,5 @@ include(":analytics_lib")
 include(":app")
 rootProject.name = "novelrecommend"
 include(":analytics_lib_api")
+include(":login")
+include(":login_api")

@@ -1,4 +1,4 @@
-package com.smile.analytics_lib_api
+package com.github.zerofancy.login
 
 import org.junit.Test
 
