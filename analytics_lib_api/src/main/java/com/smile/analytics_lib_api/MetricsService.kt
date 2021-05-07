@@ -5,9 +5,13 @@ import java.util.*
 
 interface MetricsService {
     companion object {
-        fun getInstance() =
-            ServiceLoader.load(MetricsService::class.java, MetricsService::class.java.classLoader)
-                .toList().firstOrNull()
+        fun getInstance(): MetricsService? {
+            val services = ServiceLoader.load(
+                MetricsService::class.java,
+                MetricsService::class.java.classLoader
+            )
+            return services.firstOrNull()
+        }
     }
 
     /**

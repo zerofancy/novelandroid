@@ -42,6 +42,8 @@ dependencies {
     implementation(Deps.AndroidX.CORE)
     implementation(Deps.AndroidX.COMPAT)
     implementation(Deps.MATERIAL)
+    implementation(Deps.Kotlin.COROUTINES_ANDROID)
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")

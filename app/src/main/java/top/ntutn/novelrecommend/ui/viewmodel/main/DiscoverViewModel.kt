@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.smile.analytics_lib_api.MetricsService
+import com.smile.analytics_lib_api.MetricsServiceDelegate
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -33,7 +34,7 @@ class DiscoverViewModel : ViewModel() {
                 .getNovel(deviceInfo = DeviceUtil.getDeviceInfoMap())
                 .await()
                 .map { it.copy(localId = (0..Long.MAX_VALUE).random()) }  //TODO 解决id重复的问题
-        }catch (e:Exception){
+        } catch (e: Exception) {
             Timber.e(e, "获取小说失败")
             throw e
         }
@@ -61,7 +62,7 @@ class DiscoverViewModel : ViewModel() {
 
     fun scrollTo(position: Int) {
         val previousBook = _novelList.value[_currentPosition.value]
-        MetricsService.getInstance()?.onEvent(
+        MetricsServiceDelegate.onEvent(
             "switch_book", mapOf(
                 "id" to (previousBook.id ?: -1L),
                 "liked" to previousBook.isLiked,

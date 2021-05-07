@@ -16,7 +16,7 @@ import top.ntutn.novelrecommend.databinding.FragmentMeBinding
 import top.ntutn.novelrecommend.ui.activity.AboutActivity
 import top.ntutn.novelrecommend.ui.activity.DebugHelperActivity
 import top.ntutn.novelrecommend.ui.activity.SettingsActivity
-import top.ntutn.novelrecommend.ui.base.BaseFragment
+import top.ntutn.commonui.base.BaseFragment
 import top.ntutn.novelrecommend.ui.login.LoginActivity
 import top.ntutn.novelrecommend.ui.viewmodel.main.MeViewModel
 

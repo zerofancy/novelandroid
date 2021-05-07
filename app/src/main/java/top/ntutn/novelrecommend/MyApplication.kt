@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Looper
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.smile.analytics_lib_api.MetricsService
+import com.smile.analytics_lib_api.MetricsServiceDelegate
 import org.greenrobot.eventbus.EventBus
 import timber.log.Timber
 import top.ntutn.commonutil.AppUtil
@@ -44,7 +45,7 @@ class MyApplication : Application() {
 
         //埋点工具，要在配置工具之后init
 //        MetricsUtil.init(applicationContext)
-        MetricsService.getInstance()?.init(applicationContext)
+        MetricsServiceDelegate.init(applicationContext)
 
         EventBus.builder().addIndex(AppEventBusAppIndex()).installDefaultEventBus()
     }

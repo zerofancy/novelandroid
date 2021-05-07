@@ -10,7 +10,7 @@ import top.ntutn.novelrecommend.adapter.BookShelfAdapter
 import top.ntutn.novelrecommend.common.SimpleItemDecoration
 import top.ntutn.novelrecommend.common.viewLifecycle
 import top.ntutn.novelrecommend.databinding.FragmentBookshelfBinding
-import top.ntutn.novelrecommend.ui.base.BaseFragment
+import top.ntutn.commonui.base.BaseFragment
 import top.ntutn.novelrecommend.ui.viewmodel.main.BookShelfViewModel
 
 class BookShelfFragment : BaseFragment() {

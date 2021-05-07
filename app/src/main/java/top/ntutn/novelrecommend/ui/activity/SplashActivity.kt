@@ -5,10 +5,11 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import top.ntutn.commonui.base.BaseActivity
 import top.ntutn.commonutil.showToast
 import top.ntutn.novelrecommend.databinding.ActivitySplashBinding
 
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : BaseActivity() {
     private lateinit var binding: ActivitySplashBinding
     private val handler = Handler(Looper.getMainLooper())
     private val waitRunnable = Runnable {

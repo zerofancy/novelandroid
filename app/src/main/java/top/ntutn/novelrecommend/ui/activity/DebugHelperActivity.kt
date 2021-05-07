@@ -6,7 +6,7 @@ import android.os.Bundle
 import com.google.android.material.tabs.TabLayoutMediator
 import top.ntutn.novelrecommend.adapter.DebugToolAdapter
 import top.ntutn.novelrecommend.databinding.ActivityDebugHelperBinding
-import top.ntutn.novelrecommend.ui.base.BaseActivity
+import top.ntutn.commonui.base.BaseActivity
 
 class DebugHelperActivity : BaseActivity() {
     private lateinit var binding: ActivityDebugHelperBinding

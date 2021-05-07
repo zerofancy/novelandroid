@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("kotlin-android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -8,7 +9,7 @@ android {
     buildToolsVersion = "30.0.3"
 
     defaultConfig {
-        minSdkVersion(16)
+        minSdkVersion(19)
         targetSdkVersion(30)
         versionCode = 1
         versionName = "1.0"
@@ -35,12 +36,22 @@ android {
     }
 }
 
-dependencies {
+kapt {
+    arguments {
+        arg("zeroConfigHolder", "top.ntutn.commonutil.ZeroConfigHolder")
+    }
+}
 
+dependencies {
     implementation(Deps.Kotlin.STD_LIB)
     implementation(Deps.AndroidX.CORE)
     implementation(Deps.AndroidX.COMPAT)
     implementation(Deps.MATERIAL)
-    implementation(Deps.AndroidX.ACTIVITY)
-    implementation(Deps.AndroidX.FRAGMENT)
+    implementation(Deps.TIMBER)
+
+    implementation(project(":commonutil"))
+
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.2")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
 }

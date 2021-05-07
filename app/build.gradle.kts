@@ -94,10 +94,13 @@ dependencies {
     implementation(Deps.LAYOUT_MANAGER_GROUP)
     implementation(Deps.ANIM_LOGO_VIEW)
 
-    kapt(project(":libzeroconfig"))
-    implementation(project(":libzeroconfig"))
-    implementation(project(":zeroconfigutil"))
-    implementation(project(":readview"))
-    implementation(project(":commonutil"))
+    implementation(project(":analytics_lib"))
     implementation(project(":analytics_lib_api"))
+    implementation(project(":commonui"))
+    implementation(project(":commonutil"))
+    implementation(project(":libzeroconfig"))
+    kapt(project(":libzeroconfig"))
+    implementation(project(":login"))
+    implementation(project(":readview"))
+    implementation(project(":zeroconfigutil"))
 }
