@@ -1,11 +1,8 @@
-package top.ntutn.novelrecommend.data
+package top.ntutn.login
 
 import retrofit2.await
-import top.ntutn.login.LoggedInUser
-import top.ntutn.novelrecommend.ui.login.LoginRepo
-import top.ntutn.novelrecommend.utils.RetrofitUtil
 import java.io.IOException
-import top.ntutn.login.Result
+import top.ntutn.commonutil.RetrofitUtil
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.

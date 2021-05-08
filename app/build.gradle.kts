@@ -67,7 +67,7 @@ dependencies {
     implementation(Deps.AndroidX.NAVIGATION_UI)
     implementation(Deps.AndroidX.PREFERENCE)
     implementation(Deps.AndroidX.VECTOR_DRAWABLE)
-    implementation(Deps.AndroidX.VIEW_MODEL)
+    implementation(Deps.AndroidX.VIEW_MODEL_KTX)
 
     implementation(Deps.MATERIAL)
     implementation(project(mapOf("path" to ":login_api")))

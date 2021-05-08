@@ -34,20 +34,34 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
-
-    implementation(Deps.Kotlin.STD_LIB)
+    implementation(Deps.AndroidX.ACTIVITY)
+    implementation(Deps.AndroidX.ACTIVITY_KTX)
     implementation(Deps.AndroidX.CORE)
     implementation(Deps.AndroidX.COMPAT)
-    implementation(Deps.MATERIAL)
+    implementation(Deps.AndroidX.CONSTRAINT_LAYOUT)
+    implementation(Deps.AndroidX.FRAGMENT)
+    implementation(Deps.AndroidX.FRAGMENT_KTX)
+    implementation(Deps.AndroidX.LIVE_DATA)
+    implementation(Deps.AndroidX.VIEW_MODEL_KTX)
     implementation(Deps.Kotlin.COROUTINES_ANDROID)
+    implementation(Deps.Kotlin.STD_LIB)
+    implementation(Deps.MATERIAL)
+    implementation(Deps.FRESCO)
+    implementation(Deps.RETROFIT)
+    implementation(Deps.RETROFIT_CONVERTER_GSON)
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
 
+    implementation(project(":commonutil"))
+    implementation(project(":commonui"))
     implementation(project(":login_api"))
     compileOnly(Deps.AUTO_SERVICE)
     kapt(Deps.AUTO_SERVICE)

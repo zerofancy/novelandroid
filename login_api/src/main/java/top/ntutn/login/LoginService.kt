@@ -16,7 +16,7 @@ interface LoginService {
     fun getCurrentLoginUser(): LoggedInUser?
 
     /**
-     * 获取登录用户，若用户未登录，则拉起登录界面
+     * 获取登录用户，若用户未登录，则拉起登录界面。结果在block中回调（不保证登录成功）
      */
     fun requireLoginUser(context: Context, block: (LoggedInUser?) -> Unit)
 

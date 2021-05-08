@@ -1,4 +1,4 @@
-package top.ntutn.novelrecommend.utils
+package top.ntutn.commonutil
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -9,10 +9,7 @@ import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
-import top.ntutn.commonutil.AppUtil
-import top.ntutn.commonutil.DeviceUtil
 import top.ntutn.libzeroconfig.ZeroConfig
-import top.ntutn.novelrecommend.data.LoginRepository
 import top.ntutn.zeroconfigutil.zeroConfig
 import java.io.IOException
 
@@ -74,7 +71,7 @@ object RetrofitUtil {
                 val url = originalHttpUrl.newBuilder()
 //                    .addQueryParameter("deviceInfo", deviceInfo.toString())
                     .addQueryParameter("did", DeviceUtil.getDid())
-                    .addQueryParameter("uid", LoginRepository.user?.id?.toString())
+                    .addQueryParameter("uid", TODO("获取uid"))
                     .build()
                 val request = originalRequest.newBuilder()
                     .url(url)

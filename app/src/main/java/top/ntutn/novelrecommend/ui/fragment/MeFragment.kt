@@ -17,7 +17,8 @@ import top.ntutn.novelrecommend.ui.activity.AboutActivity
 import top.ntutn.novelrecommend.ui.activity.DebugHelperActivity
 import top.ntutn.novelrecommend.ui.activity.SettingsActivity
 import top.ntutn.commonui.base.BaseFragment
-import top.ntutn.novelrecommend.ui.login.LoginActivity
+import top.ntutn.login.LoginActivity
+import top.ntutn.login.LoginServiceDelegate
 import top.ntutn.novelrecommend.ui.viewmodel.main.MeViewModel
 
 class MeFragment : BaseFragment() {
@@ -91,8 +92,8 @@ class MeFragment : BaseFragment() {
         }
 
         binding.userInfoContainer.setOnClickListener {
-            if (!meViewModel.isLoggedIn) {
-                LoginActivity.startForResult(this, REQ_START_LOGIN)
+            LoginServiceDelegate.requireLoginUser(requireContext()) {
+                it?.let { it1 -> meViewModel.onLoginSuccess(it1) }
             }
         }
 
@@ -108,15 +109,5 @@ class MeFragment : BaseFragment() {
             }
         }
         meViewModel.refreshUserInfo()
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when (requestCode) {
-            REQ_START_LOGIN -> {
-                if (resultCode == Activity.RESULT_OK) {
-                    meViewModel.refreshUserInfo()
-                }
-            }
-        }
     }
 }

@@ -14,7 +14,7 @@ import top.ntutn.novelrecommend.NovelService
 import top.ntutn.novelrecommend.common.CheckedLiveData
 import top.ntutn.novelrecommend.common.InitedLiveData
 import top.ntutn.novelrecommend.model.NovelModel
-import top.ntutn.novelrecommend.utils.RetrofitUtil
+import top.ntutn.commonutil.RetrofitUtil
 
 class DiscoverViewModel : ViewModel() {
     private val _novelList =

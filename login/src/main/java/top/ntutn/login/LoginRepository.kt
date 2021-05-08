@@ -1,11 +1,9 @@
-package top.ntutn.novelrecommend.data
+package top.ntutn.login
 
 import android.content.Context
 import androidx.core.content.edit
 import com.google.gson.Gson
 import top.ntutn.commonutil.AppUtil
-import top.ntutn.login.LoggedInUser
-import top.ntutn.login.Result
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -65,7 +63,7 @@ object LoginRepository {
     }
 
     private fun setLoggedInUser(result: Result<LoggedInUser>) {
-        this.user = if (result is Result.Success) result.data else null
+        user = if (result is Result.Success) result.data else null
         lastRefreshTime = System.currentTimeMillis()
         AppUtil.getApplicationContext().getSharedPreferences(SP_FILE, Context.MODE_PRIVATE).edit {
             putString(SP_KEY_USER_JSON, gson.toJson(user))

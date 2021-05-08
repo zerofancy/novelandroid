@@ -47,6 +47,8 @@ dependencies {
     implementation(Deps.AndroidX.CORE)
     implementation(Deps.AndroidX.COMPAT)
     implementation(Deps.MATERIAL)
+    implementation(Deps.RETROFIT)
+    implementation(Deps.RETROFIT_CONVERTER_GSON)
     implementation(Deps.TIMBER)
 
     kapt(project(":libzeroconfig"))

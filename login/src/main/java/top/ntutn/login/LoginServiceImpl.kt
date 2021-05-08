@@ -2,37 +2,33 @@ package top.ntutn.login
 
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
+import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.FragmentActivity
 import com.google.auto.service.AutoService
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 @AutoService(LoginService::class)
 class LoginServiceImpl : LoginService {
     override fun getCurrentLoginUser(): LoggedInUser? {
-        TODO("Not yet implemented")
+        return LoginRepository.user
     }
 
     override fun requireLoginUser(context: Context, block: (LoggedInUser?) -> Unit) {
-        val activity = LoginActivity()
-        val registry = activity.activityResultRegistry.register(
-            javaClass.canonicalName!!,
-            ActivityResultContracts.StartActivityForResult()
-        ) { activityResult ->
-            if (activityResult.resultCode == Activity.RESULT_OK) {
-                block.invoke(TODO())
-            }
+        getCurrentLoginUser()?.let {
+            block.invoke(it)
+            return
         }
-        registry.launch(Intent())
+        val activity = LoginActivity() as ComponentActivity
 
-//        registry.unregister()
-
-        TODO("Not yet implemented")
+        activity.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            block.invoke(getCurrentLoginUser())
+        }
     }
 
     override fun logout() {
-        TODO("Not yet implemented")
+        GlobalScope.launch {
+            LoginRepository.logout()
+        }
     }
 }
-
-class LoginActivity : FragmentActivity()

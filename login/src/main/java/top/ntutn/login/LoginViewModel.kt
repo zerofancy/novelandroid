@@ -1,18 +1,14 @@
-package top.ntutn.novelrecommend.ui.login
+package top.ntutn.login
 
 import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.github.zerofancy.login.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import top.ntutn.login.LoginFormState
-import top.ntutn.login.LoginResult
-import top.ntutn.novelrecommend.R
-import top.ntutn.novelrecommend.data.LoginRepository
-import top.ntutn.login.Result
 
 class LoginViewModel : ViewModel() {
 

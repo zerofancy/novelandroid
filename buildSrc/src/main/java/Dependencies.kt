@@ -89,12 +89,14 @@ object AndroidXVersion {
 @Suppress("unused", "SpellCheckingInspection")
 object AndroidXDependency {
     const val ACTIVITY = "androidx.activity:activity:${AndroidXVersion.ACTIVITY}"
+    const val ACTIVITY_KTX = "androidx.activity:activity-ktx:${AndroidXVersion.ACTIVITY}"
     const val ANNOTATION = "androidx.annotation:annotation:${AndroidXVersion.ANNOTATION}"
     const val COMPAT = "androidx.appcompat:appcompat:${AndroidXVersion.COMPAT}"
     const val CORE = "androidx.core:core-ktx:${AndroidXVersion.CORE}"
     const val CONSTRAINT_LAYOUT =
         "androidx.constraintlayout:constraintlayout:${AndroidXVersion.CONSTRAINT_LAYOUT}"
     const val FRAGMENT = "androidx.fragment:fragment:${AndroidXVersion.FRAGMENT}"
+    const val FRAGMENT_KTX = "androidx.fragment:fragment-ktx:${AndroidXVersion.FRAGMENT}"
     const val LIVE_DATA = "androidx.lifecycle:lifecycle-livedata-ktx:${AndroidXVersion.VIEW_MODEL}"
     const val NAVIGATION_FRAGMENT =
         "androidx.navigation:navigation-fragment-ktx:${AndroidXVersion.NAVIGATION_FRAGMENT}"
@@ -103,6 +105,6 @@ object AndroidXDependency {
     const val PREFERENCE = "androidx.preference:preference:${AndroidXVersion.PREFERENCE}"
     const val VECTOR_DRAWABLE =
         "androidx.vectordrawable:vectordrawable:${AndroidXVersion.VECTOR_DRAWABLE}"
-    const val VIEW_MODEL =
+    const val VIEW_MODEL_KTX =
         "androidx.lifecycle:lifecycle-viewmodel-ktx:${AndroidXVersion.VIEW_MODEL}"
 }

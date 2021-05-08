@@ -1,4 +1,4 @@
-package top.ntutn.novelrecommend.ui.login
+package top.ntutn.login
 
 import android.app.Activity
 import android.content.Context
@@ -12,14 +12,13 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import top.ntutn.login.LoggedInUser
-import top.ntutn.novelrecommend.R
-import top.ntutn.novelrecommend.databinding.ActivityLoginBinding
+import com.github.zerofancy.login.R
+import com.github.zerofancy.login.databinding.ActivityLoginBinding
+import top.ntutn.commonui.base.BaseActivity
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
 
     companion object {
         fun actionStart(context: Context) {
@@ -121,7 +120,7 @@ class LoginActivity : AppCompatActivity() {
             )
         }
 
-        binding.avatar.setActualImageResource(R.drawable.default_avatar)
+        binding.avatar.setActualImageResource(R.drawable.login_default_avatar)
     }
 
     private fun updateUiWithUser(model: LoggedInUser) {

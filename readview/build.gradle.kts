@@ -56,7 +56,7 @@ dependencies {
     implementation(Deps.AndroidX.VECTOR_DRAWABLE)
     implementation(Deps.AndroidX.NAVIGATION_FRAGMENT)
     implementation(Deps.AndroidX.NAVIGATION_UI)
-    implementation(Deps.AndroidX.VIEW_MODEL)
+    implementation(Deps.AndroidX.VIEW_MODEL_KTX)
     implementation(Deps.AndroidX.LIVE_DATA)
 
     implementation(Deps.MATERIAL)
