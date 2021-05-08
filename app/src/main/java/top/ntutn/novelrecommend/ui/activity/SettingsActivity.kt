@@ -5,10 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceFragmentCompat
+import top.ntutn.commonui.base.BaseActivity
 import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.databinding.SettingsActivityBinding
 
-class SettingsActivity : AppCompatActivity() {
+class SettingsActivity : BaseActivity() {
     private lateinit var binding:SettingsActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 30
@@ -45,6 +45,10 @@ dependencies {
     implementation(Deps.Kotlin.STD_LIB)
     implementation(Deps.AndroidX.CORE)
     implementation(Deps.AndroidX.COMPAT)
+    implementation(project(":analytics_lib_api"))
+    compileOnly(Deps.AUTO_SERVICE)
+    kapt(Deps.AUTO_SERVICE)
+    implementation(project(":commonutil"))
 }
 
 

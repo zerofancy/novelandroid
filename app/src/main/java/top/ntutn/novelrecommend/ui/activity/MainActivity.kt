@@ -8,12 +8,12 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.smile.analytics.MetricsServiceDelegate
 import top.ntutn.commonutil.AppUtil
-import top.ntutn.commonutil.MetricsUtil
 import top.ntutn.commonutil.showToast
 import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.databinding.ActivityMainBinding
-import top.ntutn.novelrecommend.ui.base.BaseActivity
+import top.ntutn.commonui.base.BaseActivity
 import top.ntutn.novelrecommend.ui.viewmodel.main.BookShelfViewModel
 import top.ntutn.novelrecommend.ui.viewmodel.main.DiscoverViewModel
 import top.ntutn.novelrecommend.utils.TimeUtil
@@ -81,7 +81,7 @@ class MainActivity : BaseActivity() {
                 // 过滤掉异常启动时间
                 if (coldStartTime < 50000) {
                     // 上传冷启动时间coldStartTime
-                    MetricsUtil.onEvent(
+                    MetricsServiceDelegate.onEvent(
                         "cold_start", mapOf(
                             "coldStartTime" to coldStartTime.toString()
                         )
@@ -91,7 +91,7 @@ class MainActivity : BaseActivity() {
                 // 过滤掉异常启动时间
                 if (hotStartTime < 30000) {
                     // 上传热启动时间hotStartTime
-                    MetricsUtil.onEvent(
+                    MetricsServiceDelegate.onEvent(
                         "hot_start", mapOf(
                             "hotStartTime" to hotStartTime.toString()
                         )

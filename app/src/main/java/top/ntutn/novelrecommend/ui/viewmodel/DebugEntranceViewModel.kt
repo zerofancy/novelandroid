@@ -2,16 +2,16 @@ package top.ntutn.novelrecommend.ui.viewmodel
 
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModel
+import com.smile.analytics.MetricsServiceDelegate
 import top.ntutn.commonutil.ClipboardUtil
 import top.ntutn.commonutil.DeviceUtil
-import top.ntutn.commonutil.MetricsUtil
 import top.ntutn.commonutil.showToast
+import top.ntutn.login.LoginActivity
+import top.ntutn.login.LoginServiceDelegate
 import top.ntutn.novelrecommend.adapter.DebugEntrance
 import top.ntutn.novelrecommend.common.CheckedLiveData
 import top.ntutn.novelrecommend.common.InitedLiveData
-import top.ntutn.novelrecommend.data.LoginRepository
 import top.ntutn.novelrecommend.ui.activity.SettingsActivity
-import top.ntutn.novelrecommend.ui.login.LoginActivity
 import top.ntutn.readview.BreakReadTestActivity
 import top.ntutn.readview.ReadTestActivity
 
@@ -32,7 +32,7 @@ class DebugEntranceViewModel : ViewModel() {
                         IMEI: ${DeviceUtil.getIMEI()}
                         Android ID: ${DeviceUtil.getAndroidId()}
                         GUID: ${DeviceUtil.getGUID()}
-                        UID: ${LoginRepository.user?.id}
+                        UID: ${LoginServiceDelegate.getCurrentLoginUser()?.id}
                     """.trimIndent()
 
                 AlertDialog.Builder(context).apply {
@@ -45,13 +45,13 @@ class DebugEntranceViewModel : ViewModel() {
             },
             DebugEntrance(title = "主动推送埋点事件", owner = "liuhaixin.zero") {
                 "主动推送埋点事件".showToast()
-                MetricsUtil.onEvent(
+                MetricsServiceDelegate.onEvent(
                     "ping", mapOf(
                         "random1" to (0..100).random().toString(),
                         "random2" to (0..100).random().toString()
                     )
                 )
-                MetricsUtil.push()
+                MetricsServiceDelegate.push()
             }, DebugEntrance(title = "设置页面", owner = "liuhaixin.zero") {
                 SettingsActivity.actionStart(it)
             },

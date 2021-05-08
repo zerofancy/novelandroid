@@ -58,25 +58,21 @@ dependencies {
     implementation(Deps.Kotlin.STD_LIB)
     implementation(Deps.Kotlin.COROUTINES_ANDROID)
 
+    implementation(Deps.AndroidX.ANNOTATION)
     implementation(Deps.AndroidX.CORE)
     implementation(Deps.AndroidX.COMPAT)
     implementation(Deps.AndroidX.CONSTRAINT_LAYOUT)
-    implementation(Deps.AndroidX.VECTOR_DRAWABLE)
+    implementation(Deps.AndroidX.LIVE_DATA)
     implementation(Deps.AndroidX.NAVIGATION_FRAGMENT)
     implementation(Deps.AndroidX.NAVIGATION_UI)
-    implementation(Deps.AndroidX.VIEW_MODEL)
-    implementation(Deps.AndroidX.LIVE_DATA)
+    implementation(Deps.AndroidX.PREFERENCE)
+    implementation(Deps.AndroidX.VECTOR_DRAWABLE)
+    implementation(Deps.AndroidX.VIEW_MODEL_KTX)
 
     implementation(Deps.MATERIAL)
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
-    implementation("androidx.preference:preference:1.1.1")
-    implementation("com.google.android.material:material:1.3.0")
-    implementation("androidx.annotation:annotation:1.1.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
-    testImplementation("junit:junit:4.13.1")
+    implementation(project(mapOf("path" to ":login_api")))
+
+    testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
 
@@ -86,9 +82,7 @@ dependencies {
     kapt(Deps.EVENTBUS_PROCESSOR)
 
     implementation(Deps.ABOUT_PAGE)
-//    implementation(Deps.ABOUT_TYPE)
 
-//    implementation(Deps.AROUTER_API)
 //    kapt(Deps.AROUTER_COMPILER)
 
     // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
@@ -101,9 +95,13 @@ dependencies {
     implementation(Deps.LAYOUT_MANAGER_GROUP)
     implementation(Deps.ANIM_LOGO_VIEW)
 
-    kapt(project(":libzeroconfigcompiler"))
-    implementation(project(":libzeroconfig"))
-    implementation(project(":zeroconfigutil"))
-    implementation(project(":app:readview"))
+    implementation(project(":analytics_lib"))
+    implementation(project(":analytics_lib_api"))
+    implementation(project(":commonui"))
     implementation(project(":commonutil"))
+    implementation(project(":libzeroconfig"))
+    kapt(project(":libzeroconfig"))
+    implementation(project(":login"))
+    implementation(project(":readview"))
+    implementation(project(":zeroconfigutil"))
 }

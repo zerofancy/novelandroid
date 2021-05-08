@@ -3,18 +3,18 @@ package top.ntutn.novelrecommend.ui.viewmodel.main
 import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.smile.analytics.MetricsServiceDelegate
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.await
 import timber.log.Timber
 import top.ntutn.commonutil.DeviceUtil
-import top.ntutn.commonutil.MetricsUtil
 import top.ntutn.novelrecommend.NovelService
 import top.ntutn.novelrecommend.common.CheckedLiveData
 import top.ntutn.novelrecommend.common.InitedLiveData
 import top.ntutn.novelrecommend.model.NovelModel
-import top.ntutn.novelrecommend.utils.RetrofitUtil
+import top.ntutn.commonutil.RetrofitUtil
 
 class DiscoverViewModel : ViewModel() {
     private val _novelList =
@@ -33,7 +33,7 @@ class DiscoverViewModel : ViewModel() {
                 .getNovel(deviceInfo = DeviceUtil.getDeviceInfoMap())
                 .await()
                 .map { it.copy(localId = (0..Long.MAX_VALUE).random()) }  //TODO 解决id重复的问题
-        }catch (e:Exception){
+        } catch (e: Exception) {
             Timber.e(e, "获取小说失败")
             throw e
         }
@@ -61,7 +61,7 @@ class DiscoverViewModel : ViewModel() {
 
     fun scrollTo(position: Int) {
         val previousBook = _novelList.value[_currentPosition.value]
-        MetricsUtil.onEvent(
+        MetricsServiceDelegate.onEvent(
             "switch_book", mapOf(
                 "id" to (previousBook.id ?: -1L),
                 "liked" to previousBook.isLiked,

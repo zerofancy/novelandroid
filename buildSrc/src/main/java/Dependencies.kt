@@ -17,8 +17,8 @@ object Vers {
 
     //    const val AROUTER = "1.5.1"
     const val RETROFIT = "2.9.0"
-    const val LIKE_VIEW = "1.2.2"
-    const val FRESCO = "2.4.0"
+    const val LIKE_VIEW = "2"
+    const val FRESCO = "2.3.0"
     const val SWIPE_RECYCLER_VIEW = "1.3.2"
     const val LAYOUT_MANAGER_GROUP = "1e6f4f96eb"
     const val ANIM_LOGO_VIEW = "1.0.2"
@@ -48,7 +48,8 @@ object Deps {
     const val RETROFIT = "com.squareup.retrofit2:retrofit:${Vers.RETROFIT}"
     const val RETROFIT_CONVERTER_GSON = "com.squareup.retrofit2:converter-gson:${Vers.RETROFIT}"
 
-    const val LIKE_VIEW = "com.jaren:likeview:${Vers.LIKE_VIEW}"
+    // TODO 拷贝到本地
+    const val LIKE_VIEW = "com.github.zerofancy:LikeView:${Vers.LIKE_VIEW}"
 
     const val FRESCO = "com.facebook.fresco:fresco:${Vers.FRESCO}"
 
@@ -71,28 +72,39 @@ object KotlinDependency {
 
 @Suppress("unused")
 object AndroidXVersion {
+    const val ACTIVITY = "1.2.2"
+    const val ANNOTATION = "1.2.0"
     const val COMPAT = "1.2.0"
     const val CORE = "1.3.2"
     const val CONSTRAINT_LAYOUT = "2.0.4"
+    const val FRAGMENT = "1.3.3"
+    const val LIVE_DATA = "2.3.0"
     const val NAVIGATION_FRAGMENT = "2.3.3"
     const val NAVIGATION_UI = "2.3.3"
+    const val PREFERENCE = "1.1.1"
     const val VECTOR_DRAWABLE = "1.1.0"
     const val VIEW_MODEL = "2.3.0"
-    const val LIVE_DATA = "2.3.0"
 }
 
 @Suppress("unused", "SpellCheckingInspection")
 object AndroidXDependency {
+    const val ACTIVITY = "androidx.activity:activity:${AndroidXVersion.ACTIVITY}"
+    const val ACTIVITY_KTX = "androidx.activity:activity-ktx:${AndroidXVersion.ACTIVITY}"
+    const val ANNOTATION = "androidx.annotation:annotation:${AndroidXVersion.ANNOTATION}"
     const val COMPAT = "androidx.appcompat:appcompat:${AndroidXVersion.COMPAT}"
     const val CORE = "androidx.core:core-ktx:${AndroidXVersion.CORE}"
     const val CONSTRAINT_LAYOUT =
         "androidx.constraintlayout:constraintlayout:${AndroidXVersion.CONSTRAINT_LAYOUT}"
+    const val FRAGMENT = "androidx.fragment:fragment:${AndroidXVersion.FRAGMENT}"
+    const val FRAGMENT_KTX = "androidx.fragment:fragment-ktx:${AndroidXVersion.FRAGMENT}"
+    const val LIVE_DATA = "androidx.lifecycle:lifecycle-livedata-ktx:${AndroidXVersion.VIEW_MODEL}"
     const val NAVIGATION_FRAGMENT =
         "androidx.navigation:navigation-fragment-ktx:${AndroidXVersion.NAVIGATION_FRAGMENT}"
-    const val NAVIGATION_UI = "androidx.navigation:navigation-ui-ktx:2.3.3"
+    const val NAVIGATION_UI =
+        "androidx.navigation:navigation-ui-ktx:${AndroidXVersion.NAVIGATION_UI}"
+    const val PREFERENCE = "androidx.preference:preference:${AndroidXVersion.PREFERENCE}"
     const val VECTOR_DRAWABLE =
         "androidx.vectordrawable:vectordrawable:${AndroidXVersion.VECTOR_DRAWABLE}"
-    const val VIEW_MODEL =
+    const val VIEW_MODEL_KTX =
         "androidx.lifecycle:lifecycle-viewmodel-ktx:${AndroidXVersion.VIEW_MODEL}"
-    const val LIVE_DATA = "androidx.lifecycle:lifecycle-livedata-ktx:${AndroidXVersion.VIEW_MODEL}"
 }

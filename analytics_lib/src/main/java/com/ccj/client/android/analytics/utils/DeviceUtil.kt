@@ -1,9 +1,7 @@
 package com.ccj.client.android.analytics.utils
 
 import android.content.Context
-import android.provider.Settings
 import com.ccj.client.android.analytics.JJEventManager
-import java.util.*
 
 /**
  * 获取唯一id
@@ -15,34 +13,13 @@ object DeviceUtil {
 
     var uid: Long? = null
 
-    fun getIMEI(): String? = null // 好像只有系统应用能读了
+    fun getIMEI(): String? = top.ntutn.commonutil.DeviceUtil.getIMEI()
 
-    fun getAndroidId(): String? {
-        val androidId = Settings.Secure.getString(
-            applicationContext.contentResolver,
-            Settings.Secure.ANDROID_ID
-        )
-        // 这个id是假id https://www.cnblogs.com/lqminn/p/4204855.html
-        if (androidId == "9774d56d682e549c") return null
-        return androidId
-    }
+    fun getAndroidId(): String? = top.ntutn.commonutil.DeviceUtil.getAndroidId()
 
-    fun getGUID(): String {
-        val sp = applicationContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        var guid = sp.getString(PREF_GUID, null)
-        if (guid != null) return guid
-        guid = UUID.randomUUID().toString()
-        sp.edit().apply {
-            putString(PREF_GUID, guid)
-            apply()
-        }
-        return guid
-    }
+    fun getGUID(): String = top.ntutn.commonutil.DeviceUtil.getGUID()
 
-    fun getDid(): String {
-        val originId = getIMEI() ?: getAndroidId()
-        return originId?.toByteArray()?.let { UUID.nameUUIDFromBytes(it) }?.toString() ?: getGUID()
-    }
+    fun getDid(): String = top.ntutn.commonutil.DeviceUtil.getDid()
 
     fun getDeviceInfo() = DeviceInfo(
         imei = getIMEI(),

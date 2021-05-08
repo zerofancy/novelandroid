@@ -10,7 +10,7 @@ import com.dingmouren.layoutmanagergroup.viewpager.ViewPagerLayoutManager
 import top.ntutn.novelrecommend.adapter.NovelDiscoverAdapter
 import top.ntutn.novelrecommend.common.viewLifecycle
 import top.ntutn.novelrecommend.databinding.FragmentDiscoverBinding
-import top.ntutn.novelrecommend.ui.base.BaseFragment
+import top.ntutn.commonui.base.BaseFragment
 import top.ntutn.novelrecommend.ui.viewmodel.main.DiscoverViewModel
 
 class DiscoverFragment : BaseFragment(), OnViewPagerListener {

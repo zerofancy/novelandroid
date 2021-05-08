@@ -8,7 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import top.ntutn.commonui.base.BaseFragment
 import top.ntutn.commonutil.showSnackBar
+import top.ntutn.login.LoginServiceDelegate
 import top.ntutn.novelrecommend.BuildConfig
 import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.common.viewLifecycle
@@ -16,8 +18,6 @@ import top.ntutn.novelrecommend.databinding.FragmentMeBinding
 import top.ntutn.novelrecommend.ui.activity.AboutActivity
 import top.ntutn.novelrecommend.ui.activity.DebugHelperActivity
 import top.ntutn.novelrecommend.ui.activity.SettingsActivity
-import top.ntutn.novelrecommend.ui.base.BaseFragment
-import top.ntutn.novelrecommend.ui.login.LoginActivity
 import top.ntutn.novelrecommend.ui.viewmodel.main.MeViewModel
 
 class MeFragment : BaseFragment() {
@@ -91,9 +91,7 @@ class MeFragment : BaseFragment() {
         }
 
         binding.userInfoContainer.setOnClickListener {
-            if (!meViewModel.isLoggedIn) {
-                LoginActivity.startForResult(this, REQ_START_LOGIN)
-            }
+            LoginServiceDelegate.startLoginActivity(this, REQ_START_LOGIN)
         }
 
         meViewModel.currentUser.observe(viewLifecycleOwner) {
