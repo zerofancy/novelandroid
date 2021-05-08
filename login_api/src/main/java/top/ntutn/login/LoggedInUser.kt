@@ -1,4 +1,4 @@
-package top.ntutn.commonutil
+package top.ntutn.login
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository

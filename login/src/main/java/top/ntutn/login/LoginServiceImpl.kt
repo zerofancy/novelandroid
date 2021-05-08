@@ -5,8 +5,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.FragmentActivity
-import top.ntutn.login_api.LoggedInUser
-import top.ntutn.login_api.LoginService
 import com.google.auto.service.AutoService
 
 @AutoService(LoginService::class)

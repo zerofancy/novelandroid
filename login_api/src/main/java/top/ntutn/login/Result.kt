@@ -1,4 +1,4 @@
-package top.ntutn.novelrecommend.data
+package top.ntutn.login
 
 /**
  * A generic class that holds a value with its loading status.

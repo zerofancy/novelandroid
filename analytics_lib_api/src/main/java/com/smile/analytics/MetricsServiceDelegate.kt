@@ -1,4 +1,4 @@
-package com.smile.analytics_lib_api
+package com.smile.analytics
 
 /**
  * 埋点是一个很高频的功能，所以还是不要重复创建对象了

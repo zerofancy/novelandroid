@@ -15,6 +15,7 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import top.ntutn.login.LoggedInUser
 import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.databinding.ActivityLoginBinding
 
@@ -63,11 +64,11 @@ class LoginActivity : AppCompatActivity() {
             val loginResult = it ?: return@Observer
 
             binding.loading.visibility = View.GONE
-            if (loginResult.error != null) {
-                showLoginFailed(loginResult.error)
+            loginResult.error?.let {
+                showLoginFailed(it)
             }
-            if (loginResult.success != null) {
-                updateUiWithUser(loginResult.success)
+            loginResult.success?.let {
+                updateUiWithUser(it)
             }
             setResult(Activity.RESULT_OK)
 
@@ -123,10 +124,9 @@ class LoginActivity : AppCompatActivity() {
         binding.avatar.setActualImageResource(R.drawable.default_avatar)
     }
 
-    private fun updateUiWithUser(model: LoggedInUserView) {
+    private fun updateUiWithUser(model: LoggedInUser) {
         val welcome = getString(R.string.welcome)
-        val displayName = model.displayName
-        // TODO : initiate successful logged in experience
+        val displayName = model.nickname ?: model.username
         Toast.makeText(
             applicationContext,
             "$welcome $displayName",

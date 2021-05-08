@@ -3,8 +3,7 @@ package top.ntutn.novelrecommend.ui.viewmodel.main
 import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.smile.analytics_lib_api.MetricsService
-import com.smile.analytics_lib_api.MetricsServiceDelegate
+import com.smile.analytics.MetricsServiceDelegate
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

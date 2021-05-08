@@ -1,4 +1,4 @@
-package com.smile.analytics_lib_api
+package com.smile.analytics
 
 import android.content.Context
 import java.util.*

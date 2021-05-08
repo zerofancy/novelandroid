@@ -4,10 +4,10 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
-import top.ntutn.novelrecommend.data.OperationResult
-import top.ntutn.commonutil.LoggedInUser
+import top.ntutn.login.LoggedInUser
+import top.ntutn.login.OperationResult
 
-interface LoginService {
+interface LoginRepo {
     @POST("login")
     fun login(
         @Query("username") username: String,

@@ -3,7 +3,7 @@ package com.ccj.client.android.analytics
 import android.content.Context
 import com.ccj.client.android.analyticlib.BuildConfig
 import com.google.auto.service.AutoService
-import com.smile.analytics_lib_api.MetricsService
+import com.smile.analytics.MetricsService
 
 //FIXME 让这部分支持配置
 @AutoService(MetricsService::class)

@@ -8,8 +8,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.smile.analytics_lib_api.MetricsService
-import com.smile.analytics_lib_api.MetricsServiceDelegate
+import com.smile.analytics.MetricsServiceDelegate
 import top.ntutn.commonutil.AppUtil
 import top.ntutn.commonutil.showToast
 import top.ntutn.novelrecommend.R

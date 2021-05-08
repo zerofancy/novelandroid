@@ -4,8 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.os.Looper
 import com.facebook.drawee.backends.pipeline.Fresco
-import com.smile.analytics_lib_api.MetricsService
-import com.smile.analytics_lib_api.MetricsServiceDelegate
+import com.smile.analytics.MetricsServiceDelegate
 import org.greenrobot.eventbus.EventBus
 import timber.log.Timber
 import top.ntutn.commonutil.AppUtil

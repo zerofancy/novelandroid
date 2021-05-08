@@ -1,3 +1,3 @@
-package top.ntutn.login_api
+package top.ntutn.login
 
 object LoginServiceDelegate : LoginService by LoginService.getInstance()!!

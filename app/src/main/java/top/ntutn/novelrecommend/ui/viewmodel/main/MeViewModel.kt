@@ -7,9 +7,9 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import top.ntutn.login.LoggedInUser
 import top.ntutn.novelrecommend.data.LoginRepository
-import top.ntutn.novelrecommend.data.Result
-import top.ntutn.commonutil.LoggedInUser
+import top.ntutn.login.Result
 
 class MeViewModel : ViewModel() {
     private val _currentUser = MutableLiveData<LoggedInUser>().apply { value = null }

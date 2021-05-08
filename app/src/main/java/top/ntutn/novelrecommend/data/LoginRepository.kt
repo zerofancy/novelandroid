@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.core.content.edit
 import com.google.gson.Gson
 import top.ntutn.commonutil.AppUtil
-import top.ntutn.commonutil.LoggedInUser
-import top.ntutn.commonutil.LoggedInUserHolder
+import top.ntutn.login.LoggedInUser
+import top.ntutn.login.Result
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -24,10 +24,6 @@ object LoginRepository {
 
     // in-memory cache of the loggedInUser object
     var user: LoggedInUser? = null
-        private set(value) {
-            field = value
-            LoggedInUserHolder.user = value
-        }
 
     val isLoggedIn: Boolean
         get() = user != null

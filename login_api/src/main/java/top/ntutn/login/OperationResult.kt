@@ -1,4 +1,4 @@
-package top.ntutn.novelrecommend.data
+package top.ntutn.login
 
 data class OperationResult<out T>(
     val code: Int,

@@ -8,9 +8,11 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import top.ntutn.login.LoginFormState
+import top.ntutn.login.LoginResult
 import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.data.LoginRepository
-import top.ntutn.novelrecommend.data.Result
+import top.ntutn.login.Result
 
 class LoginViewModel : ViewModel() {
 
@@ -27,9 +29,7 @@ class LoginViewModel : ViewModel() {
             if (result is Result.Success) {
                 _loginResult.value =
                     LoginResult(
-                        success = LoggedInUserView(
-                            displayName = result.data.nickname ?: result.data.username
-                        )
+                        success = result.data
                     )
             } else {
                 _loginResult.value = LoginResult(error = R.string.login_failed)

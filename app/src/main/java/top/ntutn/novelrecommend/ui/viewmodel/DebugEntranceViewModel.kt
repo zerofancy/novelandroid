@@ -2,8 +2,7 @@ package top.ntutn.novelrecommend.ui.viewmodel
 
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModel
-import com.smile.analytics_lib_api.MetricsService
-import com.smile.analytics_lib_api.MetricsServiceDelegate
+import com.smile.analytics.MetricsServiceDelegate
 import top.ntutn.commonutil.ClipboardUtil
 import top.ntutn.commonutil.DeviceUtil
 import top.ntutn.commonutil.showToast

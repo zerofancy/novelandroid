@@ -1,4 +1,4 @@
-package top.ntutn.novelrecommend.ui.login
+package top.ntutn.login
 
 /**
  * Data validation state of the login form.
