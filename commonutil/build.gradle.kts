@@ -54,6 +54,7 @@ dependencies {
     kapt(project(":libzeroconfig"))
     implementation(project(":libzeroconfig"))
     implementation(project(":zeroconfigutil"))
+    implementation(project(":login_api"))
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")

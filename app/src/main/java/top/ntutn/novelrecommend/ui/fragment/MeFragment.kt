@@ -8,7 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import top.ntutn.commonui.base.BaseFragment
 import top.ntutn.commonutil.showSnackBar
+import top.ntutn.login.LoginServiceDelegate
 import top.ntutn.novelrecommend.BuildConfig
 import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.common.viewLifecycle
@@ -16,9 +18,6 @@ import top.ntutn.novelrecommend.databinding.FragmentMeBinding
 import top.ntutn.novelrecommend.ui.activity.AboutActivity
 import top.ntutn.novelrecommend.ui.activity.DebugHelperActivity
 import top.ntutn.novelrecommend.ui.activity.SettingsActivity
-import top.ntutn.commonui.base.BaseFragment
-import top.ntutn.login.LoginActivity
-import top.ntutn.login.LoginServiceDelegate
 import top.ntutn.novelrecommend.ui.viewmodel.main.MeViewModel
 
 class MeFragment : BaseFragment() {
@@ -92,9 +91,7 @@ class MeFragment : BaseFragment() {
         }
 
         binding.userInfoContainer.setOnClickListener {
-            LoginServiceDelegate.requireLoginUser(requireContext()) {
-                it?.let { it1 -> meViewModel.onLoginSuccess(it1) }
-            }
+            LoginServiceDelegate.startLoginActivity(this, REQ_START_LOGIN)
         }
 
         meViewModel.currentUser.observe(viewLifecycleOwner) {
@@ -109,5 +106,15 @@ class MeFragment : BaseFragment() {
             }
         }
         meViewModel.refreshUserInfo()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            REQ_START_LOGIN -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    meViewModel.refreshUserInfo()
+                }
+            }
+        }
     }
 }

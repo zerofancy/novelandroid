@@ -10,6 +10,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
 import top.ntutn.libzeroconfig.ZeroConfig
+import top.ntutn.login.LoginServiceDelegate
 import top.ntutn.zeroconfigutil.zeroConfig
 import java.io.IOException
 
@@ -71,7 +72,10 @@ object RetrofitUtil {
                 val url = originalHttpUrl.newBuilder()
 //                    .addQueryParameter("deviceInfo", deviceInfo.toString())
                     .addQueryParameter("did", DeviceUtil.getDid())
-                    .addQueryParameter("uid", TODO("获取uid"))
+                    .addQueryParameter(
+                        "uid",
+                        (LoginServiceDelegate.getCurrentLoginUser()?.id ?: 0L).toString()
+                    )
                     .build()
                 val request = originalRequest.newBuilder()
                     .url(url)
