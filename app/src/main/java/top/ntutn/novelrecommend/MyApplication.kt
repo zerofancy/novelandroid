@@ -39,7 +39,7 @@ class MyApplication : Application() {
 
         ZeroConfigHelper.init(applicationContext)
             .addConfigHolder(top.ntutn.zeroconfigutil.ZeroConfigHolder())
-            .addConfigHolder(ZeroConfigHolder())
+//            .addConfigHolder(ZeroConfigHolder())
             .addConfigHolder(top.ntutn.commonutil.ZeroConfigHolder())
 
         //埋点工具，要在配置工具之后init
