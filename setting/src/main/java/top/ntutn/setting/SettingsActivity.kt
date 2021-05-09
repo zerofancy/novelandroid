@@ -1,16 +1,14 @@
-package top.ntutn.novelrecommend.ui.activity
+package top.ntutn.setting
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceFragmentCompat
 import top.ntutn.commonui.base.BaseActivity
-import top.ntutn.novelrecommend.R
-import top.ntutn.novelrecommend.databinding.SettingsActivityBinding
+import top.ntutn.setting.databinding.SettingsActivityBinding
 
 class SettingsActivity : BaseActivity() {
-    private lateinit var binding:SettingsActivityBinding
+    private lateinit var binding: SettingsActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

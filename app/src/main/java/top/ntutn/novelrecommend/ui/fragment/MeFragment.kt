@@ -17,8 +17,10 @@ import top.ntutn.novelrecommend.common.viewLifecycle
 import top.ntutn.novelrecommend.databinding.FragmentMeBinding
 import top.ntutn.novelrecommend.ui.activity.AboutActivity
 import top.ntutn.novelrecommend.ui.activity.DebugHelperActivity
-import top.ntutn.novelrecommend.ui.activity.SettingsActivity
+import top.ntutn.setting.SettingsActivity
 import top.ntutn.novelrecommend.ui.viewmodel.main.MeViewModel
+import top.ntutn.setting.SettingService
+import top.ntutn.setting.SettingServiceDelegate
 
 class MeFragment : BaseFragment() {
     companion object {
@@ -77,7 +79,7 @@ class MeFragment : BaseFragment() {
         }
 
         binding.settingContainer.setOnClickListener {
-            SettingsActivity.actionStart(requireContext())
+            SettingServiceDelegate.openSettingActivity(requireContext())
         }
 
         binding.versionTextView.text =

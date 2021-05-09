@@ -1,6 +1,7 @@
 package top.ntutn.novelrecommend.ui.viewmodel
 
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import com.smile.analytics.MetricsServiceDelegate
 import top.ntutn.commonutil.ClipboardUtil
@@ -11,9 +12,10 @@ import top.ntutn.login.LoginServiceDelegate
 import top.ntutn.novelrecommend.adapter.DebugEntrance
 import top.ntutn.novelrecommend.common.CheckedLiveData
 import top.ntutn.novelrecommend.common.InitedLiveData
-import top.ntutn.novelrecommend.ui.activity.SettingsActivity
+import top.ntutn.setting.SettingsActivity
 import top.ntutn.readview.BreakReadTestActivity
 import top.ntutn.readview.ReadTestActivity
+import top.ntutn.setting.SettingServiceDelegate
 
 class DebugEntranceViewModel : ViewModel() {
     private val _debugEntranceList = InitedLiveData<List<DebugEntrance>> { listOf() }
@@ -53,10 +55,10 @@ class DebugEntranceViewModel : ViewModel() {
                 )
                 MetricsServiceDelegate.push()
             }, DebugEntrance(title = "设置页面", owner = "liuhaixin.zero") {
-                SettingsActivity.actionStart(it)
+                SettingServiceDelegate.openSettingActivity(it)
             },
             DebugEntrance(title = "登陆界面", owner = "liuhaixin.zero") {
-                LoginActivity.actionStart(it)
+                LoginServiceDelegate.startLoginActivity(it as FragmentActivity, 0)
             }
         )
     }

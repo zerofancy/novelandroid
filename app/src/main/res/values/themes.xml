@@ -1,36 +1,4 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.Novelrecommend" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-    </style>
-
-    <style name="AppTheme.About" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryDark">@color/purple_700</item>
-        <item name="colorAccent">@android:color/black</item>
-
-
-        <!--        &lt;!&ndash;optional&ndash;&gt;-->
-        <!--        <item name="aboutPageHeaderBackground">reference|color</item>-->
-        <!--        <item name="aboutPageHeaderContentScrim">reference|color</item>-->
-        <!--        <item name="aboutPageHeaderTextColor">color</item>-->
-        <!--        <item name="aboutPageNavigationIcon">reference</item>-->
-    </style>
-
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-
-    </style>
-
     <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -39,7 +7,13 @@
     <style name="AppTheme.NoActionBar.FullScreen" parent="AppTheme.NoActionBar">
         <item name="android:windowFullscreen">true</item>
     </style>
-
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    </style>
+    <style name="AppTheme.About" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">#212121</item>
+        <item name="colorPrimaryDark">#000</item>
+        <item name="colorAccent">@android:color/black</item>
+    </style>
     <style name="SplashTheme" parent="AppTheme.NoActionBar.FullScreen">
         <item name="android:windowBackground">@drawable/splash</item>
     </style>
