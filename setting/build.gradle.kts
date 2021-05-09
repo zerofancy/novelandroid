@@ -51,6 +51,7 @@ dependencies {
 
     implementation(project(":setting_api"))
     implementation(project(":commonui"))
+    implementation(project(":commonutil"))
 
     compileOnly(Deps.AUTO_SERVICE)
     kapt(Deps.AUTO_SERVICE)
