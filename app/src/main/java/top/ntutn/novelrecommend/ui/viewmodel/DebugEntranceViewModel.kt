@@ -7,12 +7,12 @@ import com.smile.analytics.MetricsServiceDelegate
 import top.ntutn.commonutil.ClipboardUtil
 import top.ntutn.commonutil.DeviceUtil
 import top.ntutn.commonutil.showToast
-import top.ntutn.login.LoginActivity
 import top.ntutn.login.LoginServiceDelegate
+import top.ntutn.novelrecommend.BuildConfig
+import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.adapter.DebugEntrance
 import top.ntutn.novelrecommend.common.CheckedLiveData
 import top.ntutn.novelrecommend.common.InitedLiveData
-import top.ntutn.setting.SettingsActivity
 import top.ntutn.readview.BreakReadTestActivity
 import top.ntutn.readview.ReadTestActivity
 import top.ntutn.setting.SettingServiceDelegate
@@ -55,7 +55,11 @@ class DebugEntranceViewModel : ViewModel() {
                 )
                 MetricsServiceDelegate.push()
             }, DebugEntrance(title = "设置页面", owner = "liuhaixin.zero") {
-                SettingServiceDelegate.openSettingActivity(it)
+                SettingServiceDelegate.openSettingActivity(
+                    it,
+                    it.getString(R.string.app_name),
+                    BuildConfig.VERSION_NAME
+                )
             },
             DebugEntrance(title = "登陆界面", owner = "liuhaixin.zero") {
                 LoginServiceDelegate.startLoginActivity(it as FragmentActivity, 0)

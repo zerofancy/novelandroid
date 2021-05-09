@@ -15,11 +15,8 @@ import top.ntutn.novelrecommend.BuildConfig
 import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.common.viewLifecycle
 import top.ntutn.novelrecommend.databinding.FragmentMeBinding
-import top.ntutn.novelrecommend.ui.activity.AboutActivity
 import top.ntutn.novelrecommend.ui.activity.DebugHelperActivity
-import top.ntutn.setting.SettingsActivity
 import top.ntutn.novelrecommend.ui.viewmodel.main.MeViewModel
-import top.ntutn.setting.SettingService
 import top.ntutn.setting.SettingServiceDelegate
 
 class MeFragment : BaseFragment() {
@@ -44,7 +41,11 @@ class MeFragment : BaseFragment() {
 
     private fun initView() {
         binding.aboutContainer.setOnClickListener {
-            AboutActivity.actionStart(requireContext())
+            SettingServiceDelegate.openAboutActivity(
+                requireContext(),
+                getString(R.string.app_name),
+                BuildConfig.VERSION_NAME
+            )
         }
 
         binding.connectWithAuthorContainer.setOnClickListener {
@@ -79,7 +80,11 @@ class MeFragment : BaseFragment() {
         }
 
         binding.settingContainer.setOnClickListener {
-            SettingServiceDelegate.openSettingActivity(requireContext())
+            SettingServiceDelegate.openSettingActivity(
+                requireContext(),
+                getString(R.string.app_name),
+                BuildConfig.VERSION_NAME
+            )
         }
 
         binding.versionTextView.text =

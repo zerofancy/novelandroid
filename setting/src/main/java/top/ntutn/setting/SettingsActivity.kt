@@ -34,7 +34,7 @@ class SettingsActivity : BaseActivity() {
             ZeroPreferenceHelper(context, screen) {
                 ZeroPreferenceCategory("关于",
                     ZeroPreferenceNormal("关于", "关于这个应用的小故事") {
-                        "打开关于界面".showLongToast()
+                        AboutActivity.actionStart(requireContext(), "", "")//TODO
                     }
                 )
             }

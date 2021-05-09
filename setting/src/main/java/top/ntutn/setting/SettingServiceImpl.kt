@@ -5,7 +5,7 @@ import com.google.auto.service.AutoService
 
 @AutoService(SettingService::class)
 class SettingServiceImpl : SettingService {
-    override fun openSettingActivity(context: Context) {
+    override fun openSettingActivity(context: Context, appName: String, versionName: String) {
         SettingsActivity.actionStart(context)
     }
 
@@ -15,5 +15,9 @@ class SettingServiceImpl : SettingService {
 
     override fun getStringSetting(key: String): String {
         TODO("Not yet implemented")
+    }
+
+    override fun openAboutActivity(context: Context, appName: String, versionName: String) {
+        AboutActivity.actionStart(context, appName, versionName)
     }
 }

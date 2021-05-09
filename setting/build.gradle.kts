@@ -40,7 +40,7 @@ android {
 }
 
 dependencies {
-
+    implementation(Deps.ABOUT_PAGE)
     implementation(Deps.AndroidX.ACTIVITY)
     implementation(Deps.AndroidX.COMPAT)
     implementation(Deps.AndroidX.CORE)

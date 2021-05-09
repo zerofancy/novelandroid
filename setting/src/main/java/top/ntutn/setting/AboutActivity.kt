@@ -1,19 +1,34 @@
-package top.ntutn.novelrecommend.ui.activity
+package top.ntutn.setting
 
 import android.content.Context
 import android.content.Intent
 import android.widget.ImageView
 import android.widget.TextView
 import com.drakeet.about.*
-import top.ntutn.novelrecommend.BuildConfig
-import top.ntutn.novelrecommend.R
 
 class AboutActivity : AbsAboutActivity() {
+    companion object {
+        const val MIT = "MIT License"
+        const val APACHE_2 = "Apache Software License 2.0"
+        const val GPL_V3 = "GNU general public license Version 3"
+
+        const val EXTRA_APP_NAME = "app_name"
+        const val EXTRA_VERSION_NAME = "version_name"
+
+        fun actionStart(context: Context, appName: String, versionName: String) {
+            val intent = Intent(context, AboutActivity::class.java).apply {
+                putExtra(EXTRA_APP_NAME, appName)
+                putExtra(EXTRA_VERSION_NAME, versionName)
+            }
+            context.startActivity(intent)
+        }
+    }
+
     override fun onCreateHeader(icon: ImageView, slogan: TextView, version: TextView) {
-        icon.setImageResource(R.mipmap.ic_launcher_treasure)
-        title = getString(R.string.app_name)
+        icon.setImageResource(R.drawable.ic_launcher_treasure)
+        title = intent.getStringExtra(EXTRA_APP_NAME)
         slogan.text = getString(R.string.slogan)
-        version.text = "v${BuildConfig.VERSION_NAME}"
+        version.text = "v${intent.getStringExtra(EXTRA_VERSION_NAME)}"
     }
 
     override fun onItemsCreated(items: MutableList<Any>) {
@@ -117,15 +132,6 @@ class AboutActivity : AbsAboutActivity() {
                     "https://github.com/JakeWharton/timber"
                 )
             )
-        }
-    }
-
-    companion object {
-        const val MIT = "MIT License"
-        const val APACHE_2 = "Apache Software License 2.0"
-        const val GPL_V3 = "GNU general public license Version 3"
-        fun actionStart(context: Context) {
-            context.startActivity(Intent(context, AboutActivity::class.java))
         }
     }
 }
