@@ -79,7 +79,7 @@ class MainActivity : BaseActivity() {
             val eyeProtectSetting =
                 SettingServiceDelegate.getStringSetting(SettingKey.EYE_PROTECT)
             val eyeProtectEnum = SettingList.EyeProtect.values()
-                .getOrNull(eyeProtectSetting.toInt())
+                .getOrNull(eyeProtectSetting.toIntOrNull() ?: 0)
             eyeProtectColor =
                 when (eyeProtectEnum) {
                     SettingList.EyeProtect.BROWN -> EyeProtectFrameLayout.EyeProtectColor.BROWN

@@ -3,6 +3,7 @@ package top.ntutn.readview
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.RectF
+import android.text.StaticLayout
 import android.util.AttributeSet
 import android.view.MotionEvent
 import androidx.appcompat.widget.AppCompatTextView
@@ -32,10 +33,9 @@ class BreakReadView : AppCompatTextView {
     private fun getTextViewLines(): Int {
         val topOfLastLine = currentHeight - lineHeight - paddingTop - paddingBottom
 
+        // FIXME 可能出现一种情况：获取高度时layout中文字不多，获取行数不是最大行数
         val lines = layout.getLineForVertical(topOfLastLine) //staticLayout.lineCount
-        return if (maxLines > lines) {
-            lines
-        } else maxLines
+        return if (maxLines > lines) lines else maxLines
     }
 
     private fun breakStringAllowEnter(str: String, width: Int): MutableList<String> {
@@ -66,7 +66,7 @@ class BreakReadView : AppCompatTextView {
         if (textChanging) return
         originString = text.toString()
         if (currentWidth > 0) {
-            lines = breakStringAllowEnter(originString, currentWidth)
+            lines = breakStringAllowEnter(originString, currentWidth - paddingLeft - paddingRight)
             computeCurrentPageText()
         }
     }
@@ -81,7 +81,7 @@ class BreakReadView : AppCompatTextView {
         }
         currentWidth = measuredWidth
 
-        lines = breakStringAllowEnter(originString, currentWidth)
+        lines = breakStringAllowEnter(originString, currentWidth - paddingLeft - paddingRight)
         totalPageNumber = ceil(lines.size.toFloat() / pageLines.toFloat()).toInt()
         computeCurrentPageText()
     }

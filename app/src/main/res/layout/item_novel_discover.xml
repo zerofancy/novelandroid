@@ -5,12 +5,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <top.ntutn.readview.ReadView
+    <top.ntutn.readview.BreakReadView
         android:id="@+id/read_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp"
-        app:background="@drawable/white"
-        app:fontSize="16sp" />
+        android:textSize="24sp"
+        android:fontFamily="@font/zhiyong"/>
 
 </LinearLayout>
