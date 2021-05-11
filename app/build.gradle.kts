@@ -104,4 +104,6 @@ dependencies {
     implementation(project(":login"))
     implementation(project(":readview"))
     implementation(project(":zeroconfigutil"))
+    implementation(project(":setting"))
+    implementation(project(":setting_api"))
 }

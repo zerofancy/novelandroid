@@ -9,34 +9,7 @@
     <string name="save">保存</string>
     <string name="debug_notice">当前处于Debug模式，可以通过DEBUG TEST按钮进行调试</string>
     <string name="cancel">取消</string>
-    <string name="slogan">一个仿抖音模式的小说推荐系统</string>
-    <string name="description">
-        <b>本课题</b>是一个具有复杂软件工程问题特征的软件开发类题目，要求综合运用多种软件开发技术与工具，按照规范的软件开发流程研制一款具有一定实用性的软件工具。\n
-        本课题的总体目标是为小说爱好者提供一款小说预览和智能推荐系统，可根据用户的浏览习惯和个人喜好，智能为用户推荐可能会感兴趣的小说，并以类似『抖音短视频』的形式以用户友好的UI展示。该系统的开发需要运用中文信息处理、智能推荐算法等技术。本课题的主要任务如下：\n
-        \n
-        <i>1、采用中文分词技术对准备好的小说进行分析。</i>\n
-        <i>2、对分析的数据进行重复性过滤，自动分析小说中有价值信息。</i>\n
-        <i>3、采用mongodb NoSql数据库存储小说内容信息数据。</i>\n
-        <i>4、基于分析后的数据利用协同过滤算法构建推荐模型。</i>\n
-        <i>5、实现一个具有友好交互的C/S模式智能小说推荐系统。</i>\n
-        <i>6、实现推荐模型的自动更新。</i>
-    </string>
+
     <string name="about">关于</string>
     <string name="remove">移除</string>
-    <string name="title_activity_settings">SettingsActivity</string>
-
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 </resources>

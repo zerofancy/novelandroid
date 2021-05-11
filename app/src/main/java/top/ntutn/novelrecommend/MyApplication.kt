@@ -10,6 +10,8 @@ import timber.log.Timber
 import top.ntutn.commonutil.AppUtil
 import top.ntutn.novelrecommend.utils.CrashReportingTree
 import top.ntutn.novelrecommend.utils.TimeUtil
+import top.ntutn.setting.SettingService
+import top.ntutn.setting.SettingServiceDelegate
 import top.ntutn.zeroconfigutil.ZeroConfigHelper
 
 class MyApplication : Application() {
@@ -47,6 +49,8 @@ class MyApplication : Application() {
         MetricsServiceDelegate.init(applicationContext)
 
         EventBus.builder().addIndex(AppEventBusAppIndex()).installDefaultEventBus()
+        SettingService.appNameHolder = getString(R.string.app_name)
+        SettingService.versionNameHolder = BuildConfig.VERSION_NAME
     }
 
     override fun attachBaseContext(base: Context?) {
