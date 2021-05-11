@@ -42,9 +42,7 @@ class MeFragment : BaseFragment() {
     private fun initView() {
         binding.aboutContainer.setOnClickListener {
             SettingServiceDelegate.openAboutActivity(
-                requireContext(),
-                getString(R.string.app_name),
-                BuildConfig.VERSION_NAME
+                requireContext()
             )
         }
 
@@ -81,9 +79,7 @@ class MeFragment : BaseFragment() {
 
         binding.settingContainer.setOnClickListener {
             SettingServiceDelegate.openSettingActivity(
-                requireContext(),
-                getString(R.string.app_name),
-                BuildConfig.VERSION_NAME
+                requireContext()
             )
         }
 

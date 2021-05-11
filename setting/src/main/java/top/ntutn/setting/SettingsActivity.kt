@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
 import top.ntutn.commonui.base.BaseActivity
-import top.ntutn.commonutil.showLongToast
 import top.ntutn.setting.databinding.SettingsActivityBinding
 
 class SettingsActivity : BaseActivity() {
@@ -32,9 +31,18 @@ class SettingsActivity : BaseActivity() {
             val screen = preferenceManager.createPreferenceScreen(context)
 
             ZeroPreferenceHelper(context, screen) {
+                ZeroPreferenceCategory(
+                    "外观",
+                    ZeroPreferenceList(
+                        SettingKey.EYE_PROTECT,
+                        "护眼模式",
+                        "使用更柔和的光线展示",
+                        SettingList.EYE_PROTECT
+                    )
+                )
                 ZeroPreferenceCategory("关于",
                     ZeroPreferenceNormal("关于", "关于这个应用的小故事") {
-                        AboutActivity.actionStart(requireContext(), "", "")//TODO
+                        AboutActivity.actionStart(requireContext())
                     }
                 )
             }

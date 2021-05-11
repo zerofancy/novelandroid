@@ -15,10 +15,10 @@ class AboutActivity : AbsAboutActivity() {
         const val EXTRA_APP_NAME = "app_name"
         const val EXTRA_VERSION_NAME = "version_name"
 
-        fun actionStart(context: Context, appName: String, versionName: String) {
+        fun actionStart(context: Context) {
             val intent = Intent(context, AboutActivity::class.java).apply {
-                putExtra(EXTRA_APP_NAME, appName)
-                putExtra(EXTRA_VERSION_NAME, versionName)
+                putExtra(EXTRA_APP_NAME, SettingService.appNameHolder)
+                putExtra(EXTRA_VERSION_NAME, SettingService.versionNameHolder)
             }
             context.startActivity(intent)
         }

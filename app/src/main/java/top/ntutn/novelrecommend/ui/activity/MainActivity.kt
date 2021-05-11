@@ -3,26 +3,33 @@ package top.ntutn.novelrecommend.ui.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.AttributeSet
+import android.view.View
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.smile.analytics.MetricsServiceDelegate
+import top.ntutn.commonui.base.BaseActivity
+import top.ntutn.commonui.base.EyeProtectFrameLayout
 import top.ntutn.commonutil.AppUtil
 import top.ntutn.commonutil.showToast
 import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.databinding.ActivityMainBinding
-import top.ntutn.commonui.base.BaseActivity
 import top.ntutn.novelrecommend.ui.viewmodel.main.BookShelfViewModel
 import top.ntutn.novelrecommend.ui.viewmodel.main.DiscoverViewModel
 import top.ntutn.novelrecommend.utils.TimeUtil
+import top.ntutn.setting.SettingKey
+import top.ntutn.setting.SettingList
+import top.ntutn.setting.SettingServiceDelegate
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private val bookShelfViewModel by viewModels<BookShelfViewModel>()
     private val discoverViewModel by viewModels<DiscoverViewModel>()
+    private var eyeProtectLayout: EyeProtectFrameLayout? = null
 
     private var exitTime = 0L
 
@@ -35,6 +42,50 @@ class MainActivity : BaseActivity() {
         binding.navHostFragment.post {
             initView()
             initData()
+        }
+    }
+
+    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
+        try {
+            if ("FrameLayout" == name) {
+                val count = attrs.attributeCount
+                for (i in 0 until count) {
+                    val attributeName = attrs.getAttributeName(i)
+                    val attributeValue = attrs.getAttributeValue(i)
+                    if (attributeName == "id") {
+                        val id = attributeValue.substring(1).toInt()
+                        val idVal = resources.getResourceName(id)
+                        if ("android:id/content" == idVal) {
+                            eyeProtectLayout = EyeProtectFrameLayout(context, attrs)
+                            updateEyeProtectSetting()
+                            return eyeProtectLayout
+                        }
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return super.onCreateView(name, context, attrs)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateEyeProtectSetting()
+    }
+
+    private fun updateEyeProtectSetting() {
+        eyeProtectLayout?.apply {
+            val eyeProtectSetting =
+                SettingServiceDelegate.getStringSetting(SettingKey.EYE_PROTECT)
+            val eyeProtectEnum = SettingList.EyeProtect.values()
+                .getOrNull(eyeProtectSetting.toInt())
+            eyeProtectColor =
+                when (eyeProtectEnum) {
+                    SettingList.EyeProtect.BROWN -> EyeProtectFrameLayout.EyeProtectColor.BROWN
+                    SettingList.EyeProtect.GREEN -> EyeProtectFrameLayout.EyeProtectColor.GREEN
+                    else -> EyeProtectFrameLayout.EyeProtectColor.NONE
+                }
         }
     }
 

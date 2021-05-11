@@ -1,9 +1,5 @@
 package top.ntutn.setting
 
 object SettingKey {
-    enum class EyeProtect {
-        NONE,
-        GRAY,
-        GREEN
-    }
+    const val EYE_PROTECT = "eye_protect"
 }

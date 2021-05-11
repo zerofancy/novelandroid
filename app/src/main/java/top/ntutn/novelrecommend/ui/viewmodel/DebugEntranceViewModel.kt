@@ -8,8 +8,6 @@ import top.ntutn.commonutil.ClipboardUtil
 import top.ntutn.commonutil.DeviceUtil
 import top.ntutn.commonutil.showToast
 import top.ntutn.login.LoginServiceDelegate
-import top.ntutn.novelrecommend.BuildConfig
-import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.adapter.DebugEntrance
 import top.ntutn.novelrecommend.common.CheckedLiveData
 import top.ntutn.novelrecommend.common.InitedLiveData
@@ -56,9 +54,7 @@ class DebugEntranceViewModel : ViewModel() {
                 MetricsServiceDelegate.push()
             }, DebugEntrance(title = "设置页面", owner = "liuhaixin.zero") {
                 SettingServiceDelegate.openSettingActivity(
-                    it,
-                    it.getString(R.string.app_name),
-                    BuildConfig.VERSION_NAME
+                    it
                 )
             },
             DebugEntrance(title = "登陆界面", owner = "liuhaixin.zero") {
