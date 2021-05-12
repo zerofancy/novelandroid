@@ -132,6 +132,14 @@ class AboutActivity : AbsAboutActivity() {
                     "https://github.com/JakeWharton/timber"
                 )
             )
+            add(
+                License(
+                    "志勇手写体",
+                    "Joker9",
+                    "免费商用",
+                    "https://www.zcool.com.cn/work/ZMjI2MDk1MDg.html"
+                )
+            )
         }
     }
 }
