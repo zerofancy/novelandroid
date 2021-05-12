@@ -8,9 +8,11 @@ import com.drakeet.about.*
 
 class AboutActivity : AbsAboutActivity() {
     companion object {
-        const val MIT = "MIT License"
         const val APACHE_2 = "Apache Software License 2.0"
+        const val FREE_COMMERCIAL = "免费商用"
         const val GPL_V3 = "GNU general public license Version 3"
+        const val MIT = "MIT License"
+        const val OFL1_1 = "SIL OPEN FONT LICENSE Version 1.1"
 
         const val EXTRA_APP_NAME = "app_name"
         const val EXTRA_VERSION_NAME = "version_name"
@@ -56,14 +58,6 @@ class AboutActivity : AbsAboutActivity() {
                     "https://github.com/seagazer/animlogoview"
                 )
             )
-//            add(
-//                License(
-//                    "ARouter",
-//                    "阿里巴巴",
-//                    APACHE_2,
-//                    "https://github.com/alibaba/ARouter/tree/master"
-//                )
-//            )
             add(
                 License(
                     "AutoService",
@@ -78,6 +72,38 @@ class AboutActivity : AbsAboutActivity() {
                     "greenrobot",
                     APACHE_2,
                     "https://github.com/greenrobot/EventBus"
+                )
+            )
+            add(
+                License(
+                    "方正仿宋简体",
+                    "方正",
+                    FREE_COMMERCIAL,
+                    "http://www.foundertype.com/index.php/About/powerbus.html"
+                )
+            )
+            add(
+                License(
+                    "方正黑体简体",
+                    "方正",
+                    FREE_COMMERCIAL,
+                    "http://www.foundertype.com/index.php/About/powerbus.html"
+                )
+            )
+            add(
+                License(
+                    "方正楷体简体",
+                    "方正",
+                    FREE_COMMERCIAL,
+                    "http://www.foundertype.com/index.php/About/powerbus.html"
+                )
+            )
+            add(
+                License(
+                    "方正书宋简体",
+                    "方正",
+                    FREE_COMMERCIAL,
+                    "http://www.foundertype.com/index.php/About/powerbus.html"
                 )
             )
             add(
@@ -134,9 +160,17 @@ class AboutActivity : AbsAboutActivity() {
             )
             add(
                 License(
+                    "资源圆体",
+                    "CyanoHao",
+                    OFL1_1,
+                    "https://github.com/CyanoHao/Resource-Han-Rounded"
+                )
+            )
+            add(
+                License(
                     "志勇手写体",
                     "Joker9",
-                    "免费商用",
+                    FREE_COMMERCIAL,
                     "https://www.zcool.com.cn/work/ZMjI2MDk1MDg.html"
                 )
             )
