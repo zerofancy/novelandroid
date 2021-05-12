@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import top.ntutn.novelrecommend.common.CommonDiffCallback
-import top.ntutn.novelrecommend.common.CommonMutiItem
-import top.ntutn.novelrecommend.common.CommonViewHolder
+import top.ntutn.commonui.common.CommonDiffCallback
+import top.ntutn.commonui.common.CommonMutiItem
+import top.ntutn.commonui.common.CommonViewHolder
 import top.ntutn.novelrecommend.databinding.ItemDebugEntranceBinding
 
 class DebugEntranceAdapter :
@@ -42,8 +42,8 @@ class DebugEntranceAdapter :
         holder.viewBinding.root.setBackgroundColor(if (position % 2 == 1) Color.LTGRAY else Color.WHITE)
         when (holder.viewBinding) {
             is ItemDebugEntranceBinding -> {
-                holder.viewBinding.title.text = dataList[position].title
-                holder.viewBinding.owner.text = dataList[position].owner
+                (holder.viewBinding as ItemDebugEntranceBinding).title.text = dataList[position].title
+                (holder.viewBinding as ItemDebugEntranceBinding).owner.text = dataList[position].owner
                 holder.viewBinding.root.setOnClickListener { dataList[position].operation(holder.viewBinding.root.context) }
             }
             else -> Unit

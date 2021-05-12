@@ -1,4 +1,4 @@
-package top.ntutn.novelrecommend.common
+package top.ntutn.commonui.common
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding

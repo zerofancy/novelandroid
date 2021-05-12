@@ -1,4 +1,4 @@
-package top.ntutn.novelrecommend.common
+package top.ntutn.commonui.common
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*

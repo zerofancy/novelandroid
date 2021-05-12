@@ -1,4 +1,4 @@
-package top.ntutn.novelrecommend.ui.fragment
+package top.ntutn.setting
 
 import android.app.Activity
 import android.content.Intent
@@ -9,15 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import top.ntutn.commonui.base.BaseFragment
-import top.ntutn.commonutil.showSnackBar
 import top.ntutn.login.LoginServiceDelegate
-import top.ntutn.novelrecommend.BuildConfig
-import top.ntutn.novelrecommend.R
-import top.ntutn.novelrecommend.common.viewLifecycle
-import top.ntutn.novelrecommend.databinding.FragmentMeBinding
-import top.ntutn.novelrecommend.ui.activity.DebugHelperActivity
-import top.ntutn.novelrecommend.ui.viewmodel.main.MeViewModel
-import top.ntutn.setting.SettingServiceDelegate
+import top.ntutn.commonui.common.viewLifecycle
+import top.ntutn.commonutil.showSnackBar
+import top.ntutn.setting.databinding.FragmentMeBinding
 
 class MeFragment : BaseFragment() {
     companion object {
@@ -84,12 +79,12 @@ class MeFragment : BaseFragment() {
         }
 
         binding.versionTextView.text =
-            "Version(${if (BuildConfig.DEBUG) "DEBUG" else "RELEASE"}): v${BuildConfig.VERSION_NAME}"
+            "Version(${if (BuildConfig.DEBUG) "DEBUG" else "RELEASE"}): v${SettingService.versionNameHolder}"
 
         if (BuildConfig.DEBUG) {
             binding.debugToolContainer.visibility = View.VISIBLE
             binding.debugToolContainer.setOnClickListener {
-                DebugHelperActivity.actionStart(this.requireContext())
+                DebugServiceDelegate.openDebugActivity(this.requireContext())
             }
         }
 

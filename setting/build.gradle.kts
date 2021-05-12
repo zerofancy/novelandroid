@@ -42,16 +42,21 @@ android {
 dependencies {
     implementation(Deps.ABOUT_PAGE)
     implementation(Deps.AndroidX.ACTIVITY)
+    implementation(Deps.AndroidX.ACTIVITY_KTX)
     implementation(Deps.AndroidX.COMPAT)
+    implementation(Deps.AndroidX.CONSTRAINT_LAYOUT)
     implementation(Deps.AndroidX.CORE)
     implementation(Deps.AndroidX.FRAGMENT)
+    implementation(Deps.AndroidX.FRAGMENT_KTX)
     implementation(Deps.AndroidX.PREFERENCE)
+    implementation(Deps.FRESCO)
     implementation(Deps.Kotlin.STD_LIB)
     implementation(Deps.MATERIAL)
 
     implementation(project(":setting_api"))
     implementation(project(":commonui"))
     implementation(project(":commonutil"))
+    implementation(project(":login_api"))
 
     compileOnly(Deps.AUTO_SERVICE)
     kapt(Deps.AUTO_SERVICE)

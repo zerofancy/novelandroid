@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import top.ntutn.novelrecommend.adapter.DebugEntranceAdapter
-import top.ntutn.novelrecommend.common.viewLifecycle
+import top.ntutn.commonui.common.viewLifecycle
 import top.ntutn.novelrecommend.databinding.FragmentDebugEntranceBinding
 import top.ntutn.commonui.base.BaseFragment
 import top.ntutn.novelrecommend.ui.viewmodel.DebugEntranceViewModel

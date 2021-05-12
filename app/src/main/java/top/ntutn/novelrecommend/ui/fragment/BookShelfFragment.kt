@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import top.ntutn.novelrecommend.adapter.BookShelfAdapter
-import top.ntutn.novelrecommend.common.SimpleItemDecoration
-import top.ntutn.novelrecommend.common.viewLifecycle
+import top.ntutn.commonui.common.SimpleItemDecoration
+import top.ntutn.commonui.common.viewLifecycle
 import top.ntutn.novelrecommend.databinding.FragmentBookshelfBinding
 import top.ntutn.commonui.base.BaseFragment
 import top.ntutn.novelrecommend.ui.viewmodel.main.BookShelfViewModel

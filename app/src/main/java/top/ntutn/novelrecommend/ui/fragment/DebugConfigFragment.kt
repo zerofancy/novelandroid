@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.greenrobot.eventbus.Subscribe
 import top.ntutn.novelrecommend.adapter.DebugConfigAdapter
-import top.ntutn.novelrecommend.common.viewLifecycle
+import top.ntutn.commonui.common.viewLifecycle
 import top.ntutn.novelrecommend.databinding.FragmentDebugConfigBinding
 import top.ntutn.novelrecommend.ui.viewmodel.DebugConfigViewModel
 import top.ntutn.commonui.base.BaseFragment

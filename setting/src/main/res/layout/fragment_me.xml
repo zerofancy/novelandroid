@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EEE"
-    tools:context=".ui.fragment.MeFragment">
+    tools:context="top.ntutn.setting.MeFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -33,7 +33,8 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:placeholderImage="@drawable/default_avatar"
-                    app:roundAsCircle="true" />
+                    app:roundAsCircle="true"
+                    android:layout_marginLeft="32dp" />
 
                 <TextView
                     android:id="@+id/nickname_text_view"
@@ -44,7 +45,8 @@
                     android:text="未登录"
                     android:textSize="20sp"
                     app:layout_constraintLeft_toRightOf="@id/avatar"
-                    app:layout_constraintTop_toTopOf="@id/avatar" />
+                    app:layout_constraintTop_toTopOf="@id/avatar"
+                    android:layout_marginLeft="16dp" />
 
                 <TextView
                     android:id="@+id/description_text_view"
@@ -56,7 +58,8 @@
                     android:text="我曾见过一朵美丽的花，她开得如此绚烂，然后就凋零了。"
                     app:layout_constraintLeft_toLeftOf="@id/nickname_text_view"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/nickname_text_view" />
+                    app:layout_constraintTop_toBottomOf="@id/nickname_text_view"
+                    android:layout_marginRight="16dp" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
@@ -164,7 +167,8 @@
                     android:gravity="center_vertical"
                     android:text="关于"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:layout_marginLeft="8dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -202,19 +206,6 @@
                 android:layout_marginTop="32dp"
                 android:gravity="center"
                 android:text="版本号：v1.0" />
-            <!--            <Button-->
-            <!--                android:id="@+id/aboutButton"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:text="@string/about" />-->
-
-            <!--            <Button-->
-            <!--                android:id="@+id/debugButton"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:text="Debug Test"-->
-            <!--                android:visibility="gone"-->
-            <!--                tools:visibility="visible" />-->
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
