@@ -8,10 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import top.ntutn.commonui.base.BaseFragment
+import top.ntutn.commonui.common.SimpleItemDecoration
+import top.ntutn.commonui.common.SpacesItemDecoration
 import top.ntutn.login.LoginServiceDelegate
 import top.ntutn.commonui.common.viewLifecycle
+import top.ntutn.commonutil.dp
 import top.ntutn.commonutil.showSnackBar
+import top.ntutn.commonutil.sp
 import top.ntutn.setting.databinding.FragmentMeBinding
 
 class MeFragment : BaseFragment() {
@@ -35,57 +41,82 @@ class MeFragment : BaseFragment() {
     }
 
     private fun initView() {
-        binding.aboutContainer.setOnClickListener {
-            SettingServiceDelegate.openAboutActivity(
-                requireContext()
+        val meSettingAdapter = MeSettingAdapter().apply {
+            addSettingItem(
+                MeSettingAdapter.MeSetting(
+                    key = "connect_with_author",
+                    title = "联系作者",
+                    iconRes = R.drawable.ic_mail,
+                ) {
+                    val intent = Intent(Intent.ACTION_VIEW).apply {
+                        data = Uri.parse("mailto:")
+                        putExtra(Intent.EXTRA_EMAIL, "ntutn.top@gmail.com")
+                        putExtra(Intent.EXTRA_SUBJECT, "书虫软件使用咨询")
+                        putExtra(Intent.EXTRA_TEXT, "你好，我是《书虫》软件的用户，我有一些问题需要咨询……")
+                    }
+
+                    if (intent.resolveActivity(requireContext().packageManager) != null) {
+                        startActivity(intent)
+                    } else {
+                        it.showSnackBar("未找到电子邮件应用！")
+                    }
+                }
             )
-        }
-
-        binding.connectWithAuthorContainer.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.parse("mailto:")
-                putExtra(Intent.EXTRA_EMAIL, "ntutn.top@gmail.com")
-                putExtra(Intent.EXTRA_SUBJECT, "书虫软件使用咨询")
-                putExtra(Intent.EXTRA_TEXT, "你好，我是《书虫》软件的用户，我有一些问题需要咨询……")
-            }
-
-            if (intent.resolveActivity(requireContext().packageManager) != null) {
-                startActivity(intent)
-            } else {
-                it.showSnackBar("未找到电子邮件应用！")
-            }
-        }
-
-        binding.shareContainer.setOnClickListener {
-            val sendIntent: Intent = Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(
-                    Intent.EXTRA_TEXT,
-                    """
+            addSettingItem(
+                MeSettingAdapter.MeSetting(
+                    key = "share",
+                    iconRes = R.drawable.ic_share,
+                    title = "分享"
+                ) {
+                    val sendIntent: Intent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(
+                            Intent.EXTRA_TEXT,
+                            """
                     我正在使用《书虫》免费发现精品好书，你也来试试吧！
                     """.trimIndent()
-                )
-                type = "text/plain"
-            }
+                        )
+                        type = "text/plain"
+                    }
 
-            val shareIntent = Intent.createChooser(sendIntent, null)
-            startActivity(shareIntent)
-        }
-
-        binding.settingContainer.setOnClickListener {
-            SettingServiceDelegate.openSettingActivity(
-                requireContext()
+                    val shareIntent = Intent.createChooser(sendIntent, null)
+                    startActivity(shareIntent)
+                }
             )
-        }
-
-        binding.versionTextView.text =
-            "Version(${if (BuildConfig.DEBUG) "DEBUG" else "RELEASE"}): v${SettingService.versionNameHolder}"
-
-        if (BuildConfig.DEBUG) {
-            binding.debugToolContainer.visibility = View.VISIBLE
-            binding.debugToolContainer.setOnClickListener {
-                DebugServiceDelegate.openDebugActivity(this.requireContext())
+            addSettingItem(
+                MeSettingAdapter.MeSetting(
+                    key = "setting",
+                    iconRes = R.drawable.ic_setting,
+                    title = "设置"
+                ) {
+                    SettingServiceDelegate.openSettingActivity(requireContext())
+                }
+            )
+            addSettingItem(
+                MeSettingAdapter.MeSetting(
+                    key = "about",
+                    iconRes = R.drawable.ic_info,
+                    title = "关于"
+                ) {
+                    SettingServiceDelegate.openAboutActivity(requireContext())
+                }
+            )
+            if (BuildConfig.DEBUG) {
+                addSettingItem(
+                    MeSettingAdapter.MeSetting(
+                        key = "debug_tool",
+                        iconRes = R.drawable.ic_setting_config,
+                        title = "Debug工具"
+                    ) {
+                        DebugServiceDelegate.openDebugActivity(requireContext())
+                    }
+                )
             }
+        }
+        binding.meSettingRecyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = meSettingAdapter
+            addItemDecoration(SpacesItemDecoration(6.dp, RecyclerView.VERTICAL))
         }
 
         binding.userInfoContainer.setOnClickListener {

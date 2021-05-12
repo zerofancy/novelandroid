@@ -7,205 +7,63 @@
     android:background="#EEE"
     tools:context="top.ntutn.setting.MeFragment">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/user_info_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="150dp"
+            android:background="@color/white">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/user_info_container"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:background="@color/white">
-
-                <com.facebook.drawee.view.SimpleDraweeView
-                    android:id="@+id/avatar"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="32dp"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:placeholderImage="@drawable/default_avatar"
-                    app:roundAsCircle="true"
-                    android:layout_marginLeft="32dp" />
-
-                <TextView
-                    android:id="@+id/nickname_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:text="未登录"
-                    android:textSize="20sp"
-                    app:layout_constraintLeft_toRightOf="@id/avatar"
-                    app:layout_constraintTop_toTopOf="@id/avatar"
-                    android:layout_marginLeft="16dp" />
-
-                <TextView
-                    android:id="@+id/description_text_view"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="16dp"
-                    android:maxLines="2"
-                    android:text="我曾见过一朵美丽的花，她开得如此绚烂，然后就凋零了。"
-                    app:layout_constraintLeft_toLeftOf="@id/nickname_text_view"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/nickname_text_view"
-                    android:layout_marginRight="16dp" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <LinearLayout
-                android:id="@+id/connect_with_author_container"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginStart="16dp"
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/avatar"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
                 android:layout_marginTop="32dp"
-                android:layout_marginEnd="16dp"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp">
-
-                <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/ic_mail" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="8dp"
-                    android:gravity="center_vertical"
-                    android:text="联系作者"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/share_container"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp">
-
-                <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/ic_share" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="8dp"
-                    android:gravity="center_vertical"
-                    android:text="分享"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/setting_container"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp">
-
-                <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/ic_setting" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="8dp"
-                    android:gravity="center_vertical"
-                    android:text="设置"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/about_container"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp">
-
-                <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/ic_info" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="8dp"
-                    android:gravity="center_vertical"
-                    android:text="关于"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:layout_marginLeft="8dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/debug_tool_container"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:visibility="gone">
-
-                <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/ic_setting_config" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="8dp"
-                    android:gravity="center_vertical"
-                    android:text="Debug工具"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-            </LinearLayout>
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:placeholderImage="@drawable/default_avatar"
+                app:roundAsCircle="true" />
 
             <TextView
-                android:id="@+id/version_text_view"
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:layout_marginTop="32dp"
-                android:gravity="center"
-                android:text="版本号：v1.0" />
-        </LinearLayout>
-    </ScrollView>
+                android:id="@+id/nickname_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:text="未登录"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toRightOf="@id/avatar"
+                app:layout_constraintTop_toTopOf="@id/avatar" />
+
+            <TextView
+                android:id="@+id/description_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:maxLines="2"
+                android:text="我曾见过一朵美丽的花，她开得如此绚烂，然后就凋零了。"
+                app:layout_constraintLeft_toLeftOf="@id/nickname_text_view"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nickname_text_view" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/me_setting_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:layout_marginTop="32dp"/>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

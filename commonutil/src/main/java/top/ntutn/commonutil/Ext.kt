@@ -1,5 +1,6 @@
 package top.ntutn.commonutil
 
+import android.util.TypedValue
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
@@ -43,3 +44,17 @@ fun View.showSnackBar(
     }
     snackbar.show()
 }
+
+val Int.sp: Int
+    get() = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_SP,
+        this.toFloat(),
+        AppUtil.getApplicationContext().resources.displayMetrics
+    ).toInt()
+
+val Int.dp:Int
+    get() = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        this.toFloat(),
+        AppUtil.getApplicationContext().resources.displayMetrics
+    ).toInt()
