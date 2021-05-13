@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import top.ntutn.commonutil.AppUtil
 import top.ntutn.novelrecommend.R
-import top.ntutn.novelrecommend.common.CommonViewHolder
+import top.ntutn.commonui.common.CommonViewHolder
 import top.ntutn.novelrecommend.databinding.ItemBookshelfBinding
 import top.ntutn.novelrecommend.databinding.ItemBookshelfFooterBinding
 import top.ntutn.novelrecommend.databinding.ItemBookshelfTitleBinding

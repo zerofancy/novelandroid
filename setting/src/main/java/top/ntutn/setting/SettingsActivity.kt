@@ -32,6 +32,21 @@ class SettingsActivity : BaseActivity() {
 
             ZeroPreferenceHelper(context, screen) {
                 ZeroPreferenceCategory(
+                    "阅读器",
+                    ZeroPreferenceList(
+                        SettingKey.FONT_TYPE,
+                        "字体类型",
+                        "修改阅读器使用的字体类型",
+                        SettingList.FONT_TYPE
+                    ),
+                    ZeroPreferenceSeekbar(
+                        SettingKey.FONT_SIZE,
+                        "字号",
+                        "设置阅读器的字号",
+                        18, 30
+                    )
+                )
+                ZeroPreferenceCategory(
                     "外观",
                     ZeroPreferenceList(
                         SettingKey.EYE_PROTECT,

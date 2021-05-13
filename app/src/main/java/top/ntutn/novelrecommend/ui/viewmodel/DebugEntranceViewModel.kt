@@ -9,8 +9,8 @@ import top.ntutn.commonutil.DeviceUtil
 import top.ntutn.commonutil.showToast
 import top.ntutn.login.LoginServiceDelegate
 import top.ntutn.novelrecommend.adapter.DebugEntrance
-import top.ntutn.novelrecommend.common.CheckedLiveData
-import top.ntutn.novelrecommend.common.InitedLiveData
+import top.ntutn.commonui.common.CheckedLiveData
+import top.ntutn.commonui.common.InitedLiveData
 import top.ntutn.readview.BreakReadTestActivity
 import top.ntutn.readview.ReadTestActivity
 import top.ntutn.setting.SettingServiceDelegate

@@ -15,10 +15,12 @@ import top.ntutn.commonui.base.BaseActivity
 import top.ntutn.commonui.base.EyeProtectFrameLayout
 import top.ntutn.commonutil.AppUtil
 import top.ntutn.commonutil.showToast
+import top.ntutn.novelrecommend.BuildConfig
 import top.ntutn.novelrecommend.R
 import top.ntutn.novelrecommend.databinding.ActivityMainBinding
 import top.ntutn.novelrecommend.ui.viewmodel.main.BookShelfViewModel
 import top.ntutn.novelrecommend.ui.viewmodel.main.DiscoverViewModel
+import top.ntutn.novelrecommend.ui.viewmodel.main.MainViewModel
 import top.ntutn.novelrecommend.utils.TimeUtil
 import top.ntutn.setting.SettingKey
 import top.ntutn.setting.SettingList
@@ -27,6 +29,7 @@ import top.ntutn.setting.SettingServiceDelegate
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+    private val mainViewModel by viewModels<MainViewModel>()
     private val bookShelfViewModel by viewModels<BookShelfViewModel>()
     private val discoverViewModel by viewModels<DiscoverViewModel>()
     private var eyeProtectLayout: EyeProtectFrameLayout? = null
@@ -57,7 +60,7 @@ class MainActivity : BaseActivity() {
                         val idVal = resources.getResourceName(id)
                         if ("android:id/content" == idVal) {
                             eyeProtectLayout = EyeProtectFrameLayout(context, attrs)
-                            updateEyeProtectSetting()
+                            mainViewModel.updateEyeProtectMode()
                             return eyeProtectLayout
                         }
                     }
@@ -71,23 +74,9 @@ class MainActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        updateEyeProtectSetting()
+        mainViewModel.updateEyeProtectMode()
     }
 
-    private fun updateEyeProtectSetting() {
-        eyeProtectLayout?.apply {
-            val eyeProtectSetting =
-                SettingServiceDelegate.getStringSetting(SettingKey.EYE_PROTECT)
-            val eyeProtectEnum = SettingList.EyeProtect.values()
-                .getOrNull(eyeProtectSetting.toIntOrNull() ?: 0)
-            eyeProtectColor =
-                when (eyeProtectEnum) {
-                    SettingList.EyeProtect.BROWN -> EyeProtectFrameLayout.EyeProtectColor.BROWN
-                    SettingList.EyeProtect.GREEN -> EyeProtectFrameLayout.EyeProtectColor.GREEN
-                    else -> EyeProtectFrameLayout.EyeProtectColor.NONE
-                }
-        }
-    }
 
     private fun initView() {
         navController = binding.navHostFragment.findNavController()
@@ -102,7 +91,13 @@ class MainActivity : BaseActivity() {
         //setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
 
-        getString(R.string.debug_notice).showToast()
+        mainViewModel.eyeProtectMode.observe(this) {
+            eyeProtectLayout?.eyeProtectColor = it
+        }
+
+        if (BuildConfig.DEBUG) {
+            getString(R.string.debug_notice).showToast()
+        }
     }
 
     private fun initData() {

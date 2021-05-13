@@ -68,6 +68,8 @@ dependencies {
     implementation(Deps.AndroidX.PREFERENCE)
     implementation(Deps.AndroidX.VECTOR_DRAWABLE)
     implementation(Deps.AndroidX.VIEW_MODEL_KTX)
+    implementation(Deps.AUTO_SERVICE)
+    kapt(Deps.AUTO_SERVICE)
 
     implementation(Deps.MATERIAL)
     implementation(project(mapOf("path" to ":login_api")))

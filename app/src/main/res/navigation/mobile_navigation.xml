@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_me"
-        android:name="top.ntutn.novelrecommend.ui.fragment.MeFragment"
+        android:name="top.ntutn.setting.MeFragment"
         android:label="@string/title_me"
         tools:layout="@layout/fragment_me" />
 </navigation>

@@ -8,7 +8,7 @@ import androidx.fragment.app.activityViewModels
 import com.dingmouren.layoutmanagergroup.viewpager.OnViewPagerListener
 import com.dingmouren.layoutmanagergroup.viewpager.ViewPagerLayoutManager
 import top.ntutn.novelrecommend.adapter.NovelDiscoverAdapter
-import top.ntutn.novelrecommend.common.viewLifecycle
+import top.ntutn.commonui.common.viewLifecycle
 import top.ntutn.novelrecommend.databinding.FragmentDiscoverBinding
 import top.ntutn.commonui.base.BaseFragment
 import top.ntutn.novelrecommend.ui.viewmodel.main.DiscoverViewModel

@@ -5,8 +5,8 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import top.ntutn.novelrecommend.common.CheckedLiveData
-import top.ntutn.novelrecommend.common.InitedLiveData
+import top.ntutn.commonui.common.CheckedLiveData
+import top.ntutn.commonui.common.InitedLiveData
 import top.ntutn.zeroconfigutil.ZeroConfigHelper
 
 class ConfigEditViewModel : ViewModel() {

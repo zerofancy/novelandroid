@@ -3,7 +3,7 @@ package top.ntutn.readview
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.RectF
-import android.text.StaticLayout
+import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.MotionEvent
 import androidx.appcompat.widget.AppCompatTextView
@@ -30,10 +30,23 @@ class BreakReadView : AppCompatTextView {
         defStyleAttr
     )
 
+    fun changeFont(path: String) {
+        val typeface = Typeface.createFromAsset(context.assets, path)
+        setTypeface(typeface)
+        rebreakString()
+    }
+
+    /**
+     * @param textSize 单位sp
+     */
+    fun changeTextSize(textSize: Float) {
+        setTextSize(textSize)
+        rebreakString()
+    }
+
     private fun getTextViewLines(): Int {
         val topOfLastLine = currentHeight - lineHeight - paddingTop - paddingBottom
 
-        // FIXME 可能出现一种情况：获取高度时layout中文字不多，获取行数不是最大行数
         val lines = layout.getLineForVertical(topOfLastLine) //staticLayout.lineCount
         return if (maxLines > lines) lines else maxLines
     }
@@ -66,8 +79,7 @@ class BreakReadView : AppCompatTextView {
         if (textChanging) return
         originString = text.toString()
         if (currentWidth > 0) {
-            lines = breakStringAllowEnter(originString, currentWidth - paddingLeft - paddingRight)
-            computeCurrentPageText()
+            rebreakString()
         }
     }
 
@@ -81,6 +93,13 @@ class BreakReadView : AppCompatTextView {
         }
         currentWidth = measuredWidth
 
+        rebreakString()
+    }
+
+    /**
+     * 重新计算行数据
+     */
+    private fun rebreakString() {
         lines = breakStringAllowEnter(originString, currentWidth - paddingLeft - paddingRight)
         totalPageNumber = ceil(lines.size.toFloat() / pageLines.toFloat()).toInt()
         computeCurrentPageText()
@@ -146,6 +165,9 @@ class BreakReadView : AppCompatTextView {
         return false
     }
 
+    /**
+     * 计算当前页面文字
+     */
     private fun computeCurrentPageText() {
         if (lines.isNullOrEmpty() || pageLines <= 0) {
             return
@@ -154,7 +176,7 @@ class BreakReadView : AppCompatTextView {
         text = lines.subList(
             pageLines * currentPageNumber,
             min(pageLines * currentPageNumber + pageLines, lines.size)
-        ).joinToString("\n")
+        ).joinToString("\n") + "\u3000".repeat(1000) // 附加一些空行，避免当前页面内容不满
         textChanging = false
     }
 }

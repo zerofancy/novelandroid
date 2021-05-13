@@ -12,5 +12,15 @@ object SettingList {
         GREEN("墨绿")
     }
 
+    enum class FontType(override val title: String) : SettingListEnum {
+        FANGSONG("方正仿宋"),
+        HEITI("方正黑体"),
+        KAITI("方正楷体"),
+        SHUSONG("方正书宋"),
+        YUANTI("资源圆体"),
+        SHOUXIE("志勇手写体")
+    }
+
     val EYE_PROTECT = EyeProtect.values().toList()
+    val FONT_TYPE = FontType.values().toList()
 }

@@ -1,10 +1,7 @@
 package top.ntutn.setting
 
 import android.content.Context
-import androidx.preference.ListPreference
-import androidx.preference.Preference
-import androidx.preference.PreferenceCategory
-import androidx.preference.PreferenceScreen
+import androidx.preference.*
 
 class ZeroPreferenceHelper(
     val context: Context,
@@ -51,4 +48,13 @@ class ZeroPreferenceHelper(
         screen.addPreference(category)
         preferences.forEach { category.addPreference(it) }
     }
+
+    fun ZeroPreferenceSeekbar(keyString: String,titleString: String,summaryString:String, minValue: Int, maxValue: Int) =
+        SeekBarPreference(context).apply {
+            key = keyString
+            title = titleString
+            summary = summaryString
+            min = minValue
+            max = maxValue
+        }
 }
