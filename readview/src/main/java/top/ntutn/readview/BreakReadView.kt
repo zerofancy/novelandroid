@@ -97,9 +97,8 @@ class BreakReadView : AppCompatTextView {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         if (currentWidth == measuredWidth && currentHeight == measuredHeight) return
         currentHeight = measuredHeight
-        if (currentWidth != measuredWidth) {
-            pageLines = getTextViewLines()
-        }
+        // 高度或宽度改变后重新计算页面行数
+        pageLines = getTextViewLines()
         currentWidth = measuredWidth
 
         rebreakString()
