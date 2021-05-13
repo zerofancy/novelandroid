@@ -5,17 +5,21 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
+import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
-import android.widget.LinearLayout
+import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.viewModels
+import top.ntutn.commonui.base.BaseActivity
 import top.ntutn.novelrecommend.databinding.ActivityNovelReadBinding
+import top.ntutn.novelrecommend.ui.viewmodel.NovelReadViewModel
 
 /**
  * 阅读小说的Activity
  */
-class NovelReadActivity : AppCompatActivity() {
+class NovelReadActivity : BaseActivity() {
     companion object {
         /**
          * Whether or not the system UI should be auto-hidden after
@@ -50,8 +54,9 @@ class NovelReadActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNovelReadBinding
     private lateinit var fullscreenContent: TextView
-    private lateinit var fullscreenContentControls: LinearLayout
-    private val hideHandler = Handler()
+    private lateinit var fullscreenContentControls: ViewGroup
+    private val hideHandler = Handler(Looper.getMainLooper())
+    private val novelReadViewModel by viewModels<NovelReadViewModel>()
 
     @SuppressLint("InlinedApi")
     private val hidePart2Runnable = Runnable {
@@ -103,8 +108,6 @@ class NovelReadActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        isFullscreen = true
-
         // Set up the user interaction to manually show or hide the system UI.
         fullscreenContent = binding.fullscreenContent
         fullscreenContent.setOnClickListener { toggle() }
@@ -115,6 +118,11 @@ class NovelReadActivity : AppCompatActivity() {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         binding.dummyButton.setOnTouchListener(delayHideTouchListener)
+
+        novelReadViewModel.fetchNovelInfo(intent.getLongExtra(PARAM_NOVEL_ID, 0))
+        novelReadViewModel.title.observe(this) {
+            title = it
+        }
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -123,14 +131,31 @@ class NovelReadActivity : AppCompatActivity() {
         // Trigger the initial hide() shortly after the activity has been
         // created, to briefly hint to the user that UI controls
         // are available.
-        delayedHide(100)
+//        delayedHide(100)
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> finish()
+            else -> return false
+        }
+        return true
+    }
+
+    override fun onBackPressed() {
+        if (isFullscreen) {
+            show()
+            return
+        }
+        super.onBackPressed()
+    }
+
 
     private fun toggle() {
         if (isFullscreen) {
-            hide()
-        } else {
             show()
+        } else {
+            hide()
         }
     }
 
@@ -138,7 +163,7 @@ class NovelReadActivity : AppCompatActivity() {
         // Hide UI first
         supportActionBar?.hide()
         fullscreenContentControls.visibility = View.GONE
-        isFullscreen = false
+        isFullscreen = true
 
         // Schedule a runnable to remove the status and navigation bar after a delay
         hideHandler.removeCallbacks(showPart2Runnable)
@@ -150,7 +175,7 @@ class NovelReadActivity : AppCompatActivity() {
         fullscreenContent.systemUiVisibility =
             View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
                     View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-        isFullscreen = true
+        isFullscreen = false
 
         // Schedule a runnable to display UI elements after a delay
         hideHandler.removeCallbacks(hidePart2Runnable)

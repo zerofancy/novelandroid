@@ -27,6 +27,15 @@ import top.ntutn.setting.SettingList
 import top.ntutn.setting.SettingServiceDelegate
 
 class MainActivity : BaseActivity() {
+    companion object {
+        // 两次返回退出的时间间隔
+        private const val EXIT_TIME = 2000L
+
+        fun actionStart(context: Context) {
+            context.startActivity(Intent(context, MainActivity::class.java))
+        }
+    }
+
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private val mainViewModel by viewModels<MainViewModel>()
@@ -152,14 +161,5 @@ class MainActivity : BaseActivity() {
         // 这里记录的TimeUtils.coldStartTime是指Application启动的时间，最终的冷启动时间等于Application启动时间+热启动时间
         TimeUtil.sColdStartTime = if (coldStartTime > 0) coldStartTime else 0
         TimeUtil.beginTimeCalculate(TimeUtil.HOT_START)
-    }
-
-    companion object {
-        // 两次返回退出的时间间隔
-        private const val EXIT_TIME = 2000L
-
-        fun actionStart(context: Context) {
-            context.startActivity(Intent(context, MainActivity::class.java))
-        }
     }
 }
