@@ -10,11 +10,11 @@ import kotlinx.coroutines.withContext
 import retrofit2.await
 import timber.log.Timber
 import top.ntutn.commonutil.DeviceUtil
+import top.ntutn.commonutil.RetrofitUtil
 import top.ntutn.novelrecommend.NovelService
 import top.ntutn.commonui.common.CheckedLiveData
 import top.ntutn.commonui.common.InitedLiveData
 import top.ntutn.novelrecommend.model.NovelModel
-import top.ntutn.commonutil.RetrofitUtil
 
 class DiscoverViewModel : ViewModel() {
     private val _novelList =
@@ -47,6 +47,9 @@ class DiscoverViewModel : ViewModel() {
                     _novelList.value.addAll(getNovel())
                 } catch (e: Exception) {
                     Timber.e(e, "获取小说失败")
+                }
+                if (_novelList.value.isNullOrEmpty()) {
+                    _novelList.value.add(NovelModel(description = "网络错误！"))
                 }
                 _novelList.value
             }

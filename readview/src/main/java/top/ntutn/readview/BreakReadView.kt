@@ -11,6 +11,10 @@ import kotlin.math.ceil
 import kotlin.math.min
 
 class BreakReadView : AppCompatTextView {
+    companion object {
+        private val PAGE_LAST_TEXT = "\n" + "\u3000".repeat(1000) + "."
+    }
+
     private var currentWidth = 0
     private var currentHeight = 0
     private var textChanging = false
@@ -46,7 +50,7 @@ class BreakReadView : AppCompatTextView {
 
     private fun getTextViewLines(): Int {
         val topOfLastLine = currentHeight - lineHeight - paddingTop - paddingBottom
-
+        text
         val lines = layout.getLineForVertical(topOfLastLine) //staticLayout.lineCount
         return if (maxLines > lines) lines else maxLines
     }
@@ -75,9 +79,14 @@ class BreakReadView : AppCompatTextView {
     }
 
     override fun setText(text: CharSequence?, type: BufferType?) {
-        super.setText(text, type)
-        if (textChanging) return
+        if (textChanging) {
+            super.setText(text, type)
+            return
+        }
         originString = text.toString()
+        textChanging = true
+        super.setText(originString + PAGE_LAST_TEXT, type) // 附加一些空行，避免页面内容不满
+        textChanging = false
         if (currentWidth > 0) {
             rebreakString()
         }
@@ -101,11 +110,17 @@ class BreakReadView : AppCompatTextView {
      */
     private fun rebreakString() {
         lines = breakStringAllowEnter(originString, currentWidth - paddingLeft - paddingRight)
+        pageLines = getTextViewLines()
         totalPageNumber = ceil(lines.size.toFloat() / pageLines.toFloat()).toInt()
         computeCurrentPageText()
     }
 
-    fun getPageCount() = lines.size / pageLines + if (lines.size % pageLines > 0) 1 else 0
+    fun getPageCount(): Int {
+        if (pageLines == 0) {
+            return 1
+        }
+        return lines.size / pageLines + if (lines.size % pageLines > 0) 1 else 0
+    }
 
     fun getCurrentPage() = currentPageNumber
 
@@ -172,11 +187,14 @@ class BreakReadView : AppCompatTextView {
         if (lines.isNullOrEmpty() || pageLines <= 0) {
             return
         }
+        if (currentPageNumber < 0 || currentPageNumber > totalPageNumber - 1) {
+            currentPageNumber = 0
+        }
         textChanging = true
         text = lines.subList(
             pageLines * currentPageNumber,
             min(pageLines * currentPageNumber + pageLines, lines.size)
-        ).joinToString("\n") + "\u3000".repeat(1000) // 附加一些空行，避免当前页面内容不满
+        ).joinToString("\n") + PAGE_LAST_TEXT // 附加一些空行，避免当前页面内容不满
         textChanging = false
     }
 }

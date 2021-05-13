@@ -74,7 +74,7 @@ class NovelDiscoverAdapter(private val discoverFragment: DiscoverFragment) :
                     }
                 }
             }
-            readView.text = novelList[position].content ?: ""
+            readView.text = novelList[position].description ?: ""
         }
     }
 
