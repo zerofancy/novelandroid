@@ -150,7 +150,6 @@ class NovelReadActivity : BaseActivity() {
         binding.apply {
             likeButton.setOnClickListener {
                 likeButton.toggle()
-                bookShelfViewModel
             }
             starButton.setOnClickListener {
                 starButton.toggle()
@@ -168,6 +167,7 @@ class NovelReadActivity : BaseActivity() {
         }
         bookShelfViewModel.books.observe(this) {
             binding.starButton.setCheckedWithoutAnimator((it.find { it.id == currentNovelId }) != null)
+            bookShelfViewModel.books.removeObservers(this)
         }
         // 初始化点赞状态
 //        binding.likeButton.setCheckedWithoutAnimator(discoverViewModel.novelList.value[discoverViewModel.currentPosition.value].isLiked)
