@@ -17,6 +17,7 @@ import top.ntutn.commonutil.AppUtil
 import top.ntutn.commonutil.showSnackBar
 import top.ntutn.novelrecommend.databinding.ActivityNovelReadBinding
 import top.ntutn.novelrecommend.ui.viewmodel.NovelReadViewModel
+import top.ntutn.novelrecommend.ui.viewmodel.main.BookShelfViewModel
 
 /**
  * 阅读小说的Activity
@@ -61,6 +62,7 @@ class NovelReadActivity : BaseActivity() {
     private lateinit var fullscreenContentControls: ViewGroup
     private val hideHandler = Handler(Looper.getMainLooper())
     private val novelReadViewModel by viewModels<NovelReadViewModel>()
+    private val bookShelfViewModel by viewModels<BookShelfViewModel>()
 
     @SuppressLint("InlinedApi")
     private val hidePart2Runnable = Runnable {
@@ -103,6 +105,8 @@ class NovelReadActivity : BaseActivity() {
         false
     }
 
+    private var currentNovelId: Long = 0
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -128,7 +132,8 @@ class NovelReadActivity : BaseActivity() {
         // while interacting with the UI.
         binding.startReadButton.setOnTouchListener(delayHideTouchListener)
 
-        novelReadViewModel.fetchNovelInfo(intent.getLongExtra(PARAM_NOVEL_ID, 0))
+        currentNovelId = intent.getLongExtra(PARAM_NOVEL_ID, 0)
+        novelReadViewModel.fetchNovelInfo(currentNovelId)
         novelReadViewModel.title.observe(this) {
             title = it
         }
@@ -141,17 +146,30 @@ class NovelReadActivity : BaseActivity() {
         }
 
         // 点赞收藏分享
+        bookShelfViewModel.initBookShelf()
         binding.apply {
             likeButton.setOnClickListener {
                 likeButton.toggle()
+                bookShelfViewModel
             }
             starButton.setOnClickListener {
                 starButton.toggle()
+                if (starButton.isChecked) {
+                    novelReadViewModel.bookInfo.value?.let { it1 -> bookShelfViewModel.addBook(it1) }
+                } else {
+                    novelReadViewModel.bookInfo.value?.let { it1 ->
+                        bookShelfViewModel.removeBook(
+                            it1
+                        )
+                    }
+                }
             }
             shareButton.setOnClickListener { shareButton.showSnackBar("分享功能暂时不可用") }
         }
+        bookShelfViewModel.books.observe(this) {
+            binding.starButton.setCheckedWithoutAnimator((it.find { it.id == currentNovelId }) != null)
+        }
         // 初始化点赞状态
-//        binding.starButton.setCheckedWithoutAnimator((bookShelfViewModel.books.value.find { it.id == currentNovel.id }) != null)
 //        binding.likeButton.setCheckedWithoutAnimator(discoverViewModel.novelList.value[discoverViewModel.currentPosition.value].isLiked)
     }
 

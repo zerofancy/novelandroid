@@ -56,4 +56,9 @@ class BookShelfFragment : BaseFragment() {
     private fun initData() {
         bookShelfViewModel.initBookShelf()
     }
+
+    override fun onResume() {
+        super.onResume()
+        initData()
+    }
 }

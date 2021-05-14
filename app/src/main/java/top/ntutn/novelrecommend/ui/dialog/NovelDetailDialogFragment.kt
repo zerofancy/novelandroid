@@ -52,7 +52,10 @@ class NovelDetailDialogFragment : DialogFragment() {
             tagsTextView.text = currentNovel.tags.toString()
         }
         binding.starButton.setCheckedWithoutAnimator((bookShelfViewModel.books.value.find { it.id == currentNovel.id }) != null)
-        binding.likeButton.setCheckedWithoutAnimator(discoverViewModel.novelList.value[discoverViewModel.currentPosition.value].isLiked)
+        binding.likeButton.setCheckedWithoutAnimator(
+            discoverViewModel.novelList.value.getOrNull(discoverViewModel.currentPosition.value)?.isLiked
+                ?: false
+        )
     }
 
     companion object {

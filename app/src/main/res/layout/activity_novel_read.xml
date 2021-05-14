@@ -45,23 +45,30 @@
             app:placeholderImage="@mipmap/nocover"
             app:placeholderImageScaleType="fitXY" />
 
-        <TextView
+        <top.ntutn.commonui.common.SimpleMarqueeTextView
             android:id="@+id/book_title_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:layout_marginEnd="32dp"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@id/cover_image_view"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/cover_image_view"
-            tools:text="黎明之剑" />
+            tools:text="黎明之剑不回家了解客户好几个不后悔" />
 
         <TextView
             android:id="@+id/author_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
             android:textSize="18sp"
             app:layout_constraintLeft_toLeftOf="@id/book_title_text_view"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/book_title_text_view"
             tools:text="\@远瞳" />
 
