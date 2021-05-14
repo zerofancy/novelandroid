@@ -13,6 +13,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.viewModels
 import top.ntutn.commonui.base.BaseActivity
+import top.ntutn.commonutil.AppUtil
+import top.ntutn.commonutil.showSnackBar
 import top.ntutn.novelrecommend.databinding.ActivityNovelReadBinding
 import top.ntutn.novelrecommend.ui.viewmodel.NovelReadViewModel
 
@@ -31,7 +33,7 @@ class NovelReadActivity : BaseActivity() {
          * If [AUTO_HIDE] is set, the number of milliseconds to wait after
          * user interaction before hiding the system UI.
          */
-        private const val AUTO_HIDE_DELAY_MILLIS = 3000
+        private const val AUTO_HIDE_DELAY_MILLIS = 300
 
         /**
          * Some older devices needs a small delay between UI widget updates
@@ -40,13 +42,15 @@ class NovelReadActivity : BaseActivity() {
         private const val UI_ANIMATION_DELAY = 300
 
         private const val PARAM_NOVEL_ID = "novel_id"
+        private const val PARM_FULL_SCREEN = "full_screen"
 
         /**
          * @param id 小说id
          */
-        fun actionStart(context: Context, id: Long) {
+        fun actionStart(context: Context, id: Long, fullscreen: Boolean = false) {
             val intent = Intent(context, NovelReadActivity::class.java).apply {
                 putExtra(PARAM_NOVEL_ID, id)
+                putExtra(PARM_FULL_SCREEN, fullscreen)
             }
             context.startActivity(intent)
         }
@@ -110,19 +114,45 @@ class NovelReadActivity : BaseActivity() {
 
         // Set up the user interaction to manually show or hide the system UI.
         fullscreenContent = binding.fullscreenContent
-        fullscreenContent.setOnClickListener { toggle() }
+//        fullscreenContent.setOnClickListener { toggle() }
+        binding.statusBarPlaceHolder.layoutParams =
+            binding.statusBarPlaceHolder.layoutParams.apply {
+                height = AppUtil.getStatusBarHeightCompat(this@NovelReadActivity)
+            }
+        show()
 
         fullscreenContentControls = binding.fullscreenContentControls
 
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        binding.dummyButton.setOnTouchListener(delayHideTouchListener)
+        binding.startReadButton.setOnTouchListener(delayHideTouchListener)
 
         novelReadViewModel.fetchNovelInfo(intent.getLongExtra(PARAM_NOVEL_ID, 0))
         novelReadViewModel.title.observe(this) {
             title = it
         }
+        novelReadViewModel.bookInfo.observe(this) {
+            binding.coverImageView.setImageURI(it?.cover)
+            binding.bookTitleTextView.text = it?.title
+            binding.authorTextView.text = "@${it?.author}"
+            binding.tagsTextView.text = it?.tags?.joinToString()
+            binding.descriptionTextView.text = it?.description
+        }
+
+        // 点赞收藏分享
+        binding.apply {
+            likeButton.setOnClickListener {
+                likeButton.toggle()
+            }
+            starButton.setOnClickListener {
+                starButton.toggle()
+            }
+            shareButton.setOnClickListener { shareButton.showSnackBar("分享功能暂时不可用") }
+        }
+        // 初始化点赞状态
+//        binding.starButton.setCheckedWithoutAnimator((bookShelfViewModel.books.value.find { it.id == currentNovel.id }) != null)
+//        binding.likeButton.setCheckedWithoutAnimator(discoverViewModel.novelList.value[discoverViewModel.currentPosition.value].isLiked)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -131,7 +161,9 @@ class NovelReadActivity : BaseActivity() {
         // Trigger the initial hide() shortly after the activity has been
         // created, to briefly hint to the user that UI controls
         // are available.
-//        delayedHide(100)
+        if (intent.getBooleanExtra(PARM_FULL_SCREEN, false)) {
+            delayedHide(100)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -159,6 +191,9 @@ class NovelReadActivity : BaseActivity() {
         }
     }
 
+    /**
+     * 进入全屏状态（隐藏systemui）
+     */
     private fun hide() {
         // Hide UI first
         supportActionBar?.hide()
@@ -170,11 +205,13 @@ class NovelReadActivity : BaseActivity() {
         hideHandler.postDelayed(hidePart2Runnable, UI_ANIMATION_DELAY.toLong())
     }
 
+    /**
+     * 退出全屏状态
+     */
     private fun show() {
         // Show the system bar
         fullscreenContent.systemUiVisibility =
-            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
-                    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         isFullscreen = false
 
         // Schedule a runnable to display UI elements after a delay

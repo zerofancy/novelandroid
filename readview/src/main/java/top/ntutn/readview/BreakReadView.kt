@@ -163,6 +163,10 @@ class BreakReadView : AppCompatTextView {
         clickEventListenerList.add(rectF to block)
     }
 
+    fun clearClickEventListener() {
+        clickEventListenerList.clear()
+    }
+
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> return true

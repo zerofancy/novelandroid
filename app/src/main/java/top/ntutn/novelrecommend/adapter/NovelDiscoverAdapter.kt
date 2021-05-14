@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import top.ntutn.commonutil.showLongToast
 import top.ntutn.commonui.common.SimpleListDiffCallback
+import top.ntutn.commonutil.showLongToast
 import top.ntutn.novelrecommend.databinding.ItemNovelDiscoverBinding
 import top.ntutn.novelrecommend.model.NovelModel
+import top.ntutn.novelrecommend.ui.activity.NovelReadActivity
 import top.ntutn.novelrecommend.ui.dialog.NovelDetailDialogFragment
 import top.ntutn.novelrecommend.ui.fragment.DiscoverFragment
 import top.ntutn.novelrecommend.ui.viewmodel.main.DiscoverViewModel
@@ -37,6 +38,7 @@ class NovelDiscoverAdapter(private val discoverFragment: DiscoverFragment) :
             readView.post {
                 readView.setCurrentPage(0)
                 readView.apply {
+                    clearClickEventListener()
                     addClickEventListener(RectF(0f, 0f, (width / 3).toFloat(), height.toFloat())) {
                         if (isFirstPage()) {
                             "已是第一页".showLongToast()
@@ -65,9 +67,11 @@ class NovelDiscoverAdapter(private val discoverFragment: DiscoverFragment) :
                         )
                     ) {
                         if (isLastPage()) {
-                            "已是最后一页".showLongToast()
-                            NovelDetailDialogFragment.newInstance()
-                                .show(discoverFragment.parentFragmentManager, "detail")
+                            NovelReadActivity.actionStart(
+                                context,
+                                novelList[position].id ?: 0,
+                                true
+                            )
                         } else {
                             goNextPage()
                         }
