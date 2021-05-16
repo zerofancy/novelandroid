@@ -20,6 +20,7 @@ import top.ntutn.commonutil.showSnackBar
 import top.ntutn.novelrecommend.databinding.ActivityNovelReadBinding
 import top.ntutn.novelrecommend.ui.viewmodel.NovelReadViewModel
 import top.ntutn.novelrecommend.ui.viewmodel.main.BookShelfViewModel
+import top.ntutn.novelrecommend.utils.ReadViewHelper
 
 /**
  * 阅读小说的Activity
@@ -147,6 +148,7 @@ class NovelReadActivity : BaseActivity() {
             binding.descriptionTextView.text = it?.description
         }
         novelReadViewModel.currentChapter.observe(this) {
+            ReadViewHelper.updateFontSetting(binding.fullscreenContent)
             binding.fullscreenContent.apply {
                 text = it.content
                 jumpToLineNumber(0)

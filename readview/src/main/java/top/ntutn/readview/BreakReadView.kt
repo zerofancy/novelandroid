@@ -50,8 +50,7 @@ class BreakReadView : AppCompatTextView {
 
     private fun getTextViewLines(): Int {
         val topOfLastLine = currentHeight - lineHeight - paddingTop - paddingBottom
-        text
-        val lines = layout.getLineForVertical(topOfLastLine) //staticLayout.lineCount
+        val lines = layout?.getLineForVertical(topOfLastLine) ?: 10 //staticLayout.lineCount
         return if (maxLines > lines) lines else maxLines
     }
 
@@ -73,6 +72,10 @@ class BreakReadView : AppCompatTextView {
             val count: Int = paint.breakText(str, end, str.length, true, width.toFloat(), null)
             start = end
             end += count
+            if (start >= end) {
+                // 避免传入width太小陷入死循环。breakStringAllowEnter已经处理了回车问题。
+                break
+            }
             res.add(str.substring(start, end))
         }
         return res

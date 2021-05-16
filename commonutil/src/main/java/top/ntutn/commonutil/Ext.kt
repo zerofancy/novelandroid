@@ -45,16 +45,23 @@ fun View.showSnackBar(
     snackbar.show()
 }
 
-val Int.sp: Int
+val Int.spFloat: Float
     get() = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_SP,
         this.toFloat(),
         AppUtil.getApplicationContext().resources.displayMetrics
-    ).toInt()
+    )
 
-val Int.dp:Int
+
+val Int.sp: Int
+    get() = spFloat.toInt()
+
+val Int.dpFloat: Float
     get() = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,
         this.toFloat(),
         AppUtil.getApplicationContext().resources.displayMetrics
-    ).toInt()
+    )
+
+val Int.dp: Int
+    get() = dpFloat.toInt()
