@@ -9,16 +9,14 @@
     tools:context=".ui.activity.NovelReadActivity">
 
     <!--TODO 这里进入章节阅读-->
-    <TextView
+    <top.ntutn.readview.BreakReadView
         android:id="@+id/fullscreen_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:keepScreenOn="true"
         android:text="@string/dummy_content"
         android:textColor="@color/black"
-        android:textSize="50sp"
-        android:textStyle="bold" />
+        android:textSize="20sp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fullscreen_content_controls"

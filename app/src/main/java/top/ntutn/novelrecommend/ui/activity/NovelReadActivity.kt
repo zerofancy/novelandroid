@@ -3,6 +3,7 @@ package top.ntutn.novelrecommend.ui.activity
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.RectF
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -14,6 +15,7 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import top.ntutn.commonui.base.BaseActivity
 import top.ntutn.commonutil.AppUtil
+import top.ntutn.commonutil.showLongToast
 import top.ntutn.commonutil.showSnackBar
 import top.ntutn.novelrecommend.databinding.ActivityNovelReadBinding
 import top.ntutn.novelrecommend.ui.viewmodel.NovelReadViewModel
@@ -145,7 +147,50 @@ class NovelReadActivity : BaseActivity() {
             binding.descriptionTextView.text = it?.description
         }
         novelReadViewModel.currentChapter.observe(this) {
-            binding.fullscreenContent.text = it.content
+            binding.fullscreenContent.apply {
+                text = it.content
+                jumpToLineNumber(0)
+                clearClickEventListener()
+                addClickEventListener(RectF(0f, 0f, (width / 3).toFloat(), height.toFloat())) {
+                    if (isFirstPage()) {
+                        if (novelReadViewModel.readStatus.value?.currentChapter ?: 1 <= 1) {
+                            "已是第一页".showLongToast()
+                        } else {
+                            novelReadViewModel.goPerviousChapter()
+                        }
+                    } else {
+                        goPrevPage()
+                    }
+                }
+                addClickEventListener(
+                    RectF(
+                        width / 3f,
+                        0f,
+                        width / 3f * 2f,
+                        height.toFloat()
+                    )
+                ) {
+                    toggle()
+                }
+                addClickEventListener(
+                    RectF(
+                        (width / 3 * 2).toFloat(),
+                        0f,
+                        width.toFloat(),
+                        height.toFloat()
+                    )
+                ) {
+                    if (isLastPage()) {
+                        if (novelReadViewModel.readStatus.value?.currentChapter ?: 1 >= novelReadViewModel.bookInfo.value?.chapterCount ?: 0) {
+                            "已是最后一页".showLongToast()
+                        }
+                        novelReadViewModel.goNextChapter()
+                    } else {
+                        goNextPage()
+                    }
+                }
+            }
+
         }
 
         // 点赞收藏分享

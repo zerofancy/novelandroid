@@ -109,10 +109,32 @@ class NovelReadViewModel : ViewModel() {
     }
 
     fun goPerviousChapter() {
-
+        if (_readStatus.value.currentChapter <= 1) {
+            return
+        }
+        val originStatus = _readStatus.value
+        _readStatus.value = originStatus.copy(currentChapter = originStatus.currentChapter - 1)
+        val currentBookNumber = _bookInfo.value?.id ?: 0
+        viewModelScope.launch {
+            fetchChapter(currentBookNumber, _readStatus.value.currentChapter)?.let {
+                _currentChapter.value = it
+                saveReadStatus(currentBookNumber)
+            }
+        }
     }
 
     fun goNextChapter() {
-
+        if (_readStatus.value.currentChapter >= _bookInfo.value?.chapterCount ?: 0) {
+            return
+        }
+        val originStatus = _readStatus.value
+        _readStatus.value = originStatus.copy(currentChapter = originStatus.currentChapter + 1)
+        val currentBookNumber = _bookInfo.value?.id ?: 0
+        viewModelScope.launch {
+            fetchChapter(currentBookNumber, _readStatus.value.currentChapter)?.let {
+                _currentChapter.value = it
+                saveReadStatus(currentBookNumber)
+            }
+        }
     }
 }
