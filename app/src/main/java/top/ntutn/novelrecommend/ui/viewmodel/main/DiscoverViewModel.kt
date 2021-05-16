@@ -13,7 +13,7 @@ import top.ntutn.commonui.common.CheckedLiveData
 import top.ntutn.commonui.common.InitedLiveData
 import top.ntutn.commonutil.DeviceUtil
 import top.ntutn.commonutil.RetrofitUtil
-import top.ntutn.novelrecommend.NovelService
+import top.ntutn.novelrecommend.repo.NovelService
 import top.ntutn.novelrecommend.model.NovelModel
 
 class DiscoverViewModel : ViewModel() {

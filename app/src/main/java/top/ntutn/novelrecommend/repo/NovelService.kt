@@ -1,4 +1,4 @@
-package top.ntutn.novelrecommend
+package top.ntutn.novelrecommend.repo
 
 import retrofit2.Call
 import retrofit2.http.GET
