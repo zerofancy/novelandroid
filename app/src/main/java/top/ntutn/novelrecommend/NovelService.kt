@@ -4,8 +4,8 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.QueryMap
+import top.ntutn.novelrecommend.model.ChapterModel
 import top.ntutn.novelrecommend.model.NovelModel
-import top.ntutn.readview.ChapterModel
 
 interface NovelService {
     /**

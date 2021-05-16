@@ -144,6 +144,9 @@ class NovelReadActivity : BaseActivity() {
             binding.tagsTextView.text = it?.tags?.joinToString()
             binding.descriptionTextView.text = it?.description
         }
+        novelReadViewModel.currentChapter.observe(this) {
+            binding.fullscreenContent.text = it.content
+        }
 
         // 点赞收藏分享
         bookShelfViewModel.initBookShelf()
