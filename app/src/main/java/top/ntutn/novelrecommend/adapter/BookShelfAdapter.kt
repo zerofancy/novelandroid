@@ -6,13 +6,14 @@ import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import top.ntutn.commonui.common.CommonViewHolder
 import top.ntutn.commonutil.AppUtil
 import top.ntutn.novelrecommend.R
-import top.ntutn.commonui.common.CommonViewHolder
 import top.ntutn.novelrecommend.databinding.ItemBookshelfBinding
 import top.ntutn.novelrecommend.databinding.ItemBookshelfFooterBinding
 import top.ntutn.novelrecommend.databinding.ItemBookshelfTitleBinding
 import top.ntutn.novelrecommend.model.NovelModel
+import top.ntutn.novelrecommend.ui.activity.NovelReadActivity
 
 class BookShelfAdapter : RecyclerView.Adapter<CommonViewHolder<ViewBinding>>() {
     enum class ItemType {
@@ -72,6 +73,9 @@ class BookShelfAdapter : RecyclerView.Adapter<CommonViewHolder<ViewBinding>>() {
                         }
                     }
                     true
+                }
+                root.setOnClickListener {
+                    NovelReadActivity.actionStart(it.context, bookList[position].id ?: 0)
                 }
             }
         }

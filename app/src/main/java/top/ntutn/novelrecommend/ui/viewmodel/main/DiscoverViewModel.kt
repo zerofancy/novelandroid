@@ -9,12 +9,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.await
 import timber.log.Timber
-import top.ntutn.commonutil.DeviceUtil
-import top.ntutn.novelrecommend.NovelService
 import top.ntutn.commonui.common.CheckedLiveData
 import top.ntutn.commonui.common.InitedLiveData
-import top.ntutn.novelrecommend.model.NovelModel
+import top.ntutn.commonutil.DeviceUtil
 import top.ntutn.commonutil.RetrofitUtil
+import top.ntutn.novelrecommend.NovelService
+import top.ntutn.novelrecommend.model.NovelModel
 
 class DiscoverViewModel : ViewModel() {
     private val _novelList =
@@ -30,7 +30,7 @@ class DiscoverViewModel : ViewModel() {
     private suspend fun getNovel(): List<NovelModel> {
         return try {
             RetrofitUtil.create<NovelService>()
-                .getNovel(deviceInfo = DeviceUtil.getDeviceInfoMap())
+                .getRandomNovelInfo(deviceInfo = DeviceUtil.getDeviceInfoMap())
                 .await()
                 .map { it.copy(localId = (0..Long.MAX_VALUE).random()) }  //TODO 解决id重复的问题
         } catch (e: Exception) {
@@ -48,6 +48,9 @@ class DiscoverViewModel : ViewModel() {
                 } catch (e: Exception) {
                     Timber.e(e, "获取小说失败")
                 }
+                if (_novelList.value.isNullOrEmpty()) {
+                    _novelList.value.add(NovelModel(description = "网络错误！"))
+                }
                 _novelList.value
             }
         }
@@ -56,7 +59,9 @@ class DiscoverViewModel : ViewModel() {
     fun tryLoadMore() {
         val currentPosition = _currentPosition.value
         val novelCount = _novelList.value.size
-        if (currentPosition + 3 >= novelCount) loadMore()
+        if (currentPosition + 3 >= novelCount) {
+            loadMore()
+        }
     }
 
     fun scrollTo(position: Int) {

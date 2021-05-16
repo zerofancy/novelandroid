@@ -9,9 +9,9 @@ import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import top.ntutn.commonutil.AppUtil
 import top.ntutn.commonui.common.CheckedLiveData
 import top.ntutn.commonui.common.InitedLiveData
+import top.ntutn.commonutil.AppUtil
 import top.ntutn.novelrecommend.model.NovelModel
 import java.lang.reflect.Type
 
@@ -61,14 +61,12 @@ class BookShelfViewModel : ViewModel() {
     }
 
     fun initBookShelf() {
-        if (_books.value.isNullOrEmpty()) {
-            viewModelScope.launch {
-                val result = withContext(Dispatchers.IO) {
-                    loadBookShelfFromLocal()
-                }
-                result?.let {
-                    _books.value = it
-                }
+        viewModelScope.launch {
+            val result = withContext(Dispatchers.IO) {
+                loadBookShelfFromLocal()
+            }
+            result?.let {
+                _books.value = it
             }
         }
     }

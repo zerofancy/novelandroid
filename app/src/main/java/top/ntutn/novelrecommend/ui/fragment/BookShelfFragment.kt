@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import top.ntutn.novelrecommend.adapter.BookShelfAdapter
+import top.ntutn.commonui.base.BaseFragment
 import top.ntutn.commonui.common.SimpleItemDecoration
 import top.ntutn.commonui.common.viewLifecycle
+import top.ntutn.novelrecommend.adapter.BookShelfAdapter
 import top.ntutn.novelrecommend.databinding.FragmentBookshelfBinding
-import top.ntutn.commonui.base.BaseFragment
 import top.ntutn.novelrecommend.ui.viewmodel.main.BookShelfViewModel
 
 class BookShelfFragment : BaseFragment() {
@@ -55,5 +55,10 @@ class BookShelfFragment : BaseFragment() {
 
     private fun initData() {
         bookShelfViewModel.initBookShelf()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initData()
     }
 }

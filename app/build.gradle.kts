@@ -55,9 +55,10 @@ kapt {
 }
 
 dependencies {
-    implementation(Deps.Kotlin.STD_LIB)
-    implementation(Deps.Kotlin.COROUTINES_ANDROID)
 
+    implementation(Deps.ABOUT_PAGE)
+    implementation(Deps.AUTO_SERVICE)
+    kapt(Deps.AUTO_SERVICE)
     implementation(Deps.AndroidX.ANNOTATION)
     implementation(Deps.AndroidX.CORE)
     implementation(Deps.AndroidX.COMPAT)
@@ -68,34 +69,25 @@ dependencies {
     implementation(Deps.AndroidX.PREFERENCE)
     implementation(Deps.AndroidX.VECTOR_DRAWABLE)
     implementation(Deps.AndroidX.VIEW_MODEL_KTX)
-    implementation(Deps.AUTO_SERVICE)
-    kapt(Deps.AUTO_SERVICE)
-
+    implementation(Deps.ANIM_LOGO_VIEW)
+    implementation(Deps.EVENTBUS)
+    kapt(Deps.EVENTBUS_PROCESSOR)
+    implementation(Deps.FRESCO)
+    implementation(Deps.Kotlin.STD_LIB)
+    implementation(Deps.GSON)
+    implementation(Deps.Kotlin.COROUTINES_ANDROID)
+    implementation(Deps.LAYOUT_MANAGER_GROUP)
+    implementation(Deps.LIKE_VIEW)
     implementation(Deps.MATERIAL)
-    implementation(project(mapOf("path" to ":login_api")))
+    implementation(Deps.RETROFIT)
+    implementation(Deps.RETROFIT_CONVERTER_GSON)
+    implementation(Deps.TIMBER)
+
+    implementation(project(":login_api"))
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
-
-    implementation(Deps.GSON)
-    implementation(Deps.TIMBER)
-    implementation(Deps.EVENTBUS)
-    kapt(Deps.EVENTBUS_PROCESSOR)
-
-    implementation(Deps.ABOUT_PAGE)
-
-//    kapt(Deps.AROUTER_COMPILER)
-
-    // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
-    implementation(Deps.RETROFIT)
-    implementation(Deps.RETROFIT_CONVERTER_GSON)
-
-    implementation(Deps.LIKE_VIEW)
-
-    implementation(Deps.FRESCO)
-    implementation(Deps.LAYOUT_MANAGER_GROUP)
-    implementation(Deps.ANIM_LOGO_VIEW)
 
     implementation(project(":analytics_lib"))
     implementation(project(":analytics_lib_api"))
