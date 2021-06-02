@@ -14,6 +14,11 @@ import top.ntutn.novelrecommend.ui.activity.NovelReadActivity
 import top.ntutn.novelrecommend.ui.dialog.NovelDetailDialogFragment
 import top.ntutn.novelrecommend.ui.fragment.DiscoverFragment
 import top.ntutn.novelrecommend.ui.viewmodel.main.DiscoverViewModel
+import top.ntutn.novelrecommend.utils.ReadViewHelper
+import top.ntutn.readview.BreakReadView
+import top.ntutn.setting.SettingKey
+import top.ntutn.setting.SettingList
+import top.ntutn.setting.SettingServiceDelegate
 
 class NovelDiscoverAdapter(private val discoverFragment: DiscoverFragment) :
     RecyclerView.Adapter<NovelDiscoverAdapter.ViewHolder>() {
@@ -35,6 +40,7 @@ class NovelDiscoverAdapter(private val discoverFragment: DiscoverFragment) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.apply {
+            ReadViewHelper.updateFontSetting(readView)
             readView.post {
                 readView.setCurrentPage(0)
                 readView.apply {
@@ -84,4 +90,3 @@ class NovelDiscoverAdapter(private val discoverFragment: DiscoverFragment) :
 
     override fun getItemCount() = novelList.size
 }
-
