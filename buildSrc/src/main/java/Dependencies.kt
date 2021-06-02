@@ -48,7 +48,6 @@ object Deps {
     const val RETROFIT = "com.squareup.retrofit2:retrofit:${Vers.RETROFIT}"
     const val RETROFIT_CONVERTER_GSON = "com.squareup.retrofit2:converter-gson:${Vers.RETROFIT}"
 
-    // TODO 拷贝到本地
     const val LIKE_VIEW = "com.github.zerofancy:LikeView:${Vers.LIKE_VIEW}"
 
     const val FRESCO = "com.facebook.fresco:fresco:${Vers.FRESCO}"
