@@ -6,7 +6,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:4.2.1")
+        classpath("com.android.tools.build:gradle:4.2.2")
         classpath(Deps.Kotlin.GRADLE_PLUGIN)
         classpath(Deps.Kotlin.NO_ARGS)
         classpath(Deps.Kotlin.ALL_OPEN)
